@@ -10,7 +10,7 @@ public class NPC_Class : MonoBehaviour
     private void Start()
     {
         NPC npc = GenerateRandomNPC();
-        Debug.Log(npc.ToString());
+        Debug.Log(npc.ToString()); // Print details to console
     }
 
     private NPC GenerateRandomNPC()
@@ -36,7 +36,7 @@ public class NPC_Class : MonoBehaviour
 
     private int CalculateSalary(int age, float workEfficiency)
     {
-        return Mathf.RoundToInt(Random.Range(5000f, 20001f) + (age * workEfficiency));
+        return Mathf.RoundToInt(Random.Range(5000f, 8000f) + (age * (workEfficiency * 10)));
     }
 }
 
@@ -54,9 +54,9 @@ public class NPC
     public bool InRelationship { get; set; }
     public int Salary { get; set; }
 
-    public override string ToString()
-    {
-        return $"Name: {Name}\nAge: {Age}\nLeadershipStyle: {LeadershipStyle}\nTechSkill: {TechSkill}\nSocialSkill: {SocialSkill}\nWorkEfficiency: {WorkEfficiency}\nSocialPref: {SocialPref}\nIsNeurodivergent: {IsNeurodivergent}\nIsDisabled: {IsDisabled}\nInRelationship: {InRelationship}\nSalary: {Salary}";
-    }
+    // public override string ToString()
+    // {
+    //     return $"Name: {Name}\nAge: {Age}\nLeadershipStyle: {LeadershipStyle}\nTechSkill: {TechSkill}\nSocialSkill: {SocialSkill}\nWorkEfficiency: {WorkEfficiency}\nSocialPref: {SocialPref}\nIsNeurodivergent: {IsNeurodivergent}\nIsDisabled: {IsDisabled}\nInRelationship: {InRelationship}\nSalary: {Salary}";
+    // }
 }
 
