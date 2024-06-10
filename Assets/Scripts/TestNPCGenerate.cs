@@ -45,7 +45,8 @@ public class NPCGenerator : MonoBehaviour
 
     private int CalculateSalary(int age, float workEfficiency)
     {
-        return Mathf.RoundToInt(Random.Range(6000f, 8001f) + (age * (workEfficiency * 10)));
+        //return Mathf.RoundToInt(Random.Range(6000f, 8001f) + (age * (workEfficiency * 10)));
+        return Mathf.RoundToInt(Random.Range(6000f, 6001f) + (age * (workEfficiency * 10)));
     }
 
     private void DisplayNPCInfo(NPC npc)
