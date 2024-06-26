@@ -27,6 +27,7 @@ public class NPC_Class : MonoBehaviour
             IsNeurodivergent = Random.Range(0, 2) == 0,
             IsDisabled = Random.Range(0, 2) == 0,
             InRelationship = Random.Range(0, 2) == 0,
+            Mood = Random.Range(-5, 6),
         };
 
         newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
@@ -53,6 +54,7 @@ public class NPC
     public bool IsDisabled { get; set; }
     public bool InRelationship { get; set; }
     public int Salary { get; set; }
+    public int Mood { get; set; }
 
     // public override string ToString()
     // {

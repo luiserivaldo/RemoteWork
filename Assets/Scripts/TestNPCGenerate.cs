@@ -36,6 +36,7 @@ public class NPCGenerator : MonoBehaviour
             IsNeurodivergent = Random.Range(0, 2) == 0,
             IsDisabled = Random.Range(0, 2) == 0,
             InRelationship = Random.Range(0, 2) == 0,
+            Mood = Random.Range(-5, 6),
         };
 
         newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
@@ -51,7 +52,7 @@ public class NPCGenerator : MonoBehaviour
 
     private void DisplayNPCInfo(NPC npc)
     {
-        npcInfoOutput.text = $"Name: {npc.Name}\nAge: {npc.Age}\nLeadership Style: {npc.LeadershipStyle}\nTech Skill: {npc.TechSkill}\nSocial Skill: {npc.SocialSkill}\nWork Efficiency: {npc.WorkEfficiency}\nSocial Preference: {npc.SocialPref}\nIs Neurodivergent: {npc.IsNeurodivergent}\nIs Disabled: {npc.IsDisabled}\nIn Relationship: {npc.InRelationship}\nSalary: {npc.Salary}";
+        npcInfoOutput.text = $"Name: {npc.Name}\nAge: {npc.Age}\nLeadership Style: {npc.LeadershipStyle}\nTech Skill: {npc.TechSkill}\nSocial Skill: {npc.SocialSkill}\nWork Efficiency: {npc.WorkEfficiency}\nSocial Preference: {npc.SocialPref}\nIs Neurodivergent: {npc.IsNeurodivergent}\nIs Disabled: {npc.IsDisabled}\nIn Relationship: {npc.InRelationship}\nSalary: {npc.Salary}\nMood: {npc.Mood}";
     }
 }
 
@@ -67,10 +68,14 @@ public class NPC_ToGenerate
     public bool IsNeurodivergent { get; set; }
     public bool IsDisabled { get; set; }
     public bool InRelationship { get; set; }
+    
     public int Salary { get; set; }
+    public int Mood { get; set; }
+    
+
 
     public override string ToString()
     {
-        return $"Name: {Name}\nAge: {Age}\nLeadership Style: {LeadershipStyle}\nTech Skill: {TechSkill}\nSocial Skill: {SocialSkill}\nWork Efficiency: {WorkEfficiency}\nSocial Preference: {SocialPref}\nIs Neurodivergent: {IsNeurodivergent}\nIs Disabled: {IsDisabled}\nIn Relationship: {InRelationship}\nSalary: {Salary}";
+        return $"Name: {Name}\nAge: {Age}\nLeadership Style: {LeadershipStyle}\nTech Skill: {TechSkill}\nSocial Skill: {SocialSkill}\nWork Efficiency: {WorkEfficiency}\nSocial Preference: {SocialPref}\nIs Neurodivergent: {IsNeurodivergent}\nIs Disabled: {IsDisabled}\nIn Relationship: {InRelationship}\nSalary: {Salary}\nMood: {Mood}";
     }
 }
