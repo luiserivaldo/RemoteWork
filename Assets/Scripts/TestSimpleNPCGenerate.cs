@@ -5,21 +5,46 @@ using UnityEngine.UI;
 
 public class SimpleNPCGenerator : MonoBehaviour
 {
-    public Text npcInfoOutput; // Reference to the UI Text component to display NPC info
-    public Button generateButton; // Reference to the UI Button component
+    // Text Output Fields
+    public Text npcNameOutput; // Name
+    public Text npcAgeOutput; // Age
+    public Text npcWorkEfficiencyOutput; // Work Efficiency
+    public Text npcSalaryOutput; // Salary
+    public Text npcMoodOutput; // Mood
+    public Text npcInfoOutput; // Whole info
+    public Slider npcMoodSlider;
+    public Button generateButton; // Debug Generate NPC Button
+
+
+    // 3D Model reference
+    public GameObject npcPrefab; // 3D Model Prefab
+    public Transform spawnPoint; // Spawn point (Link to GameObject))
+
 
     private string[] firstNames = { "Worker" };
-    private string[] lastNames = { "Smith", "Johnson", "Brown", "Williams", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez" };
+    private string[] lastNames = { "Smith", "Johnson", "Brown", "Williams", "Jones", "Garcia", "Miller"};
 
     private void Start()
     {
-        generateButton.onClick.AddListener(OnGenerateButtonClick);
+        // Debug NPC Spawn
+        if (spawnPoint == null)
+        {
+            Debug.LogWarning("Spawn point is not set. Creating a default spawn point.");
+            //GameObject defaultSpawnPoint = new GameObject("DefaultSpawnPoint");
+            //spawnPoint = defaultSpawnPoint.transform;
+            //spawnPoint.position = new Vector3(0, 0, 0); // Adjust this position as needed
+        }
+        else {
+            Debug.LogWarning("Spawn point has been set.");
+        }
+        generateButton.onClick.AddListener(OnGenerateButtonClick); 
     }
 
     private void OnGenerateButtonClick()
     {
         NPC newNPC = GenerateRandomNPC();
         DisplayNPCInfo(newNPC);
+        SpawnNPCModel(newNPC);
     }
 
     public NPC GenerateRandomNPC()
@@ -44,9 +69,23 @@ public class SimpleNPCGenerator : MonoBehaviour
         return Mathf.RoundToInt(Random.Range(6000f, 6001f) + (age * (workEfficiency * 10)));
     }
 
-    private void DisplayNPCInfo(NPC npc)
+    public void DisplayNPCInfo(NPC npc)
     {
+        npcNameOutput.text = $"{npc.Name}";
+        //npcAgeOutput.text = $"{npc.Age}";
+        //npcWorkEfficiencyOutput.text = $"{npc.WorkEfficiency}";
+        npcSalaryOutput.text = $"{npc.Salary} / month";
+        npcMoodOutput.text = $"{npc.Mood}";
+        npcMoodSlider.value = npc.Mood;
         npcInfoOutput.text = $"Name: {npc.Name}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}";
+        //Debug.Log("Name: " + npc.Name + "\nAge: " + npc.Age);
+    }
+
+    private void SpawnNPCModel(NPC npc)
+    {
+        GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
+        NPCModel npcModelScript = npcModel.GetComponent<NPCModel>();
+        npcModelScript.Initialize(npc, this);
     }
 }
 
@@ -61,5 +100,23 @@ public class SimpleNPC_ToGenerate
     public override string ToString()
     {
         return $"Name: {Name}\nAge: {Age}\nWork Efficiency: {WorkEfficiency}\nSalary: {Salary}\nMood: {Mood}";
+    }
+
+    
+}
+public class NPCModel : MonoBehaviour
+{
+    private NPC npc;
+    private SimpleNPCGenerator npcGenerator;
+
+    public void Initialize(NPC npc, SimpleNPCGenerator generator)
+    {
+        this.npc = npc;
+        this.npcGenerator = generator;
+    }
+
+    private void OnMouseDown()
+    {
+        npcGenerator.DisplayNPCInfo(npc);
     }
 }
