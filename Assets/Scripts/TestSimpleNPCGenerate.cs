@@ -17,8 +17,8 @@ public class SimpleNPCGenerator : MonoBehaviour
 
 
     // 3D Model reference
-    public GameObject npcPrefab; // 3D Model Prefab
-    public Transform spawnPoint; // Spawn point (Link to GameObject))
+    public GameObject[] npcPrefabs; // Array of different 3D model prefabs
+    public Transform[] spawnPoints; // Array of spawn points for NPCs
 
 
     private string[] firstNames = { "Worker" };
@@ -27,7 +27,7 @@ public class SimpleNPCGenerator : MonoBehaviour
     private void Start()
     {
         // Debug NPC Spawn
-        if (spawnPoint == null)
+        /* if (spawnPoint == null)
         {
             Debug.LogWarning("Spawn point is not set. Creating a default spawn point.");
             //GameObject defaultSpawnPoint = new GameObject("DefaultSpawnPoint");
@@ -36,16 +36,20 @@ public class SimpleNPCGenerator : MonoBehaviour
         }
         else {
             Debug.LogWarning("Spawn point has been set.");
-        }
+        } */
         generateButton.onClick.AddListener(OnGenerateButtonClick); 
     }
 
     private void OnGenerateButtonClick()
     {
-        NPC newNPC = GenerateRandomNPC();
-        DisplayNPCInfo(newNPC);
-        SpawnNPCModel(newNPC);
+        for (int i = 0; i < 6; i++)
+        {
+            NPC newNPC = GenerateRandomNPC();
+            DisplayNPCInfo(newNPC); // Optionally display the first NPC's info
+            SpawnNPCModel(newNPC, i);
+        }
     }
+    
 
     public NPC GenerateRandomNPC()
     {
@@ -81,11 +85,35 @@ public class SimpleNPCGenerator : MonoBehaviour
         //Debug.Log("Name: " + npc.Name + "\nAge: " + npc.Age);
     }
 
-    private void SpawnNPCModel(NPC npc)
+    private void SpawnNPCModel(NPC npc, int index)
     {
+        if (npcPrefabs.Length == 0 || spawnPoints.Length == 0)
+        {
+            Debug.LogError("NPC Prefabs or Spawn Points are not assigned.");
+            return;
+        }
+
+        GameObject npcPrefab = npcPrefabs[Random.Range(0, npcPrefabs.Length)];
+        Transform spawnPoint = spawnPoints[index % spawnPoints.Length];
+
         GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
-        NPCModel npcModelScript = npcModel.GetComponent<NPCModel>();
-        npcModelScript.Initialize(npc, this);
+        if (npcModel != null)
+        {
+            Debug.Log($"Spawned NPC Model at {spawnPoint.position}");
+            NPCModel npcModelScript = npcModel.GetComponent<NPCModel>();
+            if (npcModelScript != null)
+            {
+                npcModelScript.Initialize(npc, this);
+            }
+            else
+            {
+                Debug.LogError("NPCModel script is missing on the prefab.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to instantiate NPC Model.");
+        }
     }
 }
 
