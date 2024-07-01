@@ -21,7 +21,7 @@ public class SimpleNPCGenerator : MonoBehaviour
     public Transform[] spawnPoints; // Array of spawn points for NPCs
 
 
-    private string[] firstNames = { "Worker" };
+    private string[] firstNames = { "Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley", "Dakota", "Reese", "Skyler", "Quinn" };
     private string[] lastNames = { "Smith", "Johnson", "Brown", "Williams", "Jones", "Garcia", "Miller"};
 
     private void Start()
@@ -78,7 +78,7 @@ public class SimpleNPCGenerator : MonoBehaviour
         npcNameOutput.text = $"{npc.Name}";
         //npcAgeOutput.text = $"{npc.Age}";
         //npcWorkEfficiencyOutput.text = $"{npc.WorkEfficiency}";
-        npcSalaryOutput.text = $"{npc.Salary} / month";
+        npcSalaryOutput.text = $"<color=green>{npc.Salary}</color> / month";
         npcMoodOutput.text = $"{npc.Mood}";
         npcMoodSlider.value = npc.Mood;
         npcInfoOutput.text = $"Name: {npc.Name}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}";
