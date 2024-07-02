@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class SimpleNPCGenerator : MonoBehaviour
 {
     // Text Output Fields
-    public Text npcNameOutput; // Name
-    public Text npcAgeOutput; // Age
-    public Text npcWorkEfficiencyOutput; // Work Efficiency
+    public Text[] npcNameOutput = new Text[6]; // Name
+    //public Text npcAgeOutput; // Age
+    //public Text npcWorkEfficiencyOutput; // Work Efficiency
     public Text npcSalaryOutput; // Salary
-    public Text npcMoodOutput; // Mood
+    //public Text npcMoodOutput; // Mood
     public Text npcInfoOutput; // Whole info
     public Slider npcMoodSlider;
     public Button generateButton; // Debug Generate NPC Button
@@ -37,6 +37,12 @@ public class SimpleNPCGenerator : MonoBehaviour
         else {
             Debug.LogWarning("Spawn point has been set.");
         } */
+        for (int i = 0; i < 6; i++)
+        {
+            NPC newNPC = GenerateRandomNPC();
+            DisplayNPCInfo(newNPC, i); // Optionally display the first NPC's info
+            SpawnNPCModel(newNPC, i);
+        }
         generateButton.onClick.AddListener(OnGenerateButtonClick); 
     }
 
@@ -45,7 +51,7 @@ public class SimpleNPCGenerator : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             NPC newNPC = GenerateRandomNPC();
-            DisplayNPCInfo(newNPC); // Optionally display the first NPC's info
+            DisplayNPCInfo(newNPC, i); // Optionally display the first NPC's info
             SpawnNPCModel(newNPC, i);
         }
     }
@@ -73,13 +79,13 @@ public class SimpleNPCGenerator : MonoBehaviour
         return Mathf.RoundToInt(Random.Range(6000f, 6001f) + (age * (workEfficiency * 10)));
     }
 
-    public void DisplayNPCInfo(NPC npc)
+    public void DisplayNPCInfo(NPC npc, int index)
     {
-        npcNameOutput.text = $"{npc.Name}";
+        npcNameOutput[index].text = $"{npc.Name}";
         //npcAgeOutput.text = $"{npc.Age}";
         //npcWorkEfficiencyOutput.text = $"{npc.WorkEfficiency}";
         npcSalaryOutput.text = $"<color=green>{npc.Salary}</color> / month";
-        npcMoodOutput.text = $"{npc.Mood}";
+        //npcMoodOutput.text = $"{npc.Mood}";
         npcMoodSlider.value = npc.Mood;
         npcInfoOutput.text = $"Name: {npc.Name}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}";
         //Debug.Log("Name: " + npc.Name + "\nAge: " + npc.Age);
@@ -95,20 +101,13 @@ public class SimpleNPCGenerator : MonoBehaviour
 
         GameObject npcPrefab = npcPrefabs[Random.Range(0, npcPrefabs.Length)];
         Transform spawnPoint = spawnPoints[index % spawnPoints.Length];
+        Debug.Log($"Selected Prefab: {npcPrefab.name} for NPC {index + 1}");
 
         GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
         if (npcModel != null)
         {
             Debug.Log($"Spawned NPC Model at {spawnPoint.position}");
-            NPCModel npcModelScript = npcModel.GetComponent<NPCModel>();
-            if (npcModelScript != null)
-            {
-                npcModelScript.Initialize(npc, this);
-            }
-            else
-            {
-                Debug.LogError("NPCModel script is missing on the prefab.");
-            }
+            // Initialize the NPC model with necessary data if required
         }
         else
         {
@@ -145,6 +144,9 @@ public class NPCModel : MonoBehaviour
 
     private void OnMouseDown()
     {
-        npcGenerator.DisplayNPCInfo(npc);
+        // Find the index of this NPC model and display its info
+        int index = System.Array.IndexOf(npcGenerator.npcPrefabs, this.gameObject);
+        npcGenerator.DisplayNPCInfo(npc, index);
+        Debug.Log("Model clicked.");
     }
 }
