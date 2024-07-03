@@ -13,6 +13,11 @@ public class SimpleNPCGenerator : MonoBehaviour
     //public Text npcMoodOutput; // Mood
     public Text npcInfoOutput; // Whole info
     public Slider npcMoodSlider;
+    public Text TaskValue; // Current assigned maximum task value
+    public Text WorkDone; // Current work completed
+    public Text npcWorkDone; // Work currently completed
+
+    // Debug options
     public Button generateButton; // Debug Generate NPC Button
 
 
@@ -26,8 +31,8 @@ public class SimpleNPCGenerator : MonoBehaviour
 
     private void Start()
     {
-        // Debug NPC Spawn
-        /* if (spawnPoint == null)
+        /* //Debug NPC Spawn
+        if (spawnPoint == null)
         {
             Debug.LogWarning("Spawn point is not set. Creating a default spawn point.");
             //GameObject defaultSpawnPoint = new GameObject("DefaultSpawnPoint");
@@ -43,9 +48,42 @@ public class SimpleNPCGenerator : MonoBehaviour
             DisplayNPCInfo(newNPC, i); // Optionally display the first NPC's info
             SpawnNPCModel(newNPC, i);
         }
-        generateButton.onClick.AddListener(OnGenerateButtonClick); 
+        generateButton.onClick.AddListener(OnGenerateButtonClick);
+
+        // Ensure all NPC prefabs have a collider
+        foreach (var prefab in npcPrefabs)
+        {
+            if (prefab.GetComponent<Collider>() == null)
+            {
+                prefab.AddComponent<BoxCollider>();
+            }
+        }
+    }
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                for (int i = 0; i < npcPrefabs.Length; i++)
+                {
+                    if (hit.transform.gameObject == npcPrefabs[i])
+                    {
+                        OnNPCPrefabClicked(i);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
+    void OnNPCPrefabClicked(int index)
+    {
+        Debug.Log($"Model {index} clicked");
+    }
     private void OnGenerateButtonClick()
     {
         for (int i = 0; i < 6; i++)
@@ -65,6 +103,7 @@ public class SimpleNPCGenerator : MonoBehaviour
             Age = Random.Range(20, 61),
             WorkEfficiency = Random.Range(1f, 10f),
             Mood = Random.Range(-5, 6),
+            TaskValue = Random.Range(1000, 2000),
         };
 
         newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
@@ -87,7 +126,7 @@ public class SimpleNPCGenerator : MonoBehaviour
         npcSalaryOutput.text = $"<color=green>{npc.Salary}</color> / month";
         //npcMoodOutput.text = $"{npc.Mood}";
         npcMoodSlider.value = npc.Mood;
-        npcInfoOutput.text = $"Name: {npc.Name}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}";
+        npcInfoOutput.text = $"Name: {npc.Name}\nAge: {npc.Age}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}\nCurrent task progress: {npc.WorkDone}\nCurrent workload: {npc.TaskValue}\n";
         //Debug.Log("Name: " + npc.Name + "\nAge: " + npc.Age);
     }
 
@@ -101,18 +140,17 @@ public class SimpleNPCGenerator : MonoBehaviour
 
         GameObject npcPrefab = npcPrefabs[Random.Range(0, npcPrefabs.Length)];
         Transform spawnPoint = spawnPoints[index % spawnPoints.Length];
-        Debug.Log($"Selected Prefab: {npcPrefab.name} for NPC {index + 1}");
+        //Debug.Log($"Selected Prefab: {npcPrefab.name} for NPC {index + 1}");
 
         GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
-        if (npcModel != null)
+        /* if (npcModel != null)
         {
             Debug.Log($"Spawned NPC Model at {spawnPoint.position}");
-            // Initialize the NPC model with necessary data if required
         }
         else
         {
             Debug.LogError("Failed to instantiate NPC Model.");
-        }
+        } */
     }
 }
 
@@ -123,6 +161,8 @@ public class SimpleNPC_ToGenerate
     public float WorkEfficiency { get; set; }
     public int Salary { get; set; }
     public int Mood { get; set; }
+    public float TaskValue { get; set; }
+    public float WorkDone { get; set; }
 
     public override string ToString()
     {

@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class TaskManager : MonoBehaviour
 {
-    public Slider taskSlider;
+    public Slider weeklyQuotaSlider;
+    public Slider[] individualTaskSliders = new Slider[6]; // Individual task sliders for each worker
     public float workCompletion;
     public float taskGoal = 1000.0f; // Example goal, adjust as necessary
     private List<NPC> workers = new List<NPC>();
@@ -16,12 +17,15 @@ public class TaskManager : MonoBehaviour
         // Generate 6 random workers
         for (int i = 0; i < 6; i++)
         {
-            workers.Add(simpleNpcGenerator.GenerateRandomNPC());
+            NPC worker = simpleNpcGenerator.GenerateRandomNPC();
+            workers.Add(worker);
+            individualTaskSliders[i].maxValue = worker.TaskValue;
+            individualTaskSliders[i].value = worker.WorkDone;
         }
 
         // Initialize the slider
-        taskSlider.maxValue = taskGoal;
-        taskSlider.value = workCompletion;
+        weeklyQuotaSlider.maxValue = CalculateWeeklyQuota();
+        weeklyQuotaSlider.value = workCompletion;
 
         // Start the work process
         StartCoroutine(UpdateWorkProgress());
@@ -29,17 +33,21 @@ public class TaskManager : MonoBehaviour
 
     IEnumerator UpdateWorkProgress()
     {
-        while (workCompletion < taskGoal)
+        while (workCompletion < weeklyQuotaSlider.maxValue)
         {
             float totalWorkDone = 0;
 
-            foreach (var worker in workers)
+            for (int i = 0; i < workers.Count; i++)
             {
-                totalWorkDone += CalculateWorkDone(worker);
+                var worker = workers[i];
+                float workDone = CalculateWorkDone(worker);
+                worker.WorkDone += workDone;
+                totalWorkDone += workDone;
+                individualTaskSliders[i].value = worker.WorkDone;
             }
 
             workCompletion += totalWorkDone;
-            taskSlider.value = workCompletion;
+            weeklyQuotaSlider.value = workCompletion;
 
             yield return new WaitForSeconds(1);
         }
@@ -48,5 +56,15 @@ public class TaskManager : MonoBehaviour
     float CalculateWorkDone(NPC worker)
     {
         return worker.WorkEfficiency * (1 + (worker.Mood / 20.0f));
+    }
+
+    float CalculateWeeklyQuota()
+    {
+        float weeklyQuota = 0;
+        foreach (var worker in workers)
+        {
+            weeklyQuota += worker.TaskValue;
+        }
+        return weeklyQuota;
     }
 }
