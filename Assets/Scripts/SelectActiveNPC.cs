@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Debug_ClickNPC : MonoBehaviour
+public class SelectActiveNPC : MonoBehaviour
 {
     void Start()
     {
@@ -12,7 +12,7 @@ public class Debug_ClickNPC : MonoBehaviour
     void OnMouseDown()
     {
         // Output to the Unity Console when the model is clicked
-        Debug.Log("Model clicked");
+        //Debug.Log("Model clicked");
     }
 
     private void EnsureColliderExists()

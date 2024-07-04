@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SimpleNPCGenerator : MonoBehaviour
+public class NPCGenerator : MonoBehaviour
 {
-    // Text Output Fields
+    // Text Output Fields: Reference to game objects in MainUI or WorkerDetails
     public Text[] npcNameOutput = new Text[6]; // Name
+    public Text npcSalaryOutput; // Salary
+    public Text npcInfoOutput; // Whole info
+    public Slider npcMoodSlider; //Mood slider game object reference
+    public Text TaskValueOutput; // Current assigned maximum task value
+    public Text WorkDoneOutput; // Current work completed
+    public Text npcWorkDoneOutput; // Work currently completed
+
+    // *USE AS NECESSARY*
     //public Text npcAgeOutput; // Age
     //public Text npcWorkEfficiencyOutput; // Work Efficiency
-    public Text npcSalaryOutput; // Salary
     //public Text npcMoodOutput; // Mood
-    public Text npcInfoOutput; // Whole info
-    public Slider npcMoodSlider;
-    public Text TaskValue; // Current assigned maximum task value
-    public Text WorkDone; // Current work completed
-    public Text npcWorkDone; // Work currently completed
 
     // Debug options
     public Button generateButton; // Debug Generate NPC Button
@@ -55,29 +57,13 @@ public class SimpleNPCGenerator : MonoBehaviour
         {
             if (prefab.GetComponent<Collider>() == null)
             {
-                prefab.AddComponent<BoxCollider>();
+                prefab.AddComponent<MeshCollider>();
             }
         }
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                for (int i = 0; i < npcPrefabs.Length; i++)
-                {
-                    if (hit.transform.gameObject == npcPrefabs[i])
-                    {
-                        OnNPCPrefabClicked(i);
-                        break;
-                    }
-                }
-            }
-        }
+         
     }
 
     void OnNPCPrefabClicked(int index)
@@ -101,7 +87,7 @@ public class SimpleNPCGenerator : MonoBehaviour
         {
             Name = firstNames[Random.Range(0, firstNames.Length)] + " " + lastNames[Random.Range(0, lastNames.Length)],
             Age = Random.Range(20, 61),
-            WorkEfficiency = Random.Range(1f, 10f),
+            WorkEfficiency = Mathf.Round(Random.Range(1f, 10f) * 100f) / 100f,
             Mood = Random.Range(-5, 6),
             TaskValue = Random.Range(1000, 2000),
         };
@@ -154,15 +140,25 @@ public class SimpleNPCGenerator : MonoBehaviour
     }
 }
 
-public class SimpleNPC_ToGenerate
+public class NPC
 {
+    public bool IsSelected {get; set;} = false;
     public string Name { get; set; }
     public int Age { get; set; }
     public float WorkEfficiency { get; set; }
     public int Salary { get; set; }
     public int Mood { get; set; }
-    public float TaskValue { get; set; }
-    public float WorkDone { get; set; }
+    public int TaskValue { get; set; }
+    public int WorkDone { get; set; }
+
+    // Expanded list
+    /* public string LeadershipStyle { get; set; }
+    public float TechSkill { get; set; }
+    public float SocialSkill { get; set; }
+    public string SocialPref { get; set; }
+    public bool IsNeurodivergent { get; set; }
+    public bool IsDisabled { get; set; }
+    public bool InRelationship { get; set; } */
 
     public override string ToString()
     {
@@ -174,9 +170,9 @@ public class SimpleNPC_ToGenerate
 public class NPCModel : MonoBehaviour
 {
     private NPC npc;
-    private SimpleNPCGenerator npcGenerator;
+    private NPCGenerator npcGenerator;
 
-    public void Initialize(NPC npc, SimpleNPCGenerator generator)
+    public void Initialize(NPC npc, NPCGenerator generator)
     {
         this.npc = npc;
         this.npcGenerator = generator;
@@ -187,6 +183,6 @@ public class NPCModel : MonoBehaviour
         // Find the index of this NPC model and display its info
         int index = System.Array.IndexOf(npcGenerator.npcPrefabs, this.gameObject);
         npcGenerator.DisplayNPCInfo(npc, index);
-        Debug.Log("Model clicked.");
+        Debug.Log($"{index} Model clicked.");
     }
 }

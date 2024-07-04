@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,10 @@ public class TaskManager : MonoBehaviour
 {
     public Slider weeklyQuotaSlider;
     public Slider[] individualTaskSliders = new Slider[6]; // Individual task sliders for each worker
-    public float workCompletion;
-    public float taskGoal = 1000.0f; // Example goal, adjust as necessary
+    public int workCompletion;
+    public int taskGoal = 1000; // Example goal, adjust as necessary
     private List<NPC> workers = new List<NPC>();
-    public SimpleNPCGenerator simpleNpcGenerator; // Reference to the NPC generator
+    public NPCGenerator simpleNpcGenerator; // Reference to the NPC generator
 
     void Start()
     {
@@ -35,12 +36,12 @@ public class TaskManager : MonoBehaviour
     {
         while (workCompletion < weeklyQuotaSlider.maxValue)
         {
-            float totalWorkDone = 0;
+            int totalWorkDone = 0;
 
             for (int i = 0; i < workers.Count; i++)
             {
                 var worker = workers[i];
-                float workDone = CalculateWorkDone(worker);
+                int workDone = CalculateWorkDone(worker);
                 worker.WorkDone += workDone;
                 totalWorkDone += workDone;
                 individualTaskSliders[i].value = worker.WorkDone;
@@ -53,9 +54,9 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    float CalculateWorkDone(NPC worker)
+    int CalculateWorkDone(NPC worker)
     {
-        return worker.WorkEfficiency * (1 + (worker.Mood / 20.0f));
+        return (int)Math.Round(worker.WorkEfficiency * (1 + (worker.Mood / 20)));
     }
 
     float CalculateWeeklyQuota()
