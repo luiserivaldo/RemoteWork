@@ -10,7 +10,7 @@ public class NPCGenerator : MonoBehaviour
     public Text npcSalaryOutput; // Salary
     public Text npcInfoOutput; // Whole info
     public Slider npcMoodSlider; //Mood slider game object reference
-    public Text TaskValueOutput; // Current assigned maximum task value
+    public Text TaskCapacityOutput; // Current assigned maximum task value
     public Text WorkDoneOutput; // Current work completed
     public Text npcWorkDoneOutput; // Work currently completed
 
@@ -89,7 +89,7 @@ public class NPCGenerator : MonoBehaviour
             Age = Random.Range(20, 61),
             WorkEfficiency = Mathf.Round(Random.Range(1f, 10f) * 100f) / 100f,
             Mood = Random.Range(-5, 6),
-            TaskValue = Random.Range(1000, 2000),
+            TaskCapacity = Random.Range(1000, 2000),
         };
 
         newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
@@ -112,7 +112,7 @@ public class NPCGenerator : MonoBehaviour
         npcSalaryOutput.text = $"<color=green>{npc.Salary}</color> / month";
         //npcMoodOutput.text = $"{npc.Mood}";
         npcMoodSlider.value = npc.Mood;
-        npcInfoOutput.text = $"Name: {npc.Name}\nAge: {npc.Age}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}\nCurrent task progress: {npc.WorkDone}\nCurrent workload: {npc.TaskValue}\n";
+        npcInfoOutput.text = $"Name: {npc.Name}\nAge: {npc.Age}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}\nCurrent task progress: {npc.WorkDone}\nCurrent workload: {npc.TaskCapacity}\n";
         //Debug.Log("Name: " + npc.Name + "\nAge: " + npc.Age);
     }
 
@@ -148,7 +148,7 @@ public class NPC
     public float WorkEfficiency { get; set; }
     public int Salary { get; set; }
     public int Mood { get; set; }
-    public int TaskValue { get; set; }
+    public int TaskCapacity { get; set; }
     public int WorkDone { get; set; }
 
     // Expanded list

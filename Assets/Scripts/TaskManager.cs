@@ -20,7 +20,7 @@ public class TaskManager : MonoBehaviour
         {
             NPC worker = simpleNpcGenerator.GenerateRandomNPC();
             workers.Add(worker);
-            individualTaskSliders[i].maxValue = worker.TaskValue;
+            individualTaskSliders[i].maxValue = worker.TaskCapacity;
             individualTaskSliders[i].value = worker.WorkDone;
         }
 
@@ -64,7 +64,7 @@ public class TaskManager : MonoBehaviour
         float weeklyQuota = 0;
         foreach (var worker in workers)
         {
-            weeklyQuota += worker.TaskValue;
+            weeklyQuota += worker.TaskCapacity;
         }
         return weeklyQuota;
     }
