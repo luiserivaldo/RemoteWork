@@ -12,7 +12,7 @@ public class SelectActiveNPC : MonoBehaviour
     void OnMouseDown()
     {
         // Output to the Unity Console when the model is clicked
-        //Debug.Log("Model clicked");
+        Debug.Log("Model clicked");
     }
 
     private void EnsureColliderExists()
