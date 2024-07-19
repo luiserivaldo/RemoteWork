@@ -9,9 +9,9 @@ public class NPCGenerator : MonoBehaviour
     // Text Output Fields: Reference to game objects in MainUI or WorkerDetails
     //public Text[] npcNameOutput = new Text[6]; // Name
     public Text allNPCOutput; // Output all NPCs in dictionary 
-    public Text npcSalaryOutput; // Salary
-    public Text npcInfoOutput; // Whole info
-    public Slider npcMoodSlider; //Mood slider game object reference
+    //public Text npcSalaryOutput; // Salary
+    //public Text npcInfoOutput; // Whole info
+    //public Slider npcMoodSlider; //Mood slider game object reference
     //public Text TaskCapacityOutput; // Current assigned maximum task value
     //public Text npcWorkDoneOutput; // Work currently completed
 
@@ -176,9 +176,9 @@ public class NPC
     public bool IsDisabled { get; set; }
     public bool InRelationship { get; set; } */
 
-    public override string ToString()
+    public override string ToString() // Output the class elements as a string
     {
-        return $"Name: {Name}\nAge: {Age}\nWork Efficiency: {WorkEfficiency}\nSalary: {Salary}\nMood: {Mood}";
+        return $"ID: {NPCId}\nName: {Name}\nAge: {Age}\nWork Efficiency: {WorkEfficiency}\nSalary: {Salary}\nMood: {Mood}\nTask Capacity: {TaskCapacity}";
     }
 
     

@@ -2914,9 +2914,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allNPCOutput: {fileID: 393272010}
-  npcSalaryOutput: {fileID: 828365663}
-  npcInfoOutput: {fileID: 262311808}
-  npcMoodSlider: {fileID: 1979040654}
   generateButton: {fileID: 676954700}
   npcPrefabs:
   - {fileID: 9090306628916022113, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
@@ -9027,9 +9024,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allNPCOutput: {fileID: 0}
-  npcSalaryOutput: {fileID: 0}
-  npcInfoOutput: {fileID: 0}
-  npcMoodSlider: {fileID: 0}
   generateButton: {fileID: 1659410062}
   npcPrefabs: []
   spawnPoints: []
@@ -23187,11 +23181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405005ae9b6f6fb4b80b05c667e3f9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allNPCOutput: {fileID: 0}
-  npcSalaryOutput: {fileID: 0}
-  npcInfoOutput: {fileID: 0}
-  npcMoodSlider: {fileID: 0}
-  generateButton: {fileID: 0}
+  allNPCOutput: {fileID: 876939439}
+  generateButton: {fileID: 1197034235}
   npcPrefabs: []
   spawnPoints: []
 --- !u!43 &1118738175
