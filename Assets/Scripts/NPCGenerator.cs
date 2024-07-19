@@ -6,33 +6,17 @@ using UnityEngine.UI;
 
 public class NPCGenerator : MonoBehaviour
 {
-    // Text Output Fields: Reference to game objects in MainUI or WorkerDetails
-    //public Text[] npcNameOutput = new Text[6]; // Name
-    public Text allNPCOutput; // Output all NPCs in dictionary 
-    //public Text npcSalaryOutput; // Salary
-    //public Text npcInfoOutput; // Whole info
-    //public Slider npcMoodSlider; //Mood slider game object reference
-    //public Text TaskCapacityOutput; // Current assigned maximum task value
-    //public Text npcWorkDoneOutput; // Work currently completed
-
-    // *USE AS NECESSARY*
-    //public Text npcAgeOutput; // Age
-    //public Text npcWorkEfficiencyOutput; // Work Efficiency
-    //public Text npcMoodOutput; // Mood
-
     // Debug options
     public Button generateButton; // Debug Generate NPC Button
-
 
     // 3D Model reference
     public GameObject[] npcPrefabs; // Array of different 3D model prefabs
     public Transform[] spawnPoints; // Array of spawn points for NPCs
 
-
     private string[] firstNames = { "Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley", "Dakota", "Reese", "Skyler", "Quinn" };
     private string[] lastNames = { "Smith", "Johnson", "Brown", "Williams", "Jones", "Garcia", "Miller"};
     private static int npcGenCounter = 0; // Number and order of NPCs generated
-    private Dictionary<int, NPC> npcList = new Dictionary<int, NPC>(); // Dictionary containing all generated NPCs
+    public Dictionary<int, NPC> npcList = new Dictionary<int, NPC>(); // Dictionary containing all generated NPCs
 
     private void Start()
     {
@@ -49,7 +33,6 @@ public class NPCGenerator : MonoBehaviour
         {
             NPC newNPC = GenerateRandomNPC();
             npcList.Add(newNPC.NPCId, newNPC); // Add NPCs to dictionary
-            DisplayNPCInfo(newNPC, i);
             SpawnNPCModel(newNPC, i);
         }
 
@@ -72,12 +55,9 @@ public class NPCGenerator : MonoBehaviour
     /*// Debug Generate
     private void OnGenerateButtonClick()
     {
-        for (int i = 0; i < 6; i++)
-        {
-            NPC newNPC = GenerateRandomNPC();
-            DisplayNPCInfo(newNPC, i); // Optionally display the first NPC's info
-            SpawnNPCModel(newNPC, i);
-        }
+        NPC newNPC = GenerateRandomNPC();
+        DisplayNPCInfo(newNPC, i); // Optionally display the first NPC's info
+        //SpawnNPCModel(newNPC, i);
     } */
     
     public NPC GenerateRandomNPC()
@@ -103,34 +83,6 @@ public class NPCGenerator : MonoBehaviour
         return Mathf.RoundToInt(Random.Range(6000f, 6501f) + (age * (workEfficiency * 10)));
     }
 
-    public void DisplayNPCInfo(NPC npc, int index)
-    {
-        /* npcNameOutput[index].text = $"{npc.Name}";
-        //npcAgeOutput.text = $"{npc.Age}";
-        //npcWorkEfficiencyOutput.text = $"{npc.WorkEfficiency}";
-        npcSalaryOutput.text = $"<color=green>{npc.Salary}</color> / month";
-        //npcMoodOutput.text = $"{npc.Mood}";
-        npcMoodSlider.value = npc.Mood;
-        npcInfoOutput.text = $"Name: {npc.Name}\nAge: {npc.Age}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}";
-        //Debug.Log("Name: " + npc.Name + "\nAge: " + npc.Age); */
-
-        string allNPCsText = "";
-        foreach (var i in npcList.Values)
-        {
-            allNPCsText += i.ToString() + "\n\n"; // Append each NPC's info and add a newline for spacing
-        }
-        allNPCOutput.text = allNPCsText; // Display all NPCs' information in the text component
-    }
-
-    public NPC GetNPC(int id)
-    {
-        if (npcList.TryGetValue(id, out NPC npc))
-        {
-            return npc;
-        }
-        return null; // Return null if NPC with given ID doesn't exist
-    }
-
     private void SpawnNPCModel(NPC npc, int index)
     {
         if (npcPrefabs.Length == 0 || spawnPoints.Length == 0)
@@ -144,14 +96,6 @@ public class NPCGenerator : MonoBehaviour
         //Debug.Log($"Selected Prefab: {npcPrefab.name} for NPC {index + 1}");
 
         GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
-        /* if (npcModel != null)
-        {
-            Debug.Log($"Spawned NPC Model at {spawnPoint.position}");
-        }
-        else
-        {
-            Debug.LogError("Failed to instantiate NPC Model.");
-        } */
     }
 }
 
@@ -183,7 +127,7 @@ public class NPC
 
     
 }
-public class NPCModel : MonoBehaviour
+/* public class NPCModel : MonoBehaviour
 {
     private NPC npc;
     private NPCGenerator npcGenerator;
@@ -193,4 +137,4 @@ public class NPCModel : MonoBehaviour
         this.npc = npc;
         this.npcGenerator = generator;
     }
-}
+} */
