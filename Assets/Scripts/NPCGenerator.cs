@@ -17,25 +17,16 @@ public class NPCGenerator : MonoBehaviour
 
     private string[] firstNames = { "Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley", "Dakota", "Reese", "Skyler", "Quinn" };
     private string[] lastNames = { "Smith", "Johnson", "Brown", "Williams", "Jones", "Garcia", "Miller"};
-    private static int npcGenCounter = 1; // Number and order of NPCs generated
+    private static int npcGenCounter = 1; // Number and order of NPCs generated, starting ID = 1
     public Dictionary<int, NPC> npcList = new Dictionary<int, NPC>(); // Dictionary containing all generated NPCs
 
     private void Start()
     {
-         //Debug NPC Spawn
-        /* if (spawnPoint == null)
-        {
-            Debug.LogWarning("No spawn point detected.");
-            //GameObject defaultSpawnPoint = new GameObject("DefaultSpawnPoint");
-            //spawnPoint = defaultSpawnPoint.transform;
-            //spawnPoint.position = new Vector3(0, 0, 0); // Adjust this position as needed
-        } */
-
         for (int i = 0; i < 6; i++) // Initial starting no. of NPCs = 6
         {
             NPC newNPC = GenerateRandomNPC();
             npcList.Add(newNPC.NPCId, newNPC); // Add NPCs to dictionary
-            //SpawnNPCModel(newNPC, i);
+            SpawnNPCModel(newNPC, i);
         }
 
         //generateButton.onClick.AddListener(OnGenerateButtonClick); // Debug Generate
@@ -64,19 +55,6 @@ public class NPCGenerator : MonoBehaviour
     
     public NPC GenerateRandomNPC()
     {
-        /* NPC newNPC = new NPC
-        {
-            NPCId = npcGenCounter++, // Sequential ID based on the order of creation, default 0
-            Name = firstNames[Random.Range(0, firstNames.Length)] + " " + lastNames[Random.Range(0, lastNames.Length)],
-            Age = Random.Range(20, 61),
-            WorkEfficiency = Mathf.Round(Random.Range(1f, 10f) * 100f) / 100f,
-            Mood = Random.Range(-5, 6),
-            TaskCapacity = Random.Range(1000, 2000)
-        };
-        newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
-
-        return newNPC; */
-
         if (spawnPoints.Length == 0 || npcPrefabs.Length == 0)
         {
             Debug.LogError("No spawn points or NPC prefabs available.");
@@ -86,7 +64,6 @@ public class NPCGenerator : MonoBehaviour
         {
             if (npcGenCounter <= spawnPoints.Length)
             {
-                GameObject npcModel = Instantiate(npcPrefabs[5], spawnPoint.position, spawnPoint.rotation);// [npcGenCounter - 1]
                 NPC newNPC = new NPC
                 {
                     NPCId = npcGenCounter++, // Sequential ID based on the order of creation, default 1
@@ -97,11 +74,9 @@ public class NPCGenerator : MonoBehaviour
                     TaskCapacity = Random.Range(1000, 2000)
                 };
                 newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
-                npcModel.GetComponent<SelectActiveNPC>().InitializeNPC(newNPC);
                 return newNPC;
             }
         }
-
         // if GenCounter exceeds spawnpoints
         return null;
     }
@@ -118,7 +93,7 @@ public class NPCGenerator : MonoBehaviour
         return roundedSalary;
     }
 
-    /* private void SpawnNPCModel(NPC npc, int index)
+    private void SpawnNPCModel(NPC npc, int index)
     {
         if (npcPrefabs.Length == 0 || spawnPoints.Length == 0)
         {
@@ -131,7 +106,8 @@ public class NPCGenerator : MonoBehaviour
         //Debug.Log($"Selected Prefab: {npcPrefab.name} for NPC {index + 1}");
 
         GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
-    } */
+        npcModel.GetComponent<SelectActiveNPC>().InitializeNPC(npc);
+    } 
 }
 
 public class NPC
