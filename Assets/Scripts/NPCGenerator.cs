@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class NPCGenerator : MonoBehaviour
 {
@@ -79,8 +81,14 @@ public class NPCGenerator : MonoBehaviour
 
     private int CalculateSalary(int age, float workEfficiency)
     {
-        //return Mathf.RoundToInt(Random.Range(6000f, 8001f) + (age * (workEfficiency * 10)));
-        return Mathf.RoundToInt(Random.Range(6000f, 6501f) + (age * (workEfficiency * 10)));
+        //return Mathf.RoundToInt(Random.Range(6000f, 6501f) + (age * (workEfficiency * 10)));
+        float baseSalary = Random.Range(6000f, 6501f);
+        float additionalPay = age * (workEfficiency * 10);
+        float totalSalary = baseSalary + additionalPay;
+
+        int roundedSalary = (int)Math.Ceiling(totalSalary / 10.0) * 10; // Round up to the nearest decimal point
+
+        return roundedSalary;
     }
 
     private void SpawnNPCModel(NPC npc, int index)
