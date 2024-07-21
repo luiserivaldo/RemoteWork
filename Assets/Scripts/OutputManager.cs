@@ -35,18 +35,18 @@ public class OutputManager : MonoBehaviour
 
     // Text Output Fields: Reference to game objects in MainUI or WorkerDetails
     public TMP_Text allNPCOutput; // Output all NPCs in dictionary
-    /* public Text[] npcNameOutput = new Text[0]; // Name
+    public Text npcNameOutput; // Name
     
-    public Text[] npcSalaryOutput = new Text[0]; // Salary
-    public Slider[] npcMoodSlider = new Slider[0]; //Mood slider game object reference
-    public Text[] TaskCapacityOutput = new Text[0]; // Current assigned maximum task value
-    public Text[] npcWorkDoneOutput = new Text[0]; // Work currently completed */
+    public Text npcSalaryOutput; // Salary
+    public Slider npcMoodSlider; //Mood slider game object reference
+    //public TMP_Text TaskCapacityOutput; // Current assigned maximum task value
+    //public Slider npcWorkDoneOutput; // Work currently completed
 
     // *USE AS NECESSARY*
     //public Text npcAgeOutput; // Age
     //public Text npcWorkEfficiencyOutput; // Work Efficiency
     //public Text npcMoodOutput; // Mood
-    // Start is called before the first frame update
+
     void Start()
     {
         //DisplayNPCInfo();
@@ -83,15 +83,18 @@ public class OutputManager : MonoBehaviour
         if (npcGenerator.npcList.TryGetValue(npcIdSelect, out NPC npc))
         {
             // ID found, display its information
-            string npcInfo = npc.ToString();  // Assuming ToString() is properly implemented in the NPC class
+            string npcInfo = npc.ToString();  // check NPCGenerator for ToString output
             allNPCOutput.text = npcInfo;
-            Debug.Log("Displaying info for NPC ID 3: " + npcInfo);
+            npcNameOutput.text = npc.Name;
+            npcSalaryOutput.text = $"$ {npc.Salary}";
+            npcMoodSlider.value = npc.Mood;
+            //Debug.Log("Displaying info for NPC ID 3: " + npcInfo);
         }
         else
         {
             // ID not found, display error message
             allNPCOutput.text = "NPC with ID 3 not found.";
-            Debug.Log($"NPC with ID (" + $"{npcIdSelect}" + ") not found.");
+            //Debug.Log($"NPC with ID (" + $"{npcIdSelect}" + ") not found.");
         }
     }
 }
