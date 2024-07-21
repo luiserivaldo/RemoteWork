@@ -8,6 +8,7 @@ public class OutputManager : MonoBehaviour
 {
     
     public NPCGenerator npcGenerator;
+    public int npcIdSelect; // Specify the ID of the NPC you want to display [REMOVE WITH PROPER NPC SELECT LOGIC]
     /* PSEUDOCODE
     refer gameobjects for output
     [
@@ -33,7 +34,7 @@ public class OutputManager : MonoBehaviour
     */
 
     // Text Output Fields: Reference to game objects in MainUI or WorkerDetails
-    public TMP_Text allNPCOutput; // Output all NPCs in dictionary 
+    public TMP_Text allNPCOutput; // Output all NPCs in dictionary
     /* public Text[] npcNameOutput = new Text[0]; // Name
     
     public Text[] npcSalaryOutput = new Text[0]; // Salary
@@ -48,7 +49,8 @@ public class OutputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DisplayNPCInfo();
+        //DisplayNPCInfo();
+        DisplaySpecificNPC();
     }
 
     // Update is called once per frame
@@ -74,5 +76,22 @@ public class OutputManager : MonoBehaviour
         }
         allNPCOutput.text = allNPCsText; // Display all NPCs' information in the text component
         return allNPCOutput;
+    }
+
+    public void DisplaySpecificNPC()
+    {
+        if (npcGenerator.npcList.TryGetValue(npcIdSelect, out NPC npc))
+        {
+            // ID found, display its information
+            string npcInfo = npc.ToString();  // Assuming ToString() is properly implemented in the NPC class
+            allNPCOutput.text = npcInfo;
+            Debug.Log("Displaying info for NPC ID 3: " + npcInfo);
+        }
+        else
+        {
+            // ID not found, display error message
+            allNPCOutput.text = "NPC with ID 3 not found.";
+            Debug.Log($"NPC with ID (" + $"{npcIdSelect}" + ") not found.");
+        }
     }
 }
