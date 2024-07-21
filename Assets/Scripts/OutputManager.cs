@@ -49,8 +49,8 @@ public class OutputManager : MonoBehaviour
 
     void Start()
     {
-        //DisplayNPCInfo();
-        DisplaySpecificNPC();
+        DisplayNPCInfo();
+        //DisplaySpecificNPC();
     }
 
     // Update is called once per frame

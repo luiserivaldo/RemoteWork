@@ -17,7 +17,7 @@ public class NPCGenerator : MonoBehaviour
 
     private string[] firstNames = { "Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley", "Dakota", "Reese", "Skyler", "Quinn" };
     private string[] lastNames = { "Smith", "Johnson", "Brown", "Williams", "Jones", "Garcia", "Miller"};
-    private static int npcGenCounter = 0; // Number and order of NPCs generated
+    private static int npcGenCounter = 1; // Number and order of NPCs generated
     public Dictionary<int, NPC> npcList = new Dictionary<int, NPC>(); // Dictionary containing all generated NPCs
 
     private void Start()
@@ -35,7 +35,7 @@ public class NPCGenerator : MonoBehaviour
         {
             NPC newNPC = GenerateRandomNPC();
             npcList.Add(newNPC.NPCId, newNPC); // Add NPCs to dictionary
-            SpawnNPCModel(newNPC, i);
+            //SpawnNPCModel(newNPC, i);
         }
 
         //generateButton.onClick.AddListener(OnGenerateButtonClick); // Debug Generate
@@ -64,7 +64,7 @@ public class NPCGenerator : MonoBehaviour
     
     public NPC GenerateRandomNPC()
     {
-        NPC newNPC = new NPC
+        /* NPC newNPC = new NPC
         {
             NPCId = npcGenCounter++, // Sequential ID based on the order of creation, default 0
             Name = firstNames[Random.Range(0, firstNames.Length)] + " " + lastNames[Random.Range(0, lastNames.Length)],
@@ -75,8 +75,35 @@ public class NPCGenerator : MonoBehaviour
         };
         newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
 
-        return newNPC;
-        //return new NPC(name, age, leadershipStyle, techSkill, socialSkill, workEfficiency, socialPref, isNeurodivergent, isDisabled, inRelationship, mood);
+        return newNPC; */
+
+        if (spawnPoints.Length == 0 || npcPrefabs.Length == 0)
+        {
+            Debug.LogError("No spawn points or NPC prefabs available.");
+            return null;  // No spawn points or prefabs to process
+        }
+        foreach (var spawnPoint in spawnPoints)
+        {
+            if (npcGenCounter <= spawnPoints.Length)
+            {
+                GameObject npcModel = Instantiate(npcPrefabs[5], spawnPoint.position, spawnPoint.rotation);// [npcGenCounter - 1]
+                NPC newNPC = new NPC
+                {
+                    NPCId = npcGenCounter++, // Sequential ID based on the order of creation, default 1
+                    Name = firstNames[Random.Range(0, firstNames.Length)] + " " + lastNames[Random.Range(0, lastNames.Length)],
+                    Age = Random.Range(20, 61),
+                    WorkEfficiency = Mathf.Round(Random.Range(1f, 10f) * 100f) / 100f,
+                    Mood = Random.Range(-5, 6),
+                    TaskCapacity = Random.Range(1000, 2000)
+                };
+                newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
+                npcModel.GetComponent<SelectActiveNPC>().InitializeNPC(newNPC);
+                return newNPC;
+            }
+        }
+
+        // if GenCounter exceeds spawnpoints
+        return null;
     }
 
     private int CalculateSalary(int age, float workEfficiency)
@@ -91,7 +118,7 @@ public class NPCGenerator : MonoBehaviour
         return roundedSalary;
     }
 
-    private void SpawnNPCModel(NPC npc, int index)
+    /* private void SpawnNPCModel(NPC npc, int index)
     {
         if (npcPrefabs.Length == 0 || spawnPoints.Length == 0)
         {
@@ -104,7 +131,7 @@ public class NPCGenerator : MonoBehaviour
         //Debug.Log($"Selected Prefab: {npcPrefab.name} for NPC {index + 1}");
 
         GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
-    }
+    } */
 }
 
 public class NPC
@@ -132,17 +159,4 @@ public class NPC
     {
         return $"ID: {NPCId}\nName: {Name}\nAge: {Age}\nWork Efficiency: {WorkEfficiency}\nSalary: {Salary}\nMood: {Mood}\nTask Capacity: {TaskCapacity}";
     }
-
-    
 }
-/* public class NPCModel : MonoBehaviour
-{
-    private NPC npc;
-    private NPCGenerator npcGenerator;
-
-    public void Initialize(NPC npc, NPCGenerator generator)
-    {
-        this.npc = npc;
-        this.npcGenerator = generator;
-    }
-} */

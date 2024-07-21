@@ -11,14 +11,14 @@ public class TaskManager : MonoBehaviour
     public int workCompletion;
     public int taskGoal = 1000; // Example goal, adjust as necessary
     private List<NPC> workers = new List<NPC>();
-    public NPCGenerator simpleNpcGenerator; // Reference to the NPC generator
+    public NPCGenerator npcGenerator; // Reference to the NPC generator
 
     void Start()
     {
         // Generate 6 random workers
         for (int i = 0; i < 6; i++)
         {
-            NPC worker = simpleNpcGenerator.GenerateRandomNPC();
+            NPC worker = npcGenerator.GenerateRandomNPC();
             workers.Add(worker);
             individualTaskSliders[i].maxValue = worker.TaskCapacity;
             individualTaskSliders[i].value = worker.WorkDone;
