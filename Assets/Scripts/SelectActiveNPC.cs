@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class SelectActiveNPC : MonoBehaviour
 {
-    //public NPCGenerator npcGenerator;
+    private NPCGenerator npcGenerator;
     private NPC assignedNPC;
 
     void Start()
     {
         EnsureColliderExists();
+        npcGenerator = FindObjectOfType<NPCGenerator>();
+        if (npcGenerator == null)
+        {
+            Debug.LogError("NPCGenerator not found.");
+            return;
+        }
     }
     public void InitializeNPC(NPC npc)
     {
@@ -29,15 +35,20 @@ public class SelectActiveNPC : MonoBehaviour
     void OnMouseDown()
     {   
         Debug.Log("Model clicked");
-        if (assignedNPC == null) // Error check when NPC has no data or reference
+        // Deselect any previously selected NPC
+        foreach (var npcEntry in npcGenerator.npcList)
         {
-            Debug.LogError("Assigned NPC data is null.");
-            return;
+            if (npcEntry.Value.IsSelected && npcEntry.Value != assignedNPC)
+            {
+                npcEntry.Value.IsSelected = false;
+            }
         }
-        
-        else // Output to the Unity Console when the model is clicked
-        {
-            Debug.Log($"NPC Clicked: ID={assignedNPC.NPCId}, Name={assignedNPC.Name}");
-        }
+
+        // Select this NPC
+        assignedNPC.IsSelected = true;
+        Debug.Log($"NPC Clicked: ID={assignedNPC.NPCId}, Name={assignedNPC.Name}, Selected={assignedNPC.IsSelected}");
+
+        // Notify OutputManager to update the display
+        FindObjectOfType<OutputManager>().DisplaySpecificNPC(assignedNPC);
     }
 }

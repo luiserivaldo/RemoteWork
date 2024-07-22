@@ -9,29 +9,6 @@ public class OutputManager : MonoBehaviour
     
     public NPCGenerator npcGenerator;
     public int npcIdSelect; // Specify the ID of the NPC you want to display [REMOVE WITH PROPER NPC SELECT LOGIC]
-    /* PSEUDOCODE
-    refer gameobjects for output
-    [
-        //WorkerDetails
-        public Text IdOutput;
-        public Text NameOutput;
-        public Text AgeOutput;
-
-        //MainInfobar 
-        public Text MainIdOutput;
-        public Text MainNameOutput;
-        public Text MainAgeOutput;
-
-    ]
-    retrieve variables from NPCGenerator
-    output each variable individually
-    assign gameobject/ui objects to each variable
-
-    mainBarOutput {
-        check for isSelected = true
-        output those values to main 
-    }
-    */
 
     // Text Output Fields: Reference to game objects in MainUI or WorkerDetails
     public TMP_Text allNPCOutput; // Output all NPCs in dictionary
@@ -47,10 +24,14 @@ public class OutputManager : MonoBehaviour
     //public Text npcWorkEfficiencyOutput; // Work Efficiency
     //public Text npcMoodOutput; // Mood
 
+    public Button showNPCDetailsButton;
+    public Text selectedNPCOutput;
+
     void Start()
     {
         DisplayNPCInfo();
         //DisplaySpecificNPC();
+        showNPCDetailsButton.onClick.AddListener(DisplayNPCOnButton); // Debug Generate
     }
 
     // Update is called once per frame
@@ -77,24 +58,23 @@ public class OutputManager : MonoBehaviour
         allNPCOutput.text = allNPCsText; // Display all NPCs' information in the text component
         return allNPCOutput;
     }
-
-    public void DisplaySpecificNPC()
+    public void DisplaySpecificNPC(NPC selectedNPC)
     {
-        if (npcGenerator.npcList.TryGetValue(npcIdSelect, out NPC npc))
+        if (selectedNPC != null && selectedNPC.IsSelected)
         {
-            // ID found, display its information
-            string npcInfo = npc.ToString();  // check NPCGenerator for ToString output
-            allNPCOutput.text = npcInfo;
-            npcNameOutput.text = npc.Name;
-            npcSalaryOutput.text = $"$ {npc.Salary}";
-            npcMoodSlider.value = npc.Mood;
-            //Debug.Log("Displaying info for NPC ID 3: " + npcInfo);
+            string npcInfo = selectedNPC.ToString();
+            selectedNPCOutput.text = npcInfo;
+            npcNameOutput.text = selectedNPC.Name;
+            npcSalaryOutput.text = $"$ {selectedNPC.Salary}";
+            npcMoodSlider.value = selectedNPC.Mood;
         }
         else
         {
-            // ID not found, display error message
-            allNPCOutput.text = "NPC with ID 3 not found.";
-            //Debug.Log($"NPC with ID (" + $"{npcIdSelect}" + ") not found.");
+            selectedNPCOutput.text = "No NPC is currently selected.";
         }
+    }
+    private void DisplayNPCOnButton()
+    {
+        
     }
 }

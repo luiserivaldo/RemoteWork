@@ -133,6 +133,6 @@ public class NPC
 
     public override string ToString() // Output the class elements as a string
     {
-        return $"ID: {NPCId}\nName: {Name}\nAge: {Age}\nWork Efficiency: {WorkEfficiency}\nSalary: {Salary}\nMood: {Mood}\nTask Capacity: {TaskCapacity}";
+        return $"isSelected: {IsSelected}\nID: {NPCId}\nName: {Name}\nAge: {Age}\nWork Efficiency: {WorkEfficiency}\nSalary: {Salary}\nMood: {Mood}\nTask Capacity: {TaskCapacity}";
     }
 }
