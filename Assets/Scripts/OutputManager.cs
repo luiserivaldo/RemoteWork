@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class OutputManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class OutputManager : MonoBehaviour
     
     public Text npcSalaryOutput; // Salary
     public Slider npcMoodSlider; //Mood slider game object reference
+    public int taskMaxValue = 100;
+    public Slider npcWorkDoneSlider;
     //public TMP_Text TaskCapacityOutput; // Current assigned maximum task value
     //public Slider npcWorkDoneOutput; // Work currently completed
 
@@ -29,9 +32,11 @@ public class OutputManager : MonoBehaviour
 
     void Start()
     {
+        npcWorkDoneSlider.maxValue = taskMaxValue;
         DisplayNPCInfo();
         //DisplaySpecificNPC();
         showNPCDetailsButton.onClick.AddListener(DisplayNPCOnButton); // Debug Generate
+        StartCoroutine(UpdateOutput());
     }
 
     // Update is called once per frame
@@ -67,6 +72,7 @@ public class OutputManager : MonoBehaviour
             npcNameOutput.text = selectedNPC.Name;
             npcSalaryOutput.text = $"$ {selectedNPC.Salary}";
             npcMoodSlider.value = selectedNPC.Mood;
+            npcWorkDoneSlider.value = selectedNPC.WorkDone;
         }
         else
         {
@@ -76,5 +82,25 @@ public class OutputManager : MonoBehaviour
     private void DisplayNPCOnButton()
     {
         
+    }
+    private IEnumerator UpdateOutput()
+    {
+        while (true)
+        {
+            foreach (var npc in npcGenerator.npcList.Values)
+            {
+                // Update the work done slider for each NPC
+                UpdateWorkDoneSlider(npc);
+            }
+            DisplayNPCInfo();
+            yield return new WaitForSeconds(1);
+        }
+    }
+    private void UpdateWorkDoneSlider(NPC npc)
+    {
+        if (npc.IsSelected)
+        {
+            npcWorkDoneSlider.value = npc.WorkDone;
+        }
     }
 }

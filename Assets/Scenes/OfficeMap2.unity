@@ -382,6 +382,8 @@ MonoBehaviour:
   npcNameOutput: {fileID: 401932511}
   npcSalaryOutput: {fileID: 828365663}
   npcMoodSlider: {fileID: 1979040654}
+  taskMaxValue: 200
+  npcWorkDoneSlider: {fileID: 1260107384}
   showNPCDetailsButton: {fileID: 676954700}
   selectedNPCOutput: {fileID: 433451441}
 --- !u!1 &43442611
@@ -3189,7 +3191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &231996206
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7862,9 +7864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weeklyQuotaSlider: {fileID: 1327946182}
-  individualTaskSliders: []
-  workCompletion: 0
-  taskGoal: 1000
+  weeklyQuotaGoal: 1000
   npcGenerator: {fileID: 0}
 --- !u!1 &485739115
 GameObject:
@@ -26656,7 +26656,7 @@ GameObject:
   - component: {fileID: 1260107383}
   - component: {fileID: 1260107384}
   m_Layer: 0
-  m_Name: TaskBar
+  m_Name: TaskSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26728,7 +26728,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 200
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -34982,7 +34982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1462283617
 Transform:
   m_ObjectHideFlags: 0
@@ -35011,16 +35011,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weeklyQuotaSlider: {fileID: 1327946182}
-  individualTaskSliders:
-  - {fileID: 812079258}
-  - {fileID: 1037242867}
-  - {fileID: 562924258}
-  - {fileID: 1942225220}
-  - {fileID: 925059581}
-  - {fileID: 954141072}
-  workCompletion: 0
-  taskGoal: 1000
-  npcGenerator: {fileID: 0}
+  weeklyQuotaGoal: 10000
+  npcGenerator: {fileID: 226452970}
 --- !u!1001 &1471878857
 PrefabInstance:
   m_ObjectHideFlags: 0

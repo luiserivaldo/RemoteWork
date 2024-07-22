@@ -39,10 +39,11 @@ public class NPCGenerator : MonoBehaviour
                 prefab.AddComponent<MeshCollider>();
             }
         }
+        StartCoroutine(UpdateWorkDone());
     }
     void Update()
     {
-         
+         //UpdateWorkProgress();
     }
 
     /*// Debug Generate
@@ -80,19 +81,6 @@ public class NPCGenerator : MonoBehaviour
         // if GenCounter exceeds spawnpoints
         return null;
     }
-
-    private int CalculateSalary(int age, float workEfficiency)
-    {
-        //return Mathf.RoundToInt(Random.Range(6000f, 6501f) + (age * (workEfficiency * 10)));
-        float baseSalary = Random.Range(6000f, 6501f);
-        float additionalPay = age * (workEfficiency * 10);
-        float totalSalary = baseSalary + additionalPay;
-
-        int roundedSalary = (int)Math.Ceiling(totalSalary / 10.0) * 10; // Round up to the nearest decimal point
-
-        return roundedSalary;
-    }
-
     private void SpawnNPCModel(NPC npc, int index)
     {
         if (npcPrefabs.Length == 0 || spawnPoints.Length == 0)
@@ -108,6 +96,30 @@ public class NPCGenerator : MonoBehaviour
         GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
         npcModel.GetComponent<SelectActiveNPC>().InitializeNPC(npc);
     } 
+    private int CalculateSalary(int age, float workEfficiency)
+    {
+        //return Mathf.RoundToInt(Random.Range(6000f, 6501f) + (age * (workEfficiency * 10)));
+        float baseSalary = Random.Range(6000f, 6501f);
+        float additionalPay = age * (workEfficiency * 10);
+        float totalSalary = baseSalary + additionalPay;
+
+        int roundedSalary = (int)Math.Ceiling(totalSalary / 10.0) * 10; // Round up to the nearest decimal point
+
+        return roundedSalary;
+    }
+    private IEnumerator UpdateWorkDone()
+    {
+        while (true)
+        {
+            foreach (var npc in npcList.Values)
+            {
+                float workDoneValue = npc.WorkEfficiency * (1 + (npc.Mood / 20));
+                npc.WorkDone += workDoneValue;
+                Debug.Log($"Updated WorkDone for {npc.WorkDone} value.");
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
 }
 
 public class NPC
@@ -120,7 +132,7 @@ public class NPC
     public int Salary { get; set; }
     public int Mood { get; set; }
     public int TaskCapacity { get; set; }
-    public int WorkDone { get; set; }
+    public float WorkDone { get; set; } = 0;
 
     // Expanded list
     /* public string LeadershipStyle { get; set; }
