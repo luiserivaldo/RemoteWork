@@ -11,48 +11,60 @@ public class OutputManager : MonoBehaviour
     private TaskManager taskManager;
     private ActionManager actionManager;
 
+    // Game Info Bar
+    public Text currentDate;
+    public Text NumOfTasksCompleted;
+    public Text currentBudget;
 
-    // Output fields
-    
+    // NPC Info Bar
     public Text npcNameOutput; // Name
     public Text npcSalaryOutput; // Salary
     public Text npcCurrentActivity;
     public Text npcCurrentWorkArrangement;
     public Slider npcMoodSlider; // Mood slider
     public Slider npcWorkDoneSlider; // Task progress slider
+    
+    // Selected NPC to display to NPC info bar
+    private NPC selectedNPC;
 
-    public Text selectedNPCOutput; // Detailed info of selected NPC
+    // Debug output
+    public Text selectedNPCOutput; // Full info of selected NPC
     public TextMeshProUGUI displayAllNPCsOutput; // Display full list of NPCs information (debug)
 
     public Button showNPCDetailsButton;
     public GameObject SelectedUI; // GameObject for selected UI elements
     public GameObject NoSelectedUI; // GameObject for no selected UI elements
 
-    
-    private NPC selectedNPC;
-
     void Start()
     {
+        // Find related Game Managers
         npcGenerator = FindObjectOfType<NPCGenerator>();
         taskManager = FindObjectOfType<TaskManager>(); 
         actionManager = FindObjectOfType<ActionManager>();
-        showNPCDetailsButton.onClick.AddListener(DisplayNPCOnButton);
 
+        // Start live updating components
         StartCoroutine(UpdateOutputCoroutine());
         npcGenerator.OnNPCsGenerated += OnNPCsGenerated; // Subscribe to the event
     }
 
-    void Update()
+    void Update() // Updates per frame
     {
-        UpdateAllNPCInfo();
+        UpdateAllNPCInfo(); // Debug output to display all NPCs in the dictionary
         UpdateSelectedNPCInfo(); // Update selected NPC info
         UpdateSelectedUIState(); // Switch between NoSelectedNPCs and SelectedNPCs UI
+        UpdateGameInfoBar();
     }
     void OnDestroy()
     {
-        npcGenerator.OnNPCsGenerated -= OnNPCsGenerated; // Unsubscribe from the event
+        npcGenerator.OnNPCsGenerated -= OnNPCsGenerated; // Unsubscribe from the event; reset isSelected state to switch to NoSelectedUI
     }
 
+    private void UpdateGameInfoBar() // Change slider values by taking from NPC data
+    {
+        currentDate.text = $"M0/W{taskManager.weeksPassed}/D0";
+        NumOfTasksCompleted.text = $"{taskManager.numOfTasksCompleted}";
+        currentBudget.text = $"{(taskManager.currentBudget/1000).ToString("N0")}K";
+    }
     private IEnumerator UpdateOutputCoroutine()
     {
         while (true)
@@ -62,7 +74,7 @@ public class OutputManager : MonoBehaviour
         }
     }
 
-    private void UpdateSelectedNPCSliders()
+    private void UpdateSelectedNPCSliders() // Change slider values by taking from NPC data
     {
         if (selectedNPC != null)
         {
@@ -77,7 +89,7 @@ public class OutputManager : MonoBehaviour
         if (selectedNPC != null)
         {
             npcNameOutput.text = selectedNPC.Name;
-            npcSalaryOutput.text = $"$ {selectedNPC.Salary}";
+            npcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")}";
             npcCurrentActivity.text = selectedNPC.CurrentActivity;
             npcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
             npcMoodSlider.value = selectedNPC.Mood;
@@ -96,7 +108,7 @@ public class OutputManager : MonoBehaviour
         {
             actionManager.SetSelectedNPC(npc); // Ensure TaskManager knows about the selected NPC
         }
-        UpdateSelectedNPCInfo(); // Immediately update UI when NPC is selected
+        UpdateSelectedNPCInfo(); // Update UI when NPC is selected
     }
 
     public void UpdateAllNPCInfo()
@@ -113,12 +125,6 @@ public class OutputManager : MonoBehaviour
         selectedNPC = null; // Clear the selected NPC
         UpdateSelectedNPCInfo(); // Update UI to reflect no NPC is selected
     }
-
-    private void DisplayNPCOnButton()
-    {
-        // Implement the logic to display NPC details on button click
-    }
-
     public void SetSelectedNPC(NPC npc)
     {
         selectedNPC = npc;

@@ -8,14 +8,20 @@ public class ActionManager : MonoBehaviour
     private NPC selectedNPC;
     public Button enquireButton;
     public Button praiseButton;
+
+    // Buy office upgrades buttons
+    public Button buyOfficeUpgradesButton;
+    public Button buyUpgrade1;
+    public Button buyUpgrade2;
     
     void Start()
     {
     enquireButton.onClick.AddListener(OnEnquireButtonClick);
     praiseButton.onClick.AddListener(OnPraiseButtonClick);
+    buyOfficeUpgradesButton.onClick.AddListener(BuyOfficeUpgrades);
 
     }
-    public void SetSelectedNPC(NPC npc)
+    public void SetSelectedNPC(NPC npc) // Set clicked NPC as the selected NPC for logic functions
     {
         selectedNPC = npc;
     }
@@ -52,5 +58,8 @@ public class ActionManager : MonoBehaviour
             Debug.LogError("No NPC selected. Cannot praise.");
         }
     }
-
+    public void BuyOfficeUpgrades()
+    {
+        
+    }
 }

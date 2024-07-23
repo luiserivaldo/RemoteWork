@@ -8,14 +8,22 @@ using UnityEngine.UI;
 public class TaskManager : MonoBehaviour
 {
     public NPCGenerator npcGenerator; // Reference to the NPC generator
+    public ActionManager actionManager; // Reference to the Action Manager
+
+    // Weekly Quota components
     public Slider weeklyQuotaSlider;
     private float workerCollectedProgress;
     public int weeklyQuotaGoal = 10000; // Max value required to reach weekly quota
-    private NPC selectedNPC;
+    public int numOfTasksCompleted;
+    public int weeksPassed;
+
+    // Budget components
+    public int startingBudget = 300000;
+    public int currentBudget;
 
     void Start()
     {
-        // Initialize the slider
+        // Initialize sliders
         weeklyQuotaSlider.maxValue = weeklyQuotaGoal;
         weeklyQuotaSlider.value = workerCollectedProgress;
 
@@ -23,8 +31,12 @@ public class TaskManager : MonoBehaviour
         StartCoroutine(UpdateWorkProgress());
         
     }
+    void Update()
+    {
+        CalculateBudget();
+    }
 
-    IEnumerator UpdateWorkProgress()
+    IEnumerator UpdateWorkProgress() // Updates slider values
     {
         while (workerCollectedProgress < weeklyQuotaSlider.maxValue)
         {
@@ -45,7 +57,7 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    private void UpdateWorkDone(NPC npc)
+    private void UpdateWorkDone(NPC npc) // Calculate work done per individual NPC
     {
         npc.WorkDonePerIncrement = npc.WorkEfficiency * (1 + (npc.Mood / 10f));
         npc.TotalWorkDone += npc.WorkDonePerIncrement;
@@ -55,5 +67,8 @@ public class TaskManager : MonoBehaviour
         }
         //Debug.Log($"NPC ID: {npc.NPCId} total work: {npc.TotalWorkDone}");
     }
-    // This method should be called to set the selected NPC, for example, when an NPC is clicked in the UI
+    private void CalculateBudget()
+    {
+        currentBudget = startingBudget;
+    }
 }

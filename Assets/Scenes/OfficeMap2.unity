@@ -510,6 +510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c43d7d927e02684c93f90b37c0fc5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDate: {fileID: 1512480547}
+  NumOfTasksCompleted: {fileID: 1233217998}
+  currentBudget: {fileID: 1358283070}
   npcNameOutput: {fileID: 401932511}
   npcSalaryOutput: {fileID: 828365663}
   npcCurrentActivity: {fileID: 712663490}
@@ -8428,10 +8431,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcGenerator: {fileID: 0}
+  actionManager: {fileID: 0}
   weeklyQuotaSlider: {fileID: 1327946182}
   weeklyQuotaGoal: 1000
-  enquireButton: {fileID: 0}
-  praiseButton: {fileID: 0}
+  startingBudget: 300000
 --- !u!1 &485739115
 GameObject:
   m_ObjectHideFlags: 0
@@ -10285,6 +10288,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enquireButton: {fileID: 1796576497}
   praiseButton: {fileID: 113418618}
+  buyOfficeUpgradesButton: {fileID: 0}
+  buyUpgrade1: {fileID: 0}
+  buyUpgrade2: {fileID: 0}
 --- !u!1 &602873476
 GameObject:
   m_ObjectHideFlags: 0
@@ -35983,10 +35989,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcGenerator: {fileID: 226452970}
+  actionManager: {fileID: 0}
   weeklyQuotaSlider: {fileID: 1327946182}
   weeklyQuotaGoal: 10000
-  enquireButton: {fileID: 1796576497}
-  praiseButton: {fileID: 113418618}
+  startingBudget: 300000
 --- !u!1001 &1471878857
 PrefabInstance:
   m_ObjectHideFlags: 0
