@@ -376,10 +376,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c43d7d927e02684c93f90b37c0fc5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  workDoneSlider: {fileID: 1260107384}
   npcNameOutput: {fileID: 401932511}
   npcSalaryOutput: {fileID: 828365663}
+  npcCurrentActivity: {fileID: 712663490}
+  npcCurrentWorkArrangement: {fileID: 383179358}
   npcMoodSlider: {fileID: 1979040654}
+  npcWorkDoneSlider: {fileID: 1260107384}
   selectedNPCOutput: {fileID: 433451441}
   displayAllNPCsOutput: {fileID: 767848574}
   showNPCDetailsButton: {fileID: 676954700}
@@ -12266,8 +12268,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1448, y: -10}
-  m_SizeDelta: {x: 831.1553, y: 590.75}
+  m_AnchoredPosition: {x: -1148, y: -10}
+  m_SizeDelta: {x: 280, y: 590.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767848574
 MonoBehaviour:

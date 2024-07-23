@@ -72,6 +72,9 @@ public class NPCGenerator : MonoBehaviour
                     Name = firstNames[Random.Range(0, firstNames.Length)] + " " + lastNames[Random.Range(0, lastNames.Length)],
                     Age = Random.Range(20, 61),
                     WorkEfficiency = Mathf.Round(Random.Range(1f, 5f) * 100f) / 100f,
+                    Salary = 0,
+                    CurrentActivity = "Working",
+                    CurrentWorkArrangement = Random.value > 0.5f ? "On-site" : "Remote Working",
                     Mood = Random.Range(-5, 6),
                     WorkDonePerIncrement = 0f,
                     TotalWorkDone = 0f,
@@ -121,6 +124,8 @@ public class NPC
     public int Age { get; set; }
     public float WorkEfficiency { get; set; }
     public int Salary { get; set; }
+    public string CurrentActivity { get; set;}
+    public string CurrentWorkArrangement { get; set;}
     public float Mood { get; set; }
     public float WorkDonePerIncrement { get; set; } = 0f;
     public float TotalWorkDone { get; set;} = 0f;

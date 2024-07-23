@@ -5,18 +5,26 @@ using UnityEngine.UI;
 using TMPro;
 
 public class OutputManager : MonoBehaviour
-{
-    public Slider workDoneSlider;
+{  
+    // Reference to Game Managers
+    private NPCGenerator npcGenerator;
+    private TaskManager taskManager;
+
+    // Output fields
+    
     public Text npcNameOutput; // Name
     public Text npcSalaryOutput; // Salary
+    public Text npcCurrentActivity;
+    public Text npcCurrentWorkArrangement;
     public Slider npcMoodSlider; // Mood slider
-    public Text selectedNPCOutput; // Detailed info
-    public TextMeshProUGUI displayAllNPCsOutput; // Debug: Display all NPCs' information
+    public Slider npcWorkDoneSlider; // Task progress slider
+
+    public Text selectedNPCOutput; // Detailed info of selected NPC
+    public TextMeshProUGUI displayAllNPCsOutput; // Display full list of NPCs information (debug)
 
     public Button showNPCDetailsButton;
 
-    private NPCGenerator npcGenerator;
-    private TaskManager taskManager;
+    
     private NPC selectedNPC;
 
     void Start()
@@ -48,8 +56,8 @@ public class OutputManager : MonoBehaviour
         if (selectedNPC != null)
         {
             npcMoodSlider.value = selectedNPC.Mood;
-            workDoneSlider.maxValue = selectedNPC.MaxTaskCapacity;
-            workDoneSlider.value = selectedNPC.TotalWorkDone;
+            npcWorkDoneSlider.maxValue = selectedNPC.MaxTaskCapacity;
+            npcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
         }
     }
 
@@ -59,8 +67,10 @@ public class OutputManager : MonoBehaviour
         {
             npcNameOutput.text = selectedNPC.Name;
             npcSalaryOutput.text = $"$ {selectedNPC.Salary}";
+            npcCurrentActivity.text = selectedNPC.CurrentActivity;
+            npcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
             npcMoodSlider.value = selectedNPC.Mood;
-            workDoneSlider.value = selectedNPC.TotalWorkDone;
+            npcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
             selectedNPCOutput.text = selectedNPC.ToString();
         }
         else
