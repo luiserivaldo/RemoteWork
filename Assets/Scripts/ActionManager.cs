@@ -5,20 +5,27 @@ using UnityEngine.UI;
 
 public class ActionManager : MonoBehaviour
 {
+    private TaskManager taskManager;
     private NPC selectedNPC;
     public Button enquireButton;
     public Button praiseButton;
 
     // Buy office upgrades buttons
-    public Button buyOfficeUpgradesButton;
     public Button buyUpgrade1;
     public Button buyUpgrade2;
+    public GameObject upgradeSet1; // Group of GameObjects for the first upgrade
+    public GameObject upgradeSet2; // Group of GameObjects for the second upgrade
+    public int upgradeCost1 = 50000; // Cost for the first upgrade
+    public int upgradeCost2 = 100000; // Cost for the second upgrade
     
     void Start()
     {
-    enquireButton.onClick.AddListener(OnEnquireButtonClick);
-    praiseButton.onClick.AddListener(OnPraiseButtonClick);
-    buyOfficeUpgradesButton.onClick.AddListener(BuyOfficeUpgrades);
+        taskManager = FindObjectOfType<TaskManager>();
+
+        enquireButton.onClick.AddListener(OnEnquireButtonClick);
+        praiseButton.onClick.AddListener(OnPraiseButtonClick);
+        buyUpgrade1.onClick.AddListener(() => TryPurchaseUpgrade(upgradeSet1, upgradeCost1));
+        buyUpgrade2.onClick.AddListener(() => TryPurchaseUpgrade(upgradeSet2, upgradeCost2));
 
     }
     public void SetSelectedNPC(NPC npc) // Set clicked NPC as the selected NPC for logic functions
@@ -58,8 +65,25 @@ public class ActionManager : MonoBehaviour
             Debug.LogError("No NPC selected. Cannot praise.");
         }
     }
-    public void BuyOfficeUpgrades()
+    public bool PurchaseUpgrade(int cost)
     {
-        
+        if (taskManager.currentBudget >= cost)
+        {
+            taskManager.currentBudget -= cost;
+            return true;
+        }
+        return false;
+    }
+    private void TryPurchaseUpgrade(GameObject upgradeGroup, int cost)
+    {
+        if (PurchaseUpgrade(cost))
+        {
+            ToggleUpgrade(upgradeGroup);
+        }
+    }
+    
+    private void ToggleUpgrade(GameObject upgradeGroup)
+    {
+        upgradeGroup.SetActive(upgradeGroup.activeSelf);
     }
 }

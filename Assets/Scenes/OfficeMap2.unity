@@ -8434,7 +8434,10 @@ MonoBehaviour:
   actionManager: {fileID: 0}
   weeklyQuotaSlider: {fileID: 1327946182}
   weeklyQuotaGoal: 1000
+  numOfTasksCompleted: 0
+  weeksPassed: 0
   startingBudget: 300000
+  currentBudget: 0
 --- !u!1 &485739115
 GameObject:
   m_ObjectHideFlags: 0
@@ -10288,9 +10291,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enquireButton: {fileID: 1796576497}
   praiseButton: {fileID: 113418618}
-  buyOfficeUpgradesButton: {fileID: 0}
-  buyUpgrade1: {fileID: 0}
-  buyUpgrade2: {fileID: 0}
+  buyUpgrade1: {fileID: 415974445}
+  buyUpgrade2: {fileID: 238931761}
+  upgradeSet1: {fileID: 1589461019}
+  upgradeSet2: {fileID: 759708592}
+  upgradeCost1: 100000
+  upgradeCost2: 150000
 --- !u!1 &602873476
 GameObject:
   m_ObjectHideFlags: 0
@@ -19664,7 +19670,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buy Lounge
+  m_text: 'Buy Lounge
+
+    $100,000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -35989,10 +35997,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcGenerator: {fileID: 226452970}
-  actionManager: {fileID: 0}
+  actionManager: {fileID: 602447866}
   weeklyQuotaSlider: {fileID: 1327946182}
   weeklyQuotaGoal: 10000
+  numOfTasksCompleted: 0
+  weeksPassed: 0
   startingBudget: 300000
+  currentBudget: 0
 --- !u!1001 &1471878857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36488,7 +36499,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buy Pantry
+  m_text: 'Buy Pantry
+
+    $50,000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

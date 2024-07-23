@@ -19,21 +19,22 @@ public class TaskManager : MonoBehaviour
 
     // Budget components
     public int startingBudget = 300000;
-    public int currentBudget;
+    public int currentBudget = 0;
 
     void Start()
     {
         // Initialize sliders
         weeklyQuotaSlider.maxValue = weeklyQuotaGoal;
         weeklyQuotaSlider.value = workerCollectedProgress;
-
+        
+        CalculateBudget();
         // Start the work process
         StartCoroutine(UpdateWorkProgress());
         
     }
     void Update()
     {
-        CalculateBudget();
+        
     }
 
     IEnumerator UpdateWorkProgress() // Updates slider values
@@ -69,6 +70,6 @@ public class TaskManager : MonoBehaviour
     }
     private void CalculateBudget()
     {
-        currentBudget = startingBudget;
+        currentBudget += startingBudget;
     }
 }
