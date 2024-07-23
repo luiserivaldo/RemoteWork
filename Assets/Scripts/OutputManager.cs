@@ -94,7 +94,7 @@ public class OutputManager : MonoBehaviour
             npcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
             npcMoodSlider.value = selectedNPC.Mood;
             npcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
-            selectedNPCOutput.text = selectedNPC.ToString();
+            selectedNPCOutput.text = NPCToString(selectedNPC);
         }
         else
         {
@@ -116,7 +116,7 @@ public class OutputManager : MonoBehaviour
         string allNPCsText = "";
         foreach (var npc in npcGenerator.npcList.Values)
         {
-            allNPCsText += npc.ToString() + "\n\n"; // Append each NPC's info and add a newline for spacing
+            allNPCsText += NPCToString(npc) + "\n\n"; // Append each NPC's info and add a newline for spacing
         }
         displayAllNPCsOutput.text = allNPCsText; // Display all NPCs' information in the text component
     }
@@ -152,5 +152,9 @@ public class OutputManager : MonoBehaviour
             SelectedUI.SetActive(false);
             NoSelectedUI.SetActive(true);
         }
+    }
+    private string NPCToString(NPC npc)
+    {
+        return $"isSelected: {npc.IsSelected}\nID: {npc.NPCId}\nName: {npc.Name}\nAge: {npc.Age}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}\nCurrent activity: {npc.CurrentActivity}\nWork per Increment: {npc.WorkDonePerIncrement}\nTotal Work Done: {npc.TotalWorkDone}\nWork Location: {npc.CurrentWorkArrangement}";
     }
 }
