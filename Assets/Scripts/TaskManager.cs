@@ -7,19 +7,23 @@ using UnityEngine.UI;
 
 public class TaskManager : MonoBehaviour
 {
+    // Reference to Game Managers
+    [Header("Reference to Game Managers")]
     public NPCGenerator npcGenerator; // Reference to the NPC generator
     public ActionManager actionManager; // Reference to the Action Manager
 
     // Weekly Quota components
+    [Header("Weekly Quota Components")]
     public Slider weeklyQuotaSlider;
     private float workerCollectedProgress;
     public int weeklyQuotaGoal = 10000; // Max value required to reach weekly quota
-    public int numOfTasksCompleted;
-    public int weeksPassed;
+    [HideInInspector] public int numOfTasksCompleted;
+    [HideInInspector] public int weeksPassed;
 
     // Budget components
+    [Header("Budget Components")]
     public int startingBudget = 300000;
-    public int currentBudget = 0;
+    [HideInInspector] public int currentBudget = 0;
 
     void Start()
     {
@@ -34,7 +38,7 @@ public class TaskManager : MonoBehaviour
     }
     void Update()
     {
-        
+
     }
 
     IEnumerator UpdateWorkProgress() // Updates slider values

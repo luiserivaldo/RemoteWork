@@ -521,7 +521,6 @@ MonoBehaviour:
   npcWorkDoneSlider: {fileID: 1260107384}
   selectedNPCOutput: {fileID: 433451441}
   displayAllNPCsOutput: {fileID: 767848574}
-  showNPCDetailsButton: {fileID: 676954700}
   SelectedUI: {fileID: 1577639314}
   NoSelectedUI: {fileID: 537969508}
 --- !u!1 &43442611
@@ -3689,7 +3688,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405005ae9b6f6fb4b80b05c667e3f9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateNPCsButton: {fileID: 676954700}
   npcPrefabs:
   - {fileID: 9090306628916022113, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
   - {fileID: 9110255225808119051, guid: 2af33cd35018e214ea8f76ff65b5b16b, type: 3}
@@ -3704,6 +3702,7 @@ MonoBehaviour:
   - {fileID: 1112250622}
   - {fileID: 618534339}
   - {fileID: 1602109343}
+  generateNPCsButton: {fileID: 676954700}
 --- !u!1 &231996205
 GameObject:
   m_ObjectHideFlags: 0
@@ -10768,9 +10767,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405005ae9b6f6fb4b80b05c667e3f9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateNPCsButton: {fileID: 0}
   npcPrefabs: []
   spawnPoints: []
+  generateNPCsButton: {fileID: 0}
 --- !u!1 &617896844
 GameObject:
   m_ObjectHideFlags: 0

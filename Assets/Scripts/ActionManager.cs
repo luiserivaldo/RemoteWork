@@ -5,18 +5,27 @@ using UnityEngine.UI;
 
 public class ActionManager : MonoBehaviour
 {
+
+    // Reference to Game Managers
+    [Header("Reference to Game Managers")]
     private TaskManager taskManager;
-    private NPC selectedNPC;
+    
+    // NPC Action Bar Buttons
+    [Header("NPC Action Bar Buttons")]
     public Button enquireButton;
     public Button praiseButton;
 
     // Buy office upgrades buttons
+    [Header("Office Upgrade Fields")]
     public Button buyUpgrade1;
     public Button buyUpgrade2;
     public GameObject upgradeSet1; // Group of GameObjects for the first upgrade
     public GameObject upgradeSet2; // Group of GameObjects for the second upgrade
     public int upgradeCost1 = 50000; // Cost for the first upgrade
     public int upgradeCost2 = 100000; // Cost for the second upgrade
+
+    // To identify currently selected NPC
+    private NPC selectedNPC;
     
     void Start()
     {

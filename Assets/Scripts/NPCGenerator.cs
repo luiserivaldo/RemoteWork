@@ -9,10 +9,11 @@ using Random = UnityEngine.Random;
 
 public class NPCGenerator : MonoBehaviour
 {
-    // Debug options
-    public Button generateNPCsButton; // Debug Generate NPC Button
+
+    
 
     // 3D Model reference
+    [Header("Instantiation references")]
     public GameObject[] npcPrefabs; // Array of different 3D model prefabs
     public Transform[] spawnPoints; // Array of spawn points for NPCs
 
@@ -22,6 +23,9 @@ public class NPCGenerator : MonoBehaviour
     public Dictionary<int, NPC> npcList = new Dictionary<int, NPC>(); // Dictionary containing all generated NPCs
     private List<GameObject> instantiatedNPCs = new List<GameObject>(); // List to store references to instantiated NPCs
     public Action OnNPCsGenerated; // Event to notify when NPCs are generated
+    // Debug options
+    [Header("Debug options")]
+    public Button generateNPCsButton; // Debug Generate NPC Button
 
     private void Start()
     {

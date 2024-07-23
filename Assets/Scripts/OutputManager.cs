@@ -7,16 +7,19 @@ using TMPro;
 public class OutputManager : MonoBehaviour
 {  
     // Reference to Game Managers
+    [Header("Reference to Game Managers")]
     private NPCGenerator npcGenerator;
     private TaskManager taskManager;
     private ActionManager actionManager;
 
     // Game Info Bar
+    [Header("Game Info Bar Fields")]
     public Text currentDate;
     public Text NumOfTasksCompleted;
     public Text currentBudget;
 
     // NPC Info Bar
+    [Header("NPC Info Bar Fields")]
     public Text npcNameOutput; // Name
     public Text npcSalaryOutput; // Salary
     public Text npcCurrentActivity;
@@ -28,10 +31,9 @@ public class OutputManager : MonoBehaviour
     private NPC selectedNPC;
 
     // Debug output
+    [Header("Debug output")]
     public Text selectedNPCOutput; // Full info of selected NPC
     public TextMeshProUGUI displayAllNPCsOutput; // Display full list of NPCs information (debug)
-
-    public Button showNPCDetailsButton;
     public GameObject SelectedUI; // GameObject for selected UI elements
     public GameObject NoSelectedUI; // GameObject for no selected UI elements
 
