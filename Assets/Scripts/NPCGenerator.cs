@@ -39,7 +39,7 @@ public class NPCGenerator : MonoBehaviour
                 prefab.AddComponent<MeshCollider>();
             }
         }
-        StartCoroutine(UpdateWorkDone());
+        
     }
     void Update()
     {
@@ -107,19 +107,7 @@ public class NPCGenerator : MonoBehaviour
 
         return roundedSalary;
     }
-    private IEnumerator UpdateWorkDone()
-    {
-        while (true)
-        {
-            foreach (var npc in npcList.Values)
-            {
-                float workDoneValue = npc.WorkEfficiency * (1 + (npc.Mood / 20));
-                npc.WorkDone += workDoneValue;
-                Debug.Log($"Updated WorkDone for {npc.WorkDone} value.");
-            }
-            yield return new WaitForSeconds(1);
-        }
-    }
+
 }
 
 public class NPC
@@ -130,7 +118,7 @@ public class NPC
     public int Age { get; set; }
     public float WorkEfficiency { get; set; }
     public int Salary { get; set; }
-    public int Mood { get; set; }
+    public float Mood { get; set; }
     public int TaskCapacity { get; set; }
     public float WorkDone { get; set; } = 0;
 

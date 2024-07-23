@@ -90,17 +90,22 @@ public class OutputManager : MonoBehaviour
             foreach (var npc in npcGenerator.npcList.Values)
             {
                 // Update the work done slider for each NPC
-                UpdateWorkDoneSlider(npc);
+                UpdateSliders(npc);
             }
             DisplayNPCInfo();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0);
         }
     }
-    private void UpdateWorkDoneSlider(NPC npc)
+    private void UpdateSliders(NPC npc)
     {
-        if (npc.IsSelected)
+        foreach (var i in npcGenerator.npcList.Values)
         {
-            npcWorkDoneSlider.value = npc.WorkDone;
+            if (i.IsSelected)
+            {
+                //npcMoodSlider.value = npc.Mood;
+                npcWorkDoneSlider.value = npc.WorkDone;
+            }
         }
+        DisplayNPCInfo();
     }
 }
