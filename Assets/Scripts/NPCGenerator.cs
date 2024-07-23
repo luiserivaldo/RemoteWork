@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class NPCGenerator : MonoBehaviour
 {
     // Debug options
-    public Button generateButton; // Debug Generate NPC Button
+    public Button generateNPCsButton; // Debug Generate NPC Button
 
     // 3D Model reference
     public GameObject[] npcPrefabs; // Array of different 3D model prefabs
@@ -23,6 +23,8 @@ public class NPCGenerator : MonoBehaviour
 
     private void Start()
     {
+        generateNPCsButton.onClick.AddListener(GenerateNewNPCs);
+
         for (int i = 0; i < 6; i++) // Initial starting no. of NPCs = 6
         {
             NPC newNPC = GenerateRandomNPC();
@@ -113,7 +115,26 @@ public class NPCGenerator : MonoBehaviour
 
         return roundedSalary;
     }
+    public void GenerateNewNPCs()
+    {
+        // Clear current NPCs
+        foreach (var npc in npcList.Values)
+        {
+            Destroy(GameObject.Find(npc.Name)); // Destroy NPC model
+        }
+        npcList.Clear(); // Clear the dictionary
 
+        // Reset NPC counter
+        npcGenCounter = 1;
+
+        // Generate new NPCs
+        for (int i = 0; i < 6; i++)
+        {
+            NPC newNPC = GenerateRandomNPC();
+            npcList.Add(newNPC.NPCId, newNPC);
+            SpawnNPCModel(newNPC, i);
+        }
+    }
 }
 
 public class NPC

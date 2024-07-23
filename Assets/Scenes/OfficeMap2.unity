@@ -3416,7 +3416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405005ae9b6f6fb4b80b05c667e3f9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateButton: {fileID: 1197034235}
+  generateNPCsButton: {fileID: 676954700}
   npcPrefabs:
   - {fileID: 9090306628916022113, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
   - {fileID: 9110255225808119051, guid: 2af33cd35018e214ea8f76ff65b5b16b, type: 3}
@@ -7355,16 +7355,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433451439}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1630876666}
+  m_Father: {fileID: 1667888548}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 90.69916, y: -270.73505}
+  m_AnchoredPosition: {x: -746.3009, y: 58.264954}
   m_SizeDelta: {x: 341.3983, y: 451.4701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433451441
@@ -9815,7 +9815,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Selected NPC Details
+  m_text: GenerateNewNPCs
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10363,7 +10363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405005ae9b6f6fb4b80b05c667e3f9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateButton: {fileID: 1659410062}
+  generateNPCsButton: {fileID: 0}
   npcPrefabs: []
   spawnPoints: []
 --- !u!1 &617896844
@@ -11092,7 +11092,7 @@ GameObject:
   - component: {fileID: 676954701}
   - component: {fileID: 676954700}
   m_Layer: 0
-  m_Name: DisplaySelectedNPCButton
+  m_Name: GenerateNewNPCsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11111,11 +11111,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 598145592}
-  m_Father: {fileID: 1630876666}
+  m_Father: {fileID: 1667888548}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -837, y: 329}
   m_SizeDelta: {x: 160, y: 52.9478}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &676954700
@@ -37137,43 +37137,6 @@ RectTransform:
   m_AnchoredPosition: {x: -36, y: -71.95154}
   m_SizeDelta: {x: 214.6546, y: 39.582596}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1630876665
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1630876666}
-  m_Layer: 0
-  m_Name: DisplaySelectedNPC
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1630876666
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630876665}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 676954699}
-  - {fileID: 433451440}
-  m_Father: {fileID: 1667888548}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -837, y: 329}
-  m_SizeDelta: {x: 160, y: 52.947815}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1638597576
 GameObject:
   m_ObjectHideFlags: 0
@@ -37540,7 +37503,8 @@ RectTransform:
   - {fileID: 472457526}
   - {fileID: 640922724}
   - {fileID: 1577639315}
-  - {fileID: 1630876666}
+  - {fileID: 676954699}
+  - {fileID: 433451440}
   - {fileID: 1904908777}
   m_Father: {fileID: 64912083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
