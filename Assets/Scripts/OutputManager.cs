@@ -34,12 +34,17 @@ public class OutputManager : MonoBehaviour
         showNPCDetailsButton.onClick.AddListener(DisplayNPCOnButton);
 
         StartCoroutine(UpdateOutputCoroutine());
+        npcGenerator.OnNPCsGenerated += OnNPCsGenerated; // Subscribe to the event
     }
 
     void Update()
     {
         UpdateAllNPCInfo();
         UpdateSelectedNPCInfo(); // Call this method every frame to update selected NPC info without delay
+    }
+    void OnDestroy()
+    {
+        npcGenerator.OnNPCsGenerated -= OnNPCsGenerated; // Unsubscribe from the event
     }
 
     private IEnumerator UpdateOutputCoroutine()
@@ -96,6 +101,11 @@ public class OutputManager : MonoBehaviour
             allNPCsText += npc.ToString() + "\n\n"; // Append each NPC's info and add a newline for spacing
         }
         displayAllNPCsOutput.text = allNPCsText; // Display all NPCs' information in the text component
+    }
+     private void OnNPCsGenerated()
+    {
+        selectedNPC = null; // Clear the selected NPC
+        UpdateSelectedNPCInfo(); // Update UI to reflect no NPC is selected
     }
 
     private void DisplayNPCOnButton()

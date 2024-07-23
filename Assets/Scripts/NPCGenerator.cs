@@ -20,6 +20,8 @@ public class NPCGenerator : MonoBehaviour
     private string[] lastNames = { "Smith", "Johnson", "Brown", "Williams", "Jones", "Garcia", "Miller"};
     private static int npcGenCounter = 1; // Number and order of NPCs generated, starting ID = 1
     public Dictionary<int, NPC> npcList = new Dictionary<int, NPC>(); // Dictionary containing all generated NPCs
+    private List<GameObject> instantiatedNPCs = new List<GameObject>(); // List to store references to instantiated NPCs
+    public Action OnNPCsGenerated; // Event to notify when NPCs are generated
 
     private void Start()
     {
@@ -102,6 +104,7 @@ public class NPCGenerator : MonoBehaviour
         //Debug.Log($"Selected Prefab: {npcPrefab.name} for NPC {index + 1}");
 
         GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
+        instantiatedNPCs.Add(npcModel); // Add to the list of instantiated NPCs
         npcModel.GetComponent<SelectActiveNPC>().InitializeNPC(npc);
     } 
     private int CalculateSalary(int age, float workEfficiency)
@@ -118,9 +121,9 @@ public class NPCGenerator : MonoBehaviour
     public void GenerateNewNPCs()
     {
         // Clear current NPCs
-        foreach (var npc in npcList.Values)
+        foreach (var npcModel in instantiatedNPCs)
         {
-            Destroy(GameObject.Find(npc.Name)); // Destroy NPC model
+            Destroy(npcModel); // Destroy NPC model
         }
         npcList.Clear(); // Clear the dictionary
 
@@ -134,6 +137,8 @@ public class NPCGenerator : MonoBehaviour
             npcList.Add(newNPC.NPCId, newNPC);
             SpawnNPCModel(newNPC, i);
         }
+        // Notify that NPCs have been generated
+        OnNPCsGenerated?.Invoke();
     }
 }
 
