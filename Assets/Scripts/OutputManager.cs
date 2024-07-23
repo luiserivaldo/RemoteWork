@@ -9,6 +9,8 @@ public class OutputManager : MonoBehaviour
     // Reference to Game Managers
     private NPCGenerator npcGenerator;
     private TaskManager taskManager;
+    private ActionManager actionManager;
+
 
     // Output fields
     
@@ -32,7 +34,8 @@ public class OutputManager : MonoBehaviour
     void Start()
     {
         npcGenerator = FindObjectOfType<NPCGenerator>();
-        taskManager = FindObjectOfType<TaskManager>(); // Add this line
+        taskManager = FindObjectOfType<TaskManager>(); 
+        actionManager = FindObjectOfType<ActionManager>();
         showNPCDetailsButton.onClick.AddListener(DisplayNPCOnButton);
 
         StartCoroutine(UpdateOutputCoroutine());
@@ -42,7 +45,7 @@ public class OutputManager : MonoBehaviour
     void Update()
     {
         UpdateAllNPCInfo();
-        UpdateSelectedNPCInfo(); // Call this method every frame to update selected NPC info without delay
+        UpdateSelectedNPCInfo(); // Update selected NPC info
         UpdateSelectedUIState(); // Switch between NoSelectedNPCs and SelectedNPCs UI
     }
     void OnDestroy()
@@ -91,7 +94,7 @@ public class OutputManager : MonoBehaviour
         selectedNPC = npc;
         if (taskManager != null)
         {
-            taskManager.SetSelectedNPC(npc); // Ensure TaskManager knows about the selected NPC
+            actionManager.SetSelectedNPC(npc); // Ensure TaskManager knows about the selected NPC
         }
         UpdateSelectedNPCInfo(); // Immediately update UI when NPC is selected
     }

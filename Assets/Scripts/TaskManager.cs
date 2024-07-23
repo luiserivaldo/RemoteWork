@@ -11,8 +11,6 @@ public class TaskManager : MonoBehaviour
     public Slider weeklyQuotaSlider;
     private float workerCollectedProgress;
     public int weeklyQuotaGoal = 10000; // Max value required to reach weekly quota
-    public Button enquireButton;
-    public Button praiseButton;
     private NPC selectedNPC;
 
     void Start()
@@ -23,8 +21,7 @@ public class TaskManager : MonoBehaviour
 
         // Start the work process
         StartCoroutine(UpdateWorkProgress());
-        enquireButton.onClick.AddListener(OnEnquireButtonClick);
-        praiseButton.onClick.AddListener(OnPraiseButtonClick);
+        
     }
 
     IEnumerator UpdateWorkProgress()
@@ -58,45 +55,5 @@ public class TaskManager : MonoBehaviour
         }
         //Debug.Log($"NPC ID: {npc.NPCId} total work: {npc.TotalWorkDone}");
     }
-
-    public void OnEnquireButtonClick()
-    {
-        if (selectedNPC != null)
-        {
-            selectedNPC.Mood -= 1; // Decrease mood by 1
-            if (selectedNPC.Mood < -5)
-            {
-                selectedNPC.Mood = -5; // Ensure mood doesn't go below -5
-            } 
-            /* Debug.Log("Enquire clicked");
-            Debug.Log($"Clicked NPC ID {selectedNPC.NPCId}. Mood: {selectedNPC.Mood}"); */
-        }
-        else
-        {
-            Debug.LogError("No NPC selected. Cannot enquire.");
-        }
-    }
-    public void OnPraiseButtonClick()
-    {
-        if (selectedNPC != null)
-        {
-            selectedNPC.Mood += 1; // Increase mood by 1
-            if (selectedNPC.Mood > 5)
-            {
-                selectedNPC.Mood = 5; // Increase mood doesn't go below -5
-            } 
-            /* Debug.Log("Praise clicked");
-            Debug.Log($"Praise NPC ID {selectedNPC.NPCId}. Mood: {selectedNPC.Mood}"); */
-        }
-        else
-        {
-            Debug.LogError("No NPC selected. Cannot praise.");
-        }
-    }
-
     // This method should be called to set the selected NPC, for example, when an NPC is clicked in the UI
-    public void SetSelectedNPC(NPC npc)
-    {
-        selectedNPC = npc;
-    }
 }
