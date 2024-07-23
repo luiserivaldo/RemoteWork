@@ -381,8 +381,9 @@ MonoBehaviour:
   npcSalaryOutput: {fileID: 828365663}
   npcMoodSlider: {fileID: 1979040654}
   selectedNPCOutput: {fileID: 433451441}
-  allNPCOutput: {fileID: 767848574}
+  displayAllNPCsOutput: {fileID: 767848574}
   showNPCDetailsButton: {fileID: 676954700}
+  enquireButton: {fileID: 1796576497}
 --- !u!1 &43442611
 GameObject:
   m_ObjectHideFlags: 0

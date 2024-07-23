@@ -13,6 +13,7 @@ public class TaskManager : MonoBehaviour
     public int weeklyQuotaGoal = 10000; // Max value required to reach weekly quota
     public Button enquireButton;
     private NPC selectedNPC;
+
     void Start()
     {
         // Initialize the slider
@@ -23,6 +24,7 @@ public class TaskManager : MonoBehaviour
         StartCoroutine(UpdateWorkProgress());
         enquireButton.onClick.AddListener(OnEnquireButtonClick);
     }
+
     IEnumerator UpdateWorkProgress()
     {
         while (workerCollectedProgress < weeklyQuotaSlider.maxValue)
@@ -55,19 +57,22 @@ public class TaskManager : MonoBehaviour
         //Debug.Log($"NPC ID: {npc.NPCId} total work: {npc.TotalWorkDone}");
     }
 
-    private void OnEnquireButtonClick()
+    public void OnEnquireButtonClick()
     {
-        //if (selectedNPC != null)
+        if (selectedNPC != null)
         {
-            selectedNPC.Mood -= 2; // Decrease mood by 1
-            /* if (selectedNPC.Mood < 0)
+            selectedNPC.Mood -= 1; // Decrease mood by 1
+            if (selectedNPC.Mood < -5)
             {
-                selectedNPC.Mood = 0; // Ensure mood doesn't go below 0
-            } */
+                selectedNPC.Mood = -5; // Ensure mood doesn't go below -5
+            } 
+            Debug.Log("Enquire clicked");
+            Debug.Log($"Clicked NPC ID {selectedNPC.NPCId}. Mood: {selectedNPC.Mood}");
         }
-        Debug.Log("Enquire clicked");
-        //Debug.Log($"Clicked NPC ID {selectedNPC.NPCId}. Mood: {selectedNPC.Mood}");
-        //Debug.Log($"Clicked NPC. Mood: {selectedNPC.Mood}");
+        else
+        {
+            Debug.LogError("No NPC selected. Cannot enquire.");
+        }
     }
 
     // This method should be called to set the selected NPC, for example, when an NPC is clicked in the UI
