@@ -376,16 +376,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c43d7d927e02684c93f90b37c0fc5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcGenerator: {fileID: 226452970}
-  npcIdSelect: 0
-  allNPCOutput: {fileID: 767848574}
+  workDoneSlider: {fileID: 1260107384}
   npcNameOutput: {fileID: 401932511}
   npcSalaryOutput: {fileID: 828365663}
   npcMoodSlider: {fileID: 1979040654}
-  taskMaxValue: 200
-  npcWorkDoneSlider: {fileID: 1260107384}
-  showNPCDetailsButton: {fileID: 676954700}
   selectedNPCOutput: {fileID: 433451441}
+  allNPCOutput: {fileID: 767848574}
+  showNPCDetailsButton: {fileID: 676954700}
 --- !u!1 &43442611
 GameObject:
   m_ObjectHideFlags: 0
@@ -25689,8 +25686,8 @@ RectTransform:
   - {fileID: 731762229}
   - {fileID: 2045290390}
   - {fileID: 1191352433}
-  - {fileID: 355161144}
   - {fileID: 1585629473}
+  - {fileID: 355161144}
   m_Father: {fileID: 1577639315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

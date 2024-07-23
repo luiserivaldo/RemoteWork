@@ -72,7 +72,8 @@ public class NPCGenerator : MonoBehaviour
                     Age = Random.Range(20, 61),
                     WorkEfficiency = Mathf.Round(Random.Range(1f, 10f) * 100f) / 100f,
                     Mood = Random.Range(-5, 6),
-                    TaskCapacity = Random.Range(1000, 2000)
+                    WorkDonePerIncrement = 0f,
+                    TotalWorkDone = 0f,
                 };
                 newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
                 return newNPC;
@@ -119,8 +120,8 @@ public class NPC
     public float WorkEfficiency { get; set; }
     public int Salary { get; set; }
     public float Mood { get; set; }
-    public int TaskCapacity { get; set; }
-    public float WorkDone { get; set; } = 0;
+    public float WorkDonePerIncrement { get; set; } = 0f;
+    public float TotalWorkDone { get; set;} = 0f;
 
     // Expanded list
     /* public string LeadershipStyle { get; set; }
@@ -133,6 +134,6 @@ public class NPC
 
     public override string ToString() // Output the class elements as a string
     {
-        return $"isSelected: {IsSelected}\nID: {NPCId}\nName: {Name}\nAge: {Age}\nWork Efficiency: {WorkEfficiency}\nSalary: {Salary}\nMood: {Mood}\nTask Capacity: {TaskCapacity}";
+        return $"isSelected: {IsSelected}\nID: {NPCId}\nName: {Name}\nAge: {Age}\nWork Efficiency: {WorkEfficiency}\nSalary: {Salary}\nMood: {Mood}\n";
     }
 }
