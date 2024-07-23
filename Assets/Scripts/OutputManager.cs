@@ -79,6 +79,7 @@ public class OutputManager : MonoBehaviour
     {
         if (selectedNPC != null)
         {
+            workDoneSlider.maxValue = selectedNPC.MaxTaskCapacity;
             npcMoodSlider.value = selectedNPC.Mood;
             workDoneSlider.value = selectedNPC.TotalWorkDone;
         }

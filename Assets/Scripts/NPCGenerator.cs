@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -74,6 +75,7 @@ public class NPCGenerator : MonoBehaviour
                     Mood = Random.Range(-5, 6),
                     WorkDonePerIncrement = 0f,
                     TotalWorkDone = 0f,
+                    MaxTaskCapacity = 100f,
                 };
                 newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
                 return newNPC;
@@ -122,6 +124,8 @@ public class NPC
     public float Mood { get; set; }
     public float WorkDonePerIncrement { get; set; } = 0f;
     public float TotalWorkDone { get; set;} = 0f;
+    public float MaxTaskCapacity { get; set;} = 100f;
+
 
     // Expanded list
     /* public string LeadershipStyle { get; set; }

@@ -48,6 +48,10 @@ public class TaskManager : MonoBehaviour
     {
         npc.WorkDonePerIncrement = npc.WorkEfficiency * (1 + (npc.Mood / 20f));
         npc.TotalWorkDone += npc.WorkDonePerIncrement;
+        if (npc.TotalWorkDone >= npc.MaxTaskCapacity)
+        {
+            npc.TotalWorkDone = 0;
+        }
         //Debug.Log($"NPC ID: {npc.NPCId} total work: {npc.TotalWorkDone}");
     }
 
