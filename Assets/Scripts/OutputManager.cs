@@ -89,7 +89,7 @@ public class OutputManager : MonoBehaviour
         if (selectedNPC != null)
         {
             npcNameOutput.text = selectedNPC.Name;
-            npcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")}";
+            npcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")} / month";
             npcCurrentActivity.text = selectedNPC.CurrentActivity;
             npcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
             npcMoodSlider.value = selectedNPC.Mood;
