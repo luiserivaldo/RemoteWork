@@ -63,8 +63,8 @@ public class OutputManager : MonoBehaviour
 
     private void UpdateGameInfoBar() // Change slider values by taking from NPC data
     {
-        currentDate.text = $"M0/W{taskManager.weeksPassed}/D0";
-        NumOfTasksCompleted.text = $"{taskManager.numOfTasksCompleted}";
+        currentDate.text = $"M0 / W{taskManager.weeksPassed} / D0";
+        NumOfTasksCompleted.text = $"{taskManager.numOfTasksCompleted} / 15";
         currentBudget.text = $"{(taskManager.currentBudget/1000).ToString("N0")}K";
     }
     private IEnumerator UpdateOutputCoroutine()
