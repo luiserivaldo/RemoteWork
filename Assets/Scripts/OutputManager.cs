@@ -23,6 +23,8 @@ public class OutputManager : MonoBehaviour
     public TextMeshProUGUI displayAllNPCsOutput; // Display full list of NPCs information (debug)
 
     public Button showNPCDetailsButton;
+    public GameObject SelectedUI; // GameObject for selected UI elements
+    public GameObject NoSelectedUI; // GameObject for no selected UI elements
 
     
     private NPC selectedNPC;
@@ -41,6 +43,7 @@ public class OutputManager : MonoBehaviour
     {
         UpdateAllNPCInfo();
         UpdateSelectedNPCInfo(); // Call this method every frame to update selected NPC info without delay
+        UpdateSelectedUIState(); // Switch between NoSelectedNPCs and SelectedNPCs UI
     }
     void OnDestroy()
     {
@@ -117,5 +120,28 @@ public class OutputManager : MonoBehaviour
     {
         selectedNPC = npc;
         DisplaySpecificNPC(npc);
+    }
+    private void UpdateSelectedUIState()
+    {
+        bool isAnyNPCSelected = false;
+        foreach (var npc in npcGenerator.npcList.Values)
+        {
+            if (npc.IsSelected)
+            {
+                isAnyNPCSelected = true;
+                break;
+            }
+        }
+
+        if (isAnyNPCSelected)
+        {
+            SelectedUI.SetActive(true);
+            NoSelectedUI.SetActive(false);
+        }
+        else
+        {
+            SelectedUI.SetActive(false);
+            NoSelectedUI.SetActive(true);
+        }
     }
 }
