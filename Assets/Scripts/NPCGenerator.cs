@@ -71,7 +71,7 @@ public class NPCGenerator : MonoBehaviour
                     NPCId = npcGenCounter++, // Sequential ID based on the order of creation, default 1
                     Name = firstNames[Random.Range(0, firstNames.Length)] + " " + lastNames[Random.Range(0, lastNames.Length)],
                     Age = Random.Range(20, 61),
-                    WorkEfficiency = Mathf.Round(Random.Range(1f, 10f) * 100f) / 100f,
+                    WorkEfficiency = Mathf.Round(Random.Range(1f, 5f) * 100f) / 100f,
                     Mood = Random.Range(-5, 6),
                     WorkDonePerIncrement = 0f,
                     TotalWorkDone = 0f,
