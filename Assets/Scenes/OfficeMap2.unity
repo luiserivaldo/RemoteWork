@@ -519,6 +519,7 @@ MonoBehaviour:
   npcCurrentWorkArrangement: {fileID: 383179358}
   npcMoodSlider: {fileID: 1979040654}
   npcWorkDoneSlider: {fileID: 1260107384}
+  npcNumOfTasksCompletedOutput: {fileID: 0}
   selectedNPCOutput: {fileID: 433451441}
   displayAllNPCsOutput: {fileID: 767848574}
   SelectedUI: {fileID: 1577639314}
@@ -8434,7 +8435,7 @@ MonoBehaviour:
   actionManager: {fileID: 0}
   weeklyQuotaSlider: {fileID: 1327946182}
   weeklyQuotaGoal: 1000
-  numOfTasksCompleted: 0
+  numOfTotalTasksCompleted: 0
   weeksPassed: 0
   startingBudget: 300000
   currentBudget: 0
@@ -35999,8 +36000,8 @@ MonoBehaviour:
   npcGenerator: {fileID: 226452970}
   actionManager: {fileID: 602447866}
   weeklyQuotaSlider: {fileID: 1327946182}
-  weeklyQuotaGoal: 10000
-  numOfTasksCompleted: 0
+  weeklyQuotaGoal: 1000
+  numOfTotalTasksCompleted: 0
   weeksPassed: 0
   startingBudget: 300000
   currentBudget: 0

@@ -87,6 +87,7 @@ public class NPCGenerator : MonoBehaviour
                     WorkDonePerIncrement = 0f,
                     TotalWorkDone = 0f,
                     MaxTaskCapacity = 100f,
+                    numOfTasksCompleted = 0,
                 };
                 newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
                 return newNPC;
@@ -160,6 +161,7 @@ public class NPC
     public float WorkDonePerIncrement { get; set; } = 0f;
     public float TotalWorkDone { get; set;} = 0f;
     public float MaxTaskCapacity { get; set;} = 100f;
+    public int numOfTasksCompleted {get; set;}
 
 
     // Expanded list

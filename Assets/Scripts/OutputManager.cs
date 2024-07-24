@@ -26,6 +26,7 @@ public class OutputManager : MonoBehaviour
     public Text npcCurrentWorkArrangement;
     public Slider npcMoodSlider; // Mood slider
     public Slider npcWorkDoneSlider; // Task progress slider
+    public Text npcNumOfTasksCompletedOutput;
     
     // Selected NPC to display to NPC info bar
     private NPC selectedNPC;
@@ -64,7 +65,7 @@ public class OutputManager : MonoBehaviour
     private void UpdateGameInfoBar() // Change slider values by taking from NPC data
     {
         currentDate.text = $"M0 / W{taskManager.weeksPassed} / D0";
-        NumOfTasksCompleted.text = $"{taskManager.numOfTasksCompleted} / 15";
+        NumOfTasksCompleted.text = $"{taskManager.numOfTotalTasksCompleted} / 15";
         currentBudget.text = $"{(taskManager.currentBudget/1000).ToString("N0")}K";
     }
     private IEnumerator UpdateOutputCoroutine()

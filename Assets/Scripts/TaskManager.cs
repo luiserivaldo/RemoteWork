@@ -17,7 +17,7 @@ public class TaskManager : MonoBehaviour
     public Slider weeklyQuotaSlider;
     private float workerCollectedProgress;
     public int weeklyQuotaGoal = 10000; // Max value required to reach weekly quota
-    [HideInInspector] public int numOfTasksCompleted;
+    [HideInInspector] public int numOfTotalTasksCompleted;
     [HideInInspector] public int weeksPassed;
 
     // Budget components
@@ -58,6 +58,12 @@ public class TaskManager : MonoBehaviour
             workerCollectedProgress += totalWeeklyIncrementalWorkDone;
             weeklyQuotaSlider.value = workerCollectedProgress;
 
+            if (workerCollectedProgress >= weeklyQuotaGoal)
+            {
+                weeksPassed += 1;
+                workerCollectedProgress = 0;
+            }
+
             yield return new WaitForSeconds(1);
         }
     }
@@ -69,6 +75,9 @@ public class TaskManager : MonoBehaviour
         if (npc.TotalWorkDone >= npc.MaxTaskCapacity)
         {
             npc.TotalWorkDone = 0;
+            npc.numOfTasksCompleted += 1;
+            numOfTotalTasksCompleted += 1;
+            currentBudget += 10000; // Increase budget when NPC has completed a task
         }
         //Debug.Log($"NPC ID: {npc.NPCId} total work: {npc.TotalWorkDone}");
     }
