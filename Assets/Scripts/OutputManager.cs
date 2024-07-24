@@ -30,6 +30,9 @@ public class OutputManager : MonoBehaviour
     
     // Selected NPC to display to NPC info bar
     private NPC selectedNPC;
+    // Purchase screen
+    [Header("Purchase screen")]
+    public Text currentBudgetPurchaseScreen;
 
     // Debug output
     [Header("Debug output")]
@@ -56,6 +59,8 @@ public class OutputManager : MonoBehaviour
         UpdateSelectedNPCInfo(); // Update selected NPC info
         UpdateSelectedUIState(); // Switch between NoSelectedNPCs and SelectedNPCs UI
         UpdateGameInfoBar();
+        currentBudgetPurchaseScreen.text = $"{(taskManager.currentBudget/1000).ToString("N0")}K";
+        
     }
     void OnDestroy()
     {
