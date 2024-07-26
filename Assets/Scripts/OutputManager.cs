@@ -22,7 +22,8 @@ public class OutputManager : MonoBehaviour
     [Header("NPC Info Bar Fields")]
     public Text npcNameOutput; // Name
     public Text npcSalaryOutput; // Salary
-    public Text npcCurrentActivity;
+    //public Text npcCurrentActivity;
+    public Text npcWorkPerIncrement;
     public Text npcCurrentWorkArrangement;
     public Slider npcMoodSlider; // Mood slider
     public Slider npcWorkDoneSlider; // Task progress slider
@@ -98,7 +99,8 @@ public class OutputManager : MonoBehaviour
         {
             npcNameOutput.text = selectedNPC.Name;
             npcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")} / month";
-            npcCurrentActivity.text = selectedNPC.CurrentActivity;
+            //npcCurrentActivity.text = selectedNPC.CurrentActivity;
+            npcWorkPerIncrement.text = selectedNPC.WorkDonePerIncrement.ToString("N2");
             npcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
             npcMoodSlider.value = selectedNPC.Mood;
             npcWorkDoneSlider.value = selectedNPC.TotalWorkDone;

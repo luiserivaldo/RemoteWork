@@ -655,7 +655,7 @@ MonoBehaviour:
   currentBudget: {fileID: 1358283070}
   npcNameOutput: {fileID: 401932511}
   npcSalaryOutput: {fileID: 828365663}
-  npcCurrentActivity: {fileID: 712663490}
+  npcWorkPerIncrement: {fileID: 712663490}
   npcCurrentWorkArrangement: {fileID: 383179358}
   npcMoodSlider: {fileID: 1979040654}
   npcWorkDoneSlider: {fileID: 1260107384}
@@ -7395,7 +7395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 81.2401, y: -8}
+  m_AnchoredPosition: {x: 54.6, y: -8}
   m_SizeDelta: {x: 382.749, y: 53.5767}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &401932511
@@ -13432,7 +13432,7 @@ GameObject:
   - component: {fileID: 712663491}
   - component: {fileID: 712663490}
   m_Layer: 0
-  m_Name: ActivityText
+  m_Name: ProductivityText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13454,8 +13454,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -173.36, y: 63.515}
-  m_SizeDelta: {x: 446.72, y: 55.9901}
+  m_AnchoredPosition: {x: -126.15788, y: 62.6}
+  m_SizeDelta: {x: 278.0042, y: 55.9901}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &712663490
 MonoBehaviour:
@@ -13490,7 +13490,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '[CURRENT ACTIVITY]'
+  m_Text: '[WORK PER INCREMENT]'
 --- !u!222 &712663491
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13796,7 +13796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 731762229}
   m_Layer: 0
-  m_Name: Activity
+  m_Name: Productivity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41757,7 +41757,7 @@ GameObject:
   - component: {fileID: 1697694436}
   - component: {fileID: 1697694435}
   m_Layer: 0
-  m_Name: ActivityLabel
+  m_Name: ProductivityLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41779,8 +41779,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -462.3894, y: 68.5}
-  m_SizeDelta: {x: 137.2211, y: 37}
+  m_AnchoredPosition: {x: -401.25253, y: 62.755005}
+  m_SizeDelta: {x: 259.4948, y: 37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1697694435
 MonoBehaviour:
@@ -41802,7 +41802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Activity:'
+  m_text: 'Productivity Level:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f11510542cd03dd4e8abb6e33b85d14b, type: 2}
   m_sharedMaterial: {fileID: 5723580738618909255, guid: f11510542cd03dd4e8abb6e33b85d14b, type: 2}
@@ -41837,7 +41837,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -45294,7 +45294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -182.47131, y: -2.2549896}
+  m_AnchoredPosition: {x: -182.47131, y: -8}
   m_SizeDelta: {x: 123.8916, y: 37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861752708
@@ -45352,7 +45352,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
