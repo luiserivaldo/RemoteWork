@@ -167,32 +167,21 @@ public class OutputManager : MonoBehaviour
     }
     public void WorkIncrementText()
     {
-        foreach (var npc in npcGenerator.npcList.Values)
+        switch (selectedNPC.WorkDonePerIncrement)
         {
-            float workIncrement = selectedNPC.WorkDonePerIncrement;
-            if (npcWorkPerIncrement != null)
-            {
-                if (workIncrement <= 2.25f)
-                {
-                    npcWorkPerIncrement.color = Color.red;
-                }
-                else if (workIncrement <= 4.0f)
-                {
-                    npcWorkPerIncrement.color = new Color(1.0f, 0.64f, 0.0f); // Orange 
-                }
-                else if (workIncrement <= 7.5f)
-                {
-                    npcWorkPerIncrement.color = new Color(0.082f, 0.812f, 0.216f); // Dark Green
-                } 
-                else
-                {
-                    npcWorkPerIncrement.color = Color.black; // Default color
-                }
-
-                npcWorkPerIncrement.text = workIncrement.ToString("N1");
-            }
+            case <= 2.25f:
+                npcWorkPerIncrement.color = Color.red;
+                break;
+            case <= 4f:
+                npcWorkPerIncrement.color = new Color(1.0f, 0.64f, 0.0f); // Orange 
+                break;
+            case <= 7.5f:
+                npcWorkPerIncrement.color = new Color(0.082f, 0.812f, 0.216f); // Dark Green
+                break;
         }
+        npcWorkPerIncrement.text = selectedNPC.WorkDonePerIncrement.ToString("N1");
     }
+    
     private string NPCToString(NPC npc)
     {
         return $"isSelected: {npc.IsSelected}\nID: {npc.NPCId}\nName: {npc.Name}\nAge: {npc.Age}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}\nCurrent activity: {npc.CurrentActivity}\nWork per Increment: {npc.WorkDonePerIncrement}\nTotal Work Done: {npc.TotalWorkDone}\nWork Location: {npc.CurrentWorkArrangement}";
