@@ -169,14 +169,17 @@ public class OutputManager : MonoBehaviour
     {
         switch (selectedNPC.WorkDonePerIncrement)
         {
-            case <= 2.25f:
-                npcWorkPerIncrement.color = Color.red;
+            case <= 2.5f:
+                npcWorkPerIncrement.color = Color.red;// weee
                 break;
             case <= 4f:
                 npcWorkPerIncrement.color = new Color(1.0f, 0.64f, 0.0f); // Orange 
                 break;
             case <= 7.5f:
                 npcWorkPerIncrement.color = new Color(0.082f, 0.812f, 0.216f); // Dark Green
+                break;
+            case >7.5f: // Exceeds value expected
+                npcWorkPerIncrement.color = Color.gray;
                 break;
         }
         npcWorkPerIncrement.text = selectedNPC.WorkDonePerIncrement.ToString("N1");
