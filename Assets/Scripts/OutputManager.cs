@@ -61,6 +61,7 @@ public class OutputManager : MonoBehaviour
         UpdateSelectedUIState(); // Switch between NoSelectedNPCs and SelectedNPCs UI
         UpdateGameInfoBar();
         currentBudgetPurchaseScreen.text = $"{(taskManager.currentBudget/1000).ToString("N0")}K";
+        WorkIncrementText();
         
     }
     void OnDestroy()
@@ -100,7 +101,8 @@ public class OutputManager : MonoBehaviour
             npcNameOutput.text = selectedNPC.Name;
             npcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")} / month";
             //npcCurrentActivity.text = selectedNPC.CurrentActivity;
-            npcWorkPerIncrement.text = selectedNPC.WorkDonePerIncrement.ToString("N2");
+            //npcWorkPerIncrement.text = selectedNPC.WorkDonePerIncrement.ToString("N2");
+            WorkIncrementText();
             npcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
             npcMoodSlider.value = selectedNPC.Mood;
             npcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
@@ -161,6 +163,34 @@ public class OutputManager : MonoBehaviour
         {
             SelectedUI.SetActive(false);
             NoSelectedUI.SetActive(true);
+        }
+    }
+    public void WorkIncrementText()
+    {
+        foreach (var npc in npcGenerator.npcList.Values)
+        {
+            float workIncrement = selectedNPC.WorkDonePerIncrement;
+            if (npcWorkPerIncrement != null)
+            {
+                if (workIncrement <= 2.25f)
+                {
+                    npcWorkPerIncrement.color = Color.red;
+                }
+                else if (workIncrement <= 4.0f)
+                {
+                    npcWorkPerIncrement.color = new Color(1.0f, 0.64f, 0.0f); // Orange 
+                }
+                else if (workIncrement <= 7.5f)
+                {
+                    npcWorkPerIncrement.color = new Color(0.082f, 0.812f, 0.216f); // Dark Green
+                } 
+                else
+                {
+                    npcWorkPerIncrement.color = Color.black; // Default color
+                }
+
+                npcWorkPerIncrement.text = workIncrement.ToString("N1");
+            }
         }
     }
     private string NPCToString(NPC npc)
