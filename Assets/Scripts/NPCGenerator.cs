@@ -83,7 +83,7 @@ public class NPCGenerator : MonoBehaviour
                     Salary = 0,
                     CurrentActivity = "Working",
                     CurrentWorkArrangement = Random.value > 0.5f ? "On-site" : "Remote Working",
-                    Mood = Random.Range(-5, 6),
+                    Mood = 0,
                     WorkDonePerIncrement = 0f,
                     TotalWorkDone = 0f,
                     MaxTaskCapacity = 100f,
