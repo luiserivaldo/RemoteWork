@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/StartMenu.uss?fileID=7433441132597879392&amp;guid=11e3a6465334850488fde9d0fef18c61&amp;type=3#StartMenu" />
+    <ui:VisualElement name="Container" style="flex-grow: 1;">
+        <ui:VisualElement name="Logo" class="logo" style="background-image: none; opacity: 1; margin-bottom: 35px;">
+            <ui:Label tabindex="-1" text="Project Manager" parse-escape-sequences="true" display-tooltip-when-elided="true" class="logo_text" />
+            <ui:Label tabindex="-1" text="Simulator" parse-escape-sequences="true" display-tooltip-when-elided="true" class="logo_text2" />
+        </ui:VisualElement>
+        <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" class="button" />
+        <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" />
+    </ui:VisualElement>
+</ui:UXML>
