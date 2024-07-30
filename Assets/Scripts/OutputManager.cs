@@ -26,6 +26,8 @@ public class OutputManager : MonoBehaviour
     public Text npcWorkPerIncrement;
     public Text npcCurrentWorkArrangement;
     public Slider npcMoodSlider; // Mood slider
+    public int minMoodvalue = -10;
+    public int maxMoodvalue = 10;
     public Slider npcWorkDoneSlider; // Task progress slider
     public Text npcNumOfTasksCompletedOutput;
     
@@ -44,6 +46,10 @@ public class OutputManager : MonoBehaviour
 
     void Start()
     {
+        // Set min-max range of sliders
+        npcMoodSlider.minValue = minMoodvalue;
+        npcMoodSlider.maxValue = maxMoodvalue;
+
         // Find related Game Managers
         npcGenerator = FindObjectOfType<NPCGenerator>();
         taskManager = FindObjectOfType<TaskManager>(); 
@@ -61,7 +67,6 @@ public class OutputManager : MonoBehaviour
         UpdateSelectedUIState(); // Switch between NoSelectedNPCs and SelectedNPCs UI
         UpdateGameInfoBar();
         currentBudgetPurchaseScreen.text = $"{(taskManager.currentBudget/1000).ToString("N0")}K";
-        WorkIncrementText();
         
     }
     void OnDestroy()
@@ -139,8 +144,8 @@ public class OutputManager : MonoBehaviour
     }
     public void SetSelectedNPC(NPC npc)
     {
-        selectedNPC = npc;
-        DisplaySpecificNPC(npc);
+        selectedNPC = npc; // Set the selected NPC
+        DisplaySpecificNPC(npc); // Display details of the selected NPC
     }
     private void UpdateSelectedUIState()
     {
@@ -170,7 +175,7 @@ public class OutputManager : MonoBehaviour
         switch (selectedNPC.WorkDonePerIncrement)
         {
             case <= 2.5f:
-                npcWorkPerIncrement.color = Color.red;// weee
+                npcWorkPerIncrement.color = Color.red;
                 break;
             case <= 4f:
                 npcWorkPerIncrement.color = new Color(1.0f, 0.64f, 0.0f); // Orange 

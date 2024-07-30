@@ -67,9 +67,9 @@ public class ActionManager : MonoBehaviour
         if (selectedNPC != null)
         {
             selectedNPC.Mood -= 1; // Decrease mood by 1
-            if (selectedNPC.Mood < -5)
+            if (selectedNPC.Mood < -10)
             {
-                selectedNPC.Mood = -5; // Ensure mood doesn't go below -5
+                selectedNPC.Mood = -10; // Ensure mood doesn't go below -5
             } 
         }
         else
@@ -82,9 +82,9 @@ public class ActionManager : MonoBehaviour
         if (selectedNPC != null)
         {
             selectedNPC.Mood += 1; // Increase mood by 1
-            if (selectedNPC.Mood > 5)
+            if (selectedNPC.Mood > 10)
             {
-                selectedNPC.Mood = 5; // Increase mood doesn't go below -5
+                selectedNPC.Mood = 10; // Increase mood doesn't go below -5
             } 
             /* Debug.Log("Praise clicked");
             Debug.Log($"Praise NPC ID {selectedNPC.NPCId}. Mood: {selectedNPC.Mood}"); */

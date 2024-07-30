@@ -70,7 +70,7 @@ public class TaskManager : MonoBehaviour
 
     private void UpdateWorkDone(NPC npc) // Calculate work done per individual NPC
     {
-        npc.WorkDonePerIncrement = npc.WorkEfficiency * (1 + (npc.Mood / 10f));
+        npc.WorkDonePerIncrement = npc.WorkEfficiency * (1 + (npc.Mood / 20f));
         npc.TotalWorkDone += npc.WorkDonePerIncrement;
         if (npc.TotalWorkDone >= npc.MaxTaskCapacity)
         {
