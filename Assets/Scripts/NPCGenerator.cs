@@ -88,7 +88,17 @@ public class NPCGenerator : MonoBehaviour
                     TotalWorkDone = 0f,
                     MaxTaskCapacity = 100f,
                     numOfTasksCompleted = 0,
+
+                    
                 };
+                if (newNPC.CurrentWorkArrangement == "On-site")
+                    {
+                        newNPC.Mood -= 2;
+                    }
+                    else if (newNPC.CurrentWorkArrangement == "Remote Working")
+                    {
+                        newNPC.Mood += 2;
+                    }
                 newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
                 return newNPC;
             }
@@ -154,10 +164,12 @@ public class NPC
     public string Name { get; set; }
     public int Age { get; set; }
     public float WorkEfficiency { get; set; }
+    public float WorkEfficiencyBonus {get; set;}
     public int Salary { get; set; }
     public string CurrentActivity { get; set;}
     public string CurrentWorkArrangement { get; set;}
     public float Mood { get; set; }
+    public float MoodBonus {get; set;}
     public float WorkDonePerIncrement { get; set; } = 0f;
     public float TotalWorkDone { get; set;} = 0f;
     public float MaxTaskCapacity { get; set;} = 100f;

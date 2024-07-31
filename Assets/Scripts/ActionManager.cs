@@ -41,6 +41,7 @@ public class ActionManager : MonoBehaviour
     void Start()
     {
         taskManager = FindObjectOfType<TaskManager>();
+        AdjustMoodBonus();
 
         enquireButton.onClick.AddListener(OnEnquireButtonClick);
         praiseButton.onClick.AddListener(OnPraiseButtonClick);
@@ -52,6 +53,7 @@ public class ActionManager : MonoBehaviour
     }
     void Update()
     {
+        AdjustMoodBonus();
         UpdateButtonInteractble(buyUpgrade1, taskManager.currentBudget >= upgradeCost1);
         UpdateButtonInteractble(buyUpgrade2, taskManager.currentBudget >= upgradeCost2);
         UpdateButtonInteractble(buyUpgrade3, taskManager.currentBudget >= upgradeCost3);
@@ -61,7 +63,20 @@ public class ActionManager : MonoBehaviour
     {
         selectedNPC = npc;
     }
-    
+    public void AdjustMoodBonus()
+    {
+        /* // Adjust mood based on working arrangement
+        if (selectedNPC.CurrentWorkArrangement == "On-site")
+        {
+            selectedNPC.MoodBonus -= 2;
+        }
+        else if (selectedNPC.CurrentWorkArrangement == "Remote Working")
+        {
+            selectedNPC.MoodBonus += 10;
+        }
+
+        selectedNPC.Mood += selectedNPC.MoodBonus;  */
+    }
     public void OnEnquireButtonClick()
     {
         if (selectedNPC != null)
