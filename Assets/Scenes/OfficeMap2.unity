@@ -42953,6 +42953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskManager: {fileID: 1462283618}
+  npcGenerator: {fileID: 226452970}
   buyPantry: {fileID: 415974445}
   buyLounge: {fileID: 238931761}
   buyLibrary: {fileID: 642474306}

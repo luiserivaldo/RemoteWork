@@ -8,10 +8,10 @@ public class UpgradeSet
     public int Cost { get; set; }
     public bool IsPurchased { get;  set; }
     public int MoodBonus { get; set; }
-    public int WorkBonus { get; set; }
+    public float WorkBonus { get; set; }
     //public string PrerequisiteSet { get; private set; }
 
-    public UpgradeSet(string setName, int cost, int moodBonus, int workBonus, string prerequisiteSet = null)
+    public UpgradeSet(string setName, int cost, int moodBonus, float workBonus, string prerequisiteSet = null)
     {
         SetName = setName;
         Cost = cost;

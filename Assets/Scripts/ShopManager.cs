@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
     public TaskManager taskManager;
+    public NPCGenerator npcGenerator;
     // Buy office upgrades buttons
     [Header("Office Upgrade Fields")]
     public Button buyPantry; // Pantry
@@ -21,10 +22,11 @@ public class ShopManager : MonoBehaviour
         // SetName, Cost, MoodBonus, WorkBonus, isPurchased
         { "Pantry", new UpgradeSet("Pantry", 100000, 1, 0) },
         { "Lounge", new UpgradeSet("Lounge", 150000, 1, 0) },
-        { "Library", new UpgradeSet("Library", 125000, 0, 2) }
+        { "Library", new UpgradeSet("Library", 125000, 0, 0.5f) }
     };
     void Start()
-    {
+    {   
+        npcGenerator = FindObjectOfType<NPCGenerator>();
         taskManager = FindObjectOfType<TaskManager>();
 
         buyPantry.onClick.AddListener(() => TryPurchaseUpgrade("Pantry"));
@@ -72,5 +74,20 @@ public class ShopManager : MonoBehaviour
                 libraryGameObject.SetActive(true);
                 break;
         }
+
+        if (upgradeSets.ContainsKey(upgradeName))
+        {
+            var upgradeSet = upgradeSets[upgradeName];
+            ApplyBonuses(upgradeSet.MoodBonus, upgradeSet.WorkBonus);
+        }
+    }
+    private void ApplyBonuses(int moodBonus, float workBonus)
+    {
+        foreach (var npc in npcGenerator.npcList.Values)
+        {
+            npc.Mood += moodBonus;
+            npc.WorkEfficiency += workBonus;
+        }
     }
 }
+
