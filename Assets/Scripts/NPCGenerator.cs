@@ -95,7 +95,7 @@ public class NPCGenerator : MonoBehaviour
                     {
                         newNPC.Mood -= 2;
                     }
-                    else if (newNPC.CurrentWorkArrangement == "Remote Working")
+                else if (newNPC.CurrentWorkArrangement == "Remote Working")
                     {
                         newNPC.Mood += 2;
                     }
