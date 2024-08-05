@@ -9,23 +9,31 @@ public class UIManager : MonoBehaviour
     public GameObject npcInfoRowPrefab; // Reference to the NPCInfoRow prefab
     public Transform npcInfoGrid; // Reference to the grid layout to house the rows
     public NPCGenerator npcGenerator;
+    private Dictionary<int, GameObject> npcRowDict = new Dictionary<int, GameObject>(); // Dictionary to keep track of NPC rows
 
     private void Start()
     {
-        CreateNPCInfoRows();
-        npcGenerator.OnNPCsGenerated += UpdateInfoRow;
-        Debug.Log("UI Manager started.");
-        UpdateInfoRow();
+        npcGenerator.OnNPCsGenerated += UpdateUI; // Subscribe to the event
+
+        // Delete temp rows
+        foreach (Transform child in npcInfoGrid)
+        {
+            Destroy(child.gameObject);
+            Debug.Log("Deleted temp rows");
+        }
+
+        // Initial UI update
+        UpdateUI();
     }
     private void OnDestroy()
     {
-        npcGenerator.OnNPCsGenerated -= UpdateInfoRow; // Unsubscribe from the event
+        npcGenerator.OnNPCsGenerated -= UpdateUI; // Unsubscribe from the event
     }
     void Update()
     {
-        UpdateInfoRow();
+        UpdateUI();
     }
-    public void CreateNPCInfoRows()
+/*     public void CreateNPCInfoRows()
     {
         // Clear existing rows
         foreach (Transform child in npcInfoGrid)
@@ -41,17 +49,21 @@ public class UIManager : MonoBehaviour
             GameObject row = Instantiate(npcInfoRowPrefab, npcInfoGrid);
             FillRowInfo(row, npc);
         }
-    }
+    } */
 
     private void FillRowInfo(GameObject row, NPC npc)
     {
         // Find text components in the row and set their values based on the NPC data
         TextMeshProUGUI[] textComponents = row.GetComponentsInChildren<TextMeshProUGUI>();
+        Slider taskSlider = row.GetComponentInChildren<Slider>();
 
         foreach (TextMeshProUGUI textComponent in textComponents)
         {
             switch (textComponent.name)
             {
+                case "NPCIdText":
+                    textComponent.text = npc.NPCId.ToString();
+                    break;
                 case "NameText":
                     textComponent.text = npc.Name;
                     break;
@@ -60,9 +72,24 @@ public class UIManager : MonoBehaviour
                     break;
                 case "ProdText":
                     textComponent.text = npc.WorkDonePerIncrement.ToString();
+                    switch (npc.WorkDonePerIncrement)
+                        {
+                            case <= 2.5f:
+                                textComponent.color = Color.red;
+                                break;
+                            case <= 4f:
+                                textComponent.color = new Color(1.0f, 0.64f, 0.0f); // Orange 
+                                break;
+                            case <= 7.5f:
+                                textComponent.color = new Color(0.082f, 0.812f, 0.216f); // Dark Green
+                                break;
+                            case >7.5f: // Exceeds value expected
+                                textComponent.color = Color.gray;
+                                break;
+                        }
                     break;
                 case "SalaryText":
-                    textComponent.text = npc.Salary.ToString();
+                    textComponent.text = $"$ {npc.Salary.ToString("N0")}";
                     break;
                 case "WorkArrangementText":
                     textComponent.text = npc.CurrentWorkArrangement;
@@ -72,7 +99,7 @@ public class UIManager : MonoBehaviour
                             textComponent.color = Color.red;
                             break;
                         case "On-site":
-                            textComponent.color = new Color(0.082f, 0.812f, 0.216f);;
+                            textComponent.color = new Color(0.082f, 0.812f, 0.216f);
                             break;
                     }
                     break;
@@ -86,27 +113,47 @@ public class UIManager : MonoBehaviour
                     Debug.LogWarning("Unhandled text component: " + textComponent.name);
                     break;
             }
-            Debug.Log("Spawned a row of NPC details.");
         }
+        if (taskSlider != null)
+            {
+                taskSlider.value = npc.TotalWorkDone;
+            }
     }
-
-    private void UpdateInfoRow()
+    private void UpdateUI()
     {
-        // Clear existing rows
-        foreach (Transform child in npcInfoGrid)
-        {
-            Destroy(child.gameObject);
-        }
-
-        // Instantiate new rows based on the updated NPC list
+        // Loop through NPC list and update/add rows
         foreach (var npc in npcGenerator.npcList.Values)
         {
-            GameObject row = Instantiate(npcInfoRowPrefab, npcInfoGrid);
-            FillRowInfo(row, npc);
+            if (npcRowDict.ContainsKey(npc.NPCId))
+            {
+                // Update existing row
+                FillRowInfo(npcRowDict[npc.NPCId], npc);
+            }
+            else
+            {
+                // Create new row
+                GameObject row = Instantiate(npcInfoRowPrefab, npcInfoGrid);
+                npcRowDict[npc.NPCId] = row;
+                FillRowInfo(row, npc);
+            }
         }
-    }
-    private void OnNPCsGenerated()
-    {
-        CreateNPCInfoRows();
+
+        // Remove rows for NPCs that no longer exist
+        var npcIds = new HashSet<int>(npcGenerator.npcList.Keys);
+        var keysToRemove = new List<int>();
+
+        foreach (var npcId in npcRowDict.Keys)
+        {
+            if (!npcIds.Contains(npcId))
+            {
+                Destroy(npcRowDict[npcId]);
+                keysToRemove.Add(npcId);
+            }
+        }
+
+        foreach (var key in keysToRemove)
+        {
+            npcRowDict.Remove(key);
+        }
     }
 }
