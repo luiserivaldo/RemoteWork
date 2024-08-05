@@ -60,6 +60,15 @@ public class UIManager : MonoBehaviour
                     break;
                 case "WorkArrangementText":
                     textComponent.text = npc.CurrentWorkArrangement;
+                    switch (npc.CurrentWorkArrangement)
+                    {
+                        case "Remote Working":
+                            textComponent.color = Color.red;
+                            break;
+                        case "On-site":
+                            textComponent.color = Color.green;
+                            break;
+                    }
                     break;
                 case "MoodText":
                     textComponent.text = npc.Mood.ToString();
