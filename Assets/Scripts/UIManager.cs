@@ -12,14 +12,20 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        PopulateNPCInfoRows();
+        CreateNPCInfoRows();
+        npcGenerator.OnNPCsGenerated += UpdateInfoRow;
         Debug.Log("UI Manager started.");
+        UpdateInfoRow();
+    }
+    private void OnDestroy()
+    {
+        npcGenerator.OnNPCsGenerated -= UpdateInfoRow; // Unsubscribe from the event
     }
     void Update()
     {
-        //PopulateNPCInfoRows();
+        UpdateInfoRow();
     }
-    public void PopulateNPCInfoRows()
+    public void CreateNPCInfoRows()
     {
         // Clear existing rows
         foreach (Transform child in npcInfoGrid)
@@ -33,11 +39,11 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log($"Instantiating row for NPC: {npc.Name}");
             GameObject row = Instantiate(npcInfoRowPrefab, npcInfoGrid);
-            PopulateRow(row, npc);
+            FillRowInfo(row, npc);
         }
     }
 
-    private void PopulateRow(GameObject row, NPC npc)
+    private void FillRowInfo(GameObject row, NPC npc)
     {
         // Find text components in the row and set their values based on the NPC data
         TextMeshProUGUI[] textComponents = row.GetComponentsInChildren<TextMeshProUGUI>();
@@ -62,11 +68,11 @@ public class UIManager : MonoBehaviour
                     textComponent.text = npc.CurrentWorkArrangement;
                     switch (npc.CurrentWorkArrangement)
                     {
-                        case "Remote Working":
+                        case "Remote":
                             textComponent.color = Color.red;
                             break;
                         case "On-site":
-                            textComponent.color = Color.green;
+                            textComponent.color = new Color(0.082f, 0.812f, 0.216f);;
                             break;
                     }
                     break;
@@ -82,5 +88,25 @@ public class UIManager : MonoBehaviour
             }
             Debug.Log("Spawned a row of NPC details.");
         }
+    }
+
+    private void UpdateInfoRow()
+    {
+        // Clear existing rows
+        foreach (Transform child in npcInfoGrid)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Instantiate new rows based on the updated NPC list
+        foreach (var npc in npcGenerator.npcList.Values)
+        {
+            GameObject row = Instantiate(npcInfoRowPrefab, npcInfoGrid);
+            FillRowInfo(row, npc);
+        }
+    }
+    private void OnNPCsGenerated()
+    {
+        CreateNPCInfoRows();
     }
 }

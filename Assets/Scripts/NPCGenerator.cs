@@ -23,6 +23,7 @@ public class NPCGenerator : MonoBehaviour
     public Dictionary<int, NPC> npcList = new Dictionary<int, NPC>(); // Dictionary containing all generated NPCs
     private List<GameObject> instantiatedNPCs = new List<GameObject>(); // List to store references to instantiated NPCs
     public Action OnNPCsGenerated; // Event to notify when NPCs are generated
+    public event Action OnNPCListUpdated; // Event to notify when NPCs details are updated
     // Debug options
     [Header("Debug options")]
     public Button generateNPCsButton; // Debug Generate NPC Button
@@ -48,20 +49,12 @@ public class NPCGenerator : MonoBehaviour
                 prefab.AddComponent<MeshCollider>();
             }
         }
-        
+        NotifyNPCListUpdated();
     }
     void Update()
     {
-         //UpdateWorkProgress();
-    }
 
-    /*// Debug Generate
-    private void OnGenerateButtonClick()
-    {
-        NPC newNPC = GenerateRandomNPC();
-        DisplayNPCInfo(newNPC, i); // Optionally display the first NPC's info
-        //SpawnNPCModel(newNPC, i);
-    } */
+    }
     
     public NPC GenerateRandomNPC()
     {
@@ -82,14 +75,12 @@ public class NPCGenerator : MonoBehaviour
                     WorkEfficiency = Mathf.Round(Random.Range(1f, 5f) * 100f) / 100f,
                     Salary = 0,
                     CurrentActivity = "Working",
-                    CurrentWorkArrangement = Random.value > 0.5f ? "On-site" : "Remote Working",
+                    CurrentWorkArrangement = Random.value > 0.5f ? "On-site" : "Remote",
                     Mood = 0,
                     WorkDonePerIncrement = 0f,
                     TotalWorkDone = 0f,
                     MaxTaskCapacity = 100f,
                     numOfTasksCompleted = 0,
-
-                    
                 };
                 if (newNPC.CurrentWorkArrangement == "On-site")
                     {
@@ -154,6 +145,27 @@ public class NPCGenerator : MonoBehaviour
         }
         // Notify that NPCs have been generated
         OnNPCsGenerated?.Invoke();
+        NotifyNPCListUpdated();
+    }
+
+    private void NotifyNPCListUpdated()
+    {
+        if (OnNPCListUpdated != null)
+        {
+            OnNPCListUpdated();
+        }
+    }
+
+    private void AddNPC(NPC newNPC)
+    {
+        npcList.Add(newNPC.NPCId, newNPC);
+        NotifyNPCListUpdated();
+    }
+
+    private void RemoveNPC(int npcId)
+    {
+        npcList.Remove(npcId);
+        NotifyNPCListUpdated();
     }
 }
 
