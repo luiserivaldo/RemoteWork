@@ -123,6 +123,9 @@ public class UIManager : MonoBehaviour
                 case "TaskProgressText":
                     textComponent.text = npc.TotalWorkDone.ToString();
                     break;
+                case "TasksCompletedText":
+                    textComponent.text = npc.numOfTasksCompleted.ToString();
+                    break;
                 default:
                     Debug.LogWarning("Unhandled text component: " + textComponent.name);
                     break;
