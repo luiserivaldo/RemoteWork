@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
                     textComponent.text = npc.Age.ToString();
                     break;
                 case "ProdText":
-                    textComponent.text = npc.WorkDonePerIncrement.ToString();
+                    textComponent.text = npc.WorkDonePerIncrement.ToString("N1");
                     switch (npc.WorkDonePerIncrement)
                         {
                             case <= 2.5f:
@@ -103,7 +103,22 @@ public class UIManager : MonoBehaviour
                     }
                     break;
                 case "MoodText":
-                    textComponent.text = npc.Mood.ToString();
+                    textComponent.text = ((npc.Mood + 10) / 2).ToString("N1");
+                    switch ((npc.Mood + 10) / 2)
+                        {
+                            case <= 3f:
+                                textComponent.color = Color.red;
+                                break;
+                            case <= 7f:
+                                textComponent.color = new Color(1.0f, 0.64f, 0.0f); // Orange 
+                                break;
+                            case <= 10f:
+                                textComponent.color = new Color(0.082f, 0.812f, 0.216f); // Dark Green
+                                break;
+                            case >10f: // Exceeds value expected
+                                textComponent.color = Color.gray;
+                                break;
+                        }
                     break;
                 case "TaskProgressText":
                     textComponent.text = npc.TotalWorkDone.ToString();
