@@ -55,8 +55,7 @@ public class UIManager : MonoBehaviour
     {
         // Find text components in the row and set their values based on the NPC data
         TextMeshProUGUI[] textComponents = row.GetComponentsInChildren<TextMeshProUGUI>();
-        Slider taskSlider = row.GetComponentInChildren<Slider>();
-
+        Slider taskSlider =  row.transform.Find("TaskSlider").GetComponent<Slider>();
         foreach (TextMeshProUGUI textComponent in textComponents)
         {
             switch (textComponent.name)

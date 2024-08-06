@@ -9,9 +9,6 @@ using Random = UnityEngine.Random;
 
 public class NPCGenerator : MonoBehaviour
 {
-
-    
-
     // 3D Model reference
     [Header("Instantiation references")]
     public GameObject[] npcPrefabs; // Array of different 3D model prefabs
@@ -36,7 +33,10 @@ public class NPCGenerator : MonoBehaviour
         {
             NPC newNPC = GenerateRandomNPC();
             npcList.Add(newNPC.NPCId, newNPC); // Add NPCs to dictionary
-            SpawnNPCModel(newNPC, i);
+            if (newNPC.CurrentWorkArrangement == "On-site")
+            {
+                SpawnNPCModel(newNPC, i);
+            }
         }
 
         //generateButton.onClick.AddListener(OnGenerateButtonClick); // Debug Generate
@@ -141,7 +141,10 @@ public class NPCGenerator : MonoBehaviour
         {
             NPC newNPC = GenerateRandomNPC();
             npcList.Add(newNPC.NPCId, newNPC);
-            SpawnNPCModel(newNPC, i);
+            if (newNPC.CurrentWorkArrangement == "On-site")
+            {
+                SpawnNPCModel(newNPC, i);
+            }
         }
         // Notify that NPCs have been generated
         OnNPCsGenerated?.Invoke();
