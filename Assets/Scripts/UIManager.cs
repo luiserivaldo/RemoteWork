@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         npcGenerator.OnNPCsGenerated += UpdateUI; // Subscribe to the event
+        npcGenerator.OnNPCsGenerated += AddRemoteNPCsToDropdown; // Subscribe to the event to update dropdown
 
         // Delete temp rows
         foreach (Transform child in npcInfoGrid)
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
     private void OnDestroy()
     {
         npcGenerator.OnNPCsGenerated -= UpdateUI; // Unsubscribe from the event
+        npcGenerator.OnNPCsGenerated -= AddRemoteNPCsToDropdown; // Unsubscribe from the event
     }
 
     void Update()
