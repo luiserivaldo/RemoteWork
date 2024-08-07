@@ -16,7 +16,6 @@ public class ActionManager : MonoBehaviour
     public Button enquireButton;
     public Button praiseButton;
 
-    
     // To identify currently selected NPC
     private NPC selectedNPC;
     

@@ -6,9 +6,21 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    // Manager references
+    [Header("Manager references")]
+    public NPCGenerator npcGenerator;
+    public OutputManager outputManager;
+
+    // Select Remote Workers
+    [Header("Select Remote Workers")]
+    public TMP_Dropdown remoteWorkerDropdown; // Reference to the Dropdown UI element
+    private List<NPC> remoteNPCs = new List<NPC>();
+    private NPC currentlySelectedNPC; // Track the currently selected NPC
+
+    // View Workers Screen
+    [Header("View Workers Screen")] 
     public GameObject npcInfoRowPrefab; // Reference to the NPCInfoRow prefab
     public Transform npcInfoGrid; // Reference to the grid layout to house the rows
-    public NPCGenerator npcGenerator;
     private Dictionary<int, GameObject> npcRowDict = new Dictionary<int, GameObject>(); // Dictionary to keep track of NPC rows
 
     private void Start()
@@ -24,32 +36,73 @@ public class UIManager : MonoBehaviour
 
         // Initial UI update
         UpdateUI();
+        AddRemoteNPCsToDropdown();
+        remoteWorkerDropdown.onValueChanged.AddListener(OnRemoteWorkerSelected);
     }
+
     private void OnDestroy()
     {
         npcGenerator.OnNPCsGenerated -= UpdateUI; // Unsubscribe from the event
     }
+
     void Update()
     {
         UpdateUI();
     }
-/*     public void CreateNPCInfoRows()
-    {
-        // Clear existing rows
-        foreach (Transform child in npcInfoGrid)
-        {
-            Destroy(child.gameObject);
-            Debug.Log("Deleted temp rows");
-        }
 
-        // Create a new row for each NPC
+    private void AddRemoteNPCsToDropdown()
+    {
+        remoteWorkerDropdown.ClearOptions();
+        remoteNPCs.Clear(); // Clear the list
+
+        List<string> options = new List<string> { "Remote workers:" }; // Placeholder entry
+        
         foreach (var npc in npcGenerator.npcList.Values)
         {
-            Debug.Log($"Instantiating row for NPC: {npc.Name}");
-            GameObject row = Instantiate(npcInfoRowPrefab, npcInfoGrid);
-            FillRowInfo(row, npc);
+            if (npc.CurrentWorkArrangement == "Remote")
+            {
+                remoteNPCs.Add(npc);
+                options.Add(npc.Name);
+            }
         }
-    } */
+        remoteWorkerDropdown.AddOptions(options); // Add new options
+        remoteWorkerDropdown.value = 0; // Set default value to placeholder
+        remoteWorkerDropdown.RefreshShownValue(); // Refresh the dropdown display
+    }
+    private void OnRemoteWorkerSelected(int index)
+    {   
+        if (index == 0)
+        {
+            return; // Do nothing if 1st entry is selected (the placeholder)
+        }
+
+        // Adjust index to match the remoteNPCs list
+        int npcIndex = index - 1;
+        if (index >= 0 && npcIndex < remoteNPCs.Count)
+        {
+            if (currentlySelectedNPC != null)
+            {
+                currentlySelectedNPC.IsSelected = false; // Reset previous selection
+            }
+
+            foreach (var npc in npcGenerator.npcList.Values)
+            {
+                npc.IsSelected = false; // Deselect all NPCs
+            }
+
+            NPC selectedRemoteNPC = remoteNPCs[npcIndex];
+            selectedRemoteNPC.IsSelected = true; // Tag as selected
+            currentlySelectedNPC = selectedRemoteNPC; // Update the currently selected NPC
+
+            outputManager.DisplaySpecificNPC(selectedRemoteNPC); // Display info through OutputManager
+        }
+    }
+
+    public void ResetDropdownToPlaceholder()
+    {
+        remoteWorkerDropdown.value = 0; // Set to placeholder
+        remoteWorkerDropdown.RefreshShownValue(); // Refresh the dropdown display
+    }
 
     private void FillRowInfo(GameObject row, NPC npc)
     {

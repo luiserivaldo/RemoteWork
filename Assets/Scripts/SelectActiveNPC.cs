@@ -5,12 +5,14 @@ using UnityEngine;
 public class SelectActiveNPC : MonoBehaviour
 {
     private NPCGenerator npcGenerator;
+    public UIManager uiManager; // Reference to the UIManager
     private NPC assignedNPC;
 
     void Start()
     {
         EnsureColliderExists();
         npcGenerator = FindObjectOfType<NPCGenerator>();
+        uiManager = FindObjectOfType<UIManager>();
         if (npcGenerator == null)
         {
             Debug.LogError("NPCGenerator not found.");
@@ -34,7 +36,7 @@ public class SelectActiveNPC : MonoBehaviour
     }
     void OnMouseDown()
     {   
-        Debug.Log("Model clicked");
+        //Debug.Log("Model clicked");
         // Deselect any previously selected NPC
         foreach (var npcEntry in npcGenerator.npcList)
         {
@@ -46,7 +48,10 @@ public class SelectActiveNPC : MonoBehaviour
 
         // Select this NPC
         assignedNPC.IsSelected = true;
-        Debug.Log($"NPC Clicked: ID={assignedNPC.NPCId}, Name={assignedNPC.Name}, Selected={assignedNPC.IsSelected}");
+        //Debug.Log($"NPC Clicked: ID={assignedNPC.NPCId}, Name={assignedNPC.Name}, Selected={assignedNPC.IsSelected}");
+
+        // Reset RemoteNPC Dropdown menu
+        uiManager.ResetDropdownToPlaceholder();
 
         // Notify OutputManager to update the display
         FindObjectOfType<OutputManager>().DisplaySpecificNPC(assignedNPC);
