@@ -33,6 +33,27 @@ public class OutputManager : MonoBehaviour
     
     // Selected NPC to display to NPC info bar
     private NPC selectedNPC;
+    // Select NPC Screen
+    [Header("Select NPC Screen")]
+    // Bio
+    public Text selectedNpcNameOutput; // Name
+    public Text selectednpcCurrentWorkArrangement;
+    public Text selectedageOutput;
+    public Text selectednpcSalaryOutput; // Salary
+
+    // Work
+    public Text selectedworkEfficiencyOutput;
+    public Text selectedworkBonusOutput;
+    public Text selectednpcWorkPerIncrement;
+    public Slider selectednpcWorkDoneSlider; // Task progress slider
+    public Text selectedcompletedTasksOutput;
+
+    // Mood and Traits
+    public Slider selectednpcMoodSlider; // Mood slider
+    public Text selectedmoodValueOutput;
+    public Text selectedmoodBonusOutput;
+    public Text selectedtraitsOutput;
+
     // Purchase screen
     [Header("Purchase screen")]
     public Text currentBudgetPurchaseScreen;
@@ -96,6 +117,9 @@ public class OutputManager : MonoBehaviour
             npcMoodSlider.value = selectedNPC.Mood;
             npcWorkDoneSlider.maxValue = selectedNPC.MaxTaskCapacity;
             npcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
+
+            selectednpcWorkDoneSlider.maxValue = selectedNPC.MaxTaskCapacity;
+            selectednpcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
         }
     }
 
@@ -103,15 +127,31 @@ public class OutputManager : MonoBehaviour
     {
         if (selectedNPC != null)
         {
+            // Active info bar
             npcNameOutput.text = selectedNPC.Name;
             npcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")} / month";
             //npcCurrentActivity.text = selectedNPC.CurrentActivity;
-            //npcWorkPerIncrement.text = selectedNPC.WorkDonePerIncrement.ToString("N2");
             WorkIncrementText();
             npcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
             npcMoodSlider.value = selectedNPC.Mood;
             npcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
+
+            // Selected NPC Screen
+            selectedNpcNameOutput.text = selectedNPC.Name;
+            selectednpcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")} / month";
+            SeniorityLevelText(); // Age/Seniority level
+            WorkIncrementText();
+            selectednpcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
+            selectednpcMoodSlider.value = selectedNPC.Mood;
+            selectedmoodBonusOutput.text = selectedNPC.MoodBonus.ToString();
+            selectedmoodValueOutput.text = selectedNPC.Mood.ToString();
+            selectedworkEfficiencyOutput.text = selectedNPC.WorkEfficiency.ToString();
+            selectednpcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
+            selectedworkBonusOutput.text = selectedNPC.WorkEfficiencyBonus.ToString();
+            selectedcompletedTasksOutput.text = selectedNPC.numOfTasksCompleted.ToString();
             selectedNPCOutput.text = NPCToString(selectedNPC);
+            selectedtraitsOutput.text = "Traits here";
+
         }
         else
         {
@@ -188,6 +228,26 @@ public class OutputManager : MonoBehaviour
                 break;
         }
         npcWorkPerIncrement.text = selectedNPC.WorkDonePerIncrement.ToString("N1");
+        selectednpcWorkPerIncrement.text = selectedNPC.WorkDonePerIncrement.ToString("N1");
+    }
+    public void SeniorityLevelText()
+    {
+        switch (selectedNPC.Age)
+        {
+            case <= 25:
+                selectedageOutput.text = "Junior";
+                break;
+            case <= 40:
+                selectedageOutput.text = "Mid-level";
+                break;
+            case <= 80:
+                selectedageOutput.text = "Senior";
+                break;
+            case >80: // Exceeds value expected
+                selectedageOutput.text = "Senior";
+                break;
+        }
+        //selectednpcWorkPerIncrement.text = selectedNPC.Age.ToString();
     }
     
     private string NPCToString(NPC npc)
