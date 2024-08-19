@@ -75,12 +75,15 @@ public class NPCGenerator : MonoBehaviour
                     WorkEfficiency = Mathf.Round(Random.Range(1f, 5f) * 100f) / 100f,
                     Salary = 0,
                     CurrentActivity = "Working",
-                    CurrentWorkArrangement = Random.value > 0.5f ? "On-site" : "Remote",
+                    CurrentWorkArrangement = Random.value > 0.2f ? "On-site" : "Remote",
                     Mood = 0,
                     WorkDonePerIncrement = 0f,
                     TotalWorkDone = 0f,
                     MaxTaskCapacity = 100f,
                     numOfTasksCompleted = 0,
+                    SocialPref = Random.value > 0.5f ? "Introvert" : "Extrovert",
+                    IsDisabled = Random.value > 0.9f ? "Disabled" : "Able-bodied",
+                    TechSkill = Random.Range(1, 11)
                 };
                 if (newNPC.CurrentWorkArrangement == "On-site")
                     {
@@ -189,15 +192,16 @@ public class NPC
     public float TotalWorkDone { get; set;} = 0f;
     public float MaxTaskCapacity { get; set;} = 100f;
     public int numOfTasksCompleted {get; set;}
+    public string SocialPref { get; set; }
+    public string IsDisabled { get; set; }
+    public float TechSkill { get; set; }
 
 
     // Expanded list
     /* public string LeadershipStyle { get; set; }
-    public float TechSkill { get; set; }
+    
     public float SocialSkill { get; set; }
-    public string SocialPref { get; set; }
     public bool IsNeurodivergent { get; set; }
-    public bool IsDisabled { get; set; }
     public bool InRelationship { get; set; } */
 
     public override string ToString() // Output the class elements as a string

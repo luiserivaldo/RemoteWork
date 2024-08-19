@@ -131,7 +131,7 @@ public class OutputManager : MonoBehaviour
             npcNameOutput.text = selectedNPC.Name;
             npcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")} / month";
             //npcCurrentActivity.text = selectedNPC.CurrentActivity;
-            WorkIncrementText();
+            WorkIncrementText(); // Both info bar and selected NPC Screen 
             npcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
             npcMoodSlider.value = selectedNPC.Mood;
             npcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
@@ -140,7 +140,7 @@ public class OutputManager : MonoBehaviour
             selectedNpcNameOutput.text = selectedNPC.Name;
             selectednpcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")} / month";
             SeniorityLevelText(); // Age/Seniority level
-            WorkIncrementText();
+            //WorkIncrementText();
             selectednpcCurrentWorkArrangement.text = selectedNPC.CurrentWorkArrangement;
             selectednpcMoodSlider.value = selectedNPC.Mood;
             selectedmoodBonusOutput.text = selectedNPC.MoodBonus.ToString();
@@ -150,7 +150,7 @@ public class OutputManager : MonoBehaviour
             selectedworkBonusOutput.text = selectedNPC.WorkEfficiencyBonus.ToString();
             selectedcompletedTasksOutput.text = selectedNPC.numOfTasksCompleted.ToString();
             selectedNPCOutput.text = NPCToString(selectedNPC);
-            selectedtraitsOutput.text = "Traits here";
+            selectedtraitsOutput.text = $"{selectedNPC.IsDisabled}, {selectedNPC.SocialPref}";
 
         }
         else
@@ -240,10 +240,10 @@ public class OutputManager : MonoBehaviour
             case <= 40:
                 selectedageOutput.text = "Mid-level";
                 break;
-            case <= 80:
+            case <= 60:
                 selectedageOutput.text = "Senior";
                 break;
-            case >80: // Exceeds value expected
+            case >60: // Exceeds value expected
                 selectedageOutput.text = "Senior";
                 break;
         }
