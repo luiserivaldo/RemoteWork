@@ -11,6 +11,7 @@ public class NPCGenerator : MonoBehaviour
 {
     // 3D Model reference
     [Header("Instantiation references")]
+    public int maxNPCsGenerated = 4;
     public GameObject[] npcPrefabs; // Array of different 3D model prefabs
     public Transform[] spawnPoints; // Array of spawn points for NPCs
 
@@ -28,8 +29,7 @@ public class NPCGenerator : MonoBehaviour
     private void Start()
     {
         generateNPCsButton.onClick.AddListener(GenerateNewNPCs);
-
-        for (int i = 0; i < 6; i++) // Initial starting no. of NPCs = 6
+        for (int i = 0; i < maxNPCsGenerated; i++) // Set max number of NPCs depending on scene/office size
         {
             NPC newNPC = GenerateRandomNPC();
             npcList.Add(newNPC.NPCId, newNPC); // Add NPCs to dictionary
