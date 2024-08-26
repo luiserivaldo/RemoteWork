@@ -15,6 +15,7 @@ public class ShopManager1 : MonoBehaviour
     public Button buyPantry; // Pantry
     public Button buyPrinter; // PrinterSet
     public GameObject junkGameObject; // Group of GameObjects for the first upgrade
+    public GameObject cardboardDeskGameObject; 
     public GameObject deskSetupGameObject; // Group of GameObjects for the second upgrade
     public GameObject pantryGameObject; // Group of GameObjects for the second upgrade
     public GameObject printerGameObject; 
@@ -23,7 +24,7 @@ public class ShopManager1 : MonoBehaviour
     {
         // SetName, Cost, MoodBonus, WorkBonus, isPurchased
         { "CleanJunk", new UpgradeSet("CleanJunk", 20000, 1, 0) },
-        { "DeskSetup", new UpgradeSet("DeskSetup", 750000, 1, 0) },
+        { "DeskSetup", new UpgradeSet("DeskSetup", 50000, 1, 0) },
         { "Pantry", new UpgradeSet("Pantry", 100000, 1, 0) },
         { "Printer", new UpgradeSet("Printer", 125000, 0, 1f) }
     };
@@ -73,6 +74,7 @@ public class ShopManager1 : MonoBehaviour
                 pantryGameObject.SetActive(true);
                 break;
             case "DeskSetup":
+                cardboardDeskGameObject.SetActive(false);
                 deskSetupGameObject.SetActive(true);
                 break;
             case "CleanJunk":
