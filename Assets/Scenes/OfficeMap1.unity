@@ -9511,58 +9511,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d64b99adc8137214197ed5702bb8f742, type: 3}
   m_PrefabInstance: {fileID: 638018788}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &642016299
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 642016301}
-  - component: {fileID: 642016300}
-  m_Layer: 0
-  m_Name: TaskManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &642016300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642016299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5942595618ce8c04db07975822d0352a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcGenerator: {fileID: 1681697170}
-  actionManager: {fileID: 1476152432}
-  weeklyQuotaSlider: {fileID: 0}
-  weeklyQuotaGoal: 1000
-  numOfTotalTasksCompleted: 0
-  weeksPassed: 0
-  startingBudget: 200000
-  currentBudget: 0
---- !u!4 &642016301
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642016299}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1520076199}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &656289467
 GameObject:
   m_ObjectHideFlags: 0
@@ -21304,7 +21252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1205412860
 Transform:
   m_ObjectHideFlags: 0
@@ -22238,7 +22186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1268979280
 Transform:
   m_ObjectHideFlags: 0
@@ -23732,7 +23680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1337960778
 Transform:
   m_ObjectHideFlags: 0
@@ -23755,13 +23703,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337960777}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 151b5ad974696604cab5ebb34d8b350c, type: 3}
+  m_Script: {fileID: 11500000, guid: a5ea704ee6629d84aa1ae49580c011c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskManager: {fileID: 642016300}
-  npcGenerator: {fileID: 1681697170}
+  taskManager: {fileID: 0}
+  npcGenerator: {fileID: 0}
   buyPantry: {fileID: 0}
   buyLounge: {fileID: 0}
   buyLibrary: {fileID: 0}
@@ -25665,7 +25613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1476152432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26283,7 +26231,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1681697171}
-  - {fileID: 642016301}
+  - {fileID: 1863952765856451238}
   - {fileID: 1476152433}
   - {fileID: 1620272013}
   - {fileID: 1337960778}
@@ -27563,7 +27511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1620272013
 Transform:
   m_ObjectHideFlags: 0
@@ -27603,6 +27551,19 @@ MonoBehaviour:
   maxMoodvalue: 10
   npcWorkDoneSlider: {fileID: 1734822849}
   npcNumOfTasksCompletedOutput: {fileID: 0}
+  selectedNpcNameOutput: {fileID: 0}
+  selectednpcCurrentWorkArrangement: {fileID: 0}
+  selectedageOutput: {fileID: 0}
+  selectednpcSalaryOutput: {fileID: 0}
+  selectedworkEfficiencyOutput: {fileID: 0}
+  selectedworkBonusOutput: {fileID: 0}
+  selectednpcWorkPerIncrement: {fileID: 0}
+  selectednpcWorkDoneSlider: {fileID: 0}
+  selectedcompletedTasksOutput: {fileID: 0}
+  selectednpcMoodSlider: {fileID: 0}
+  selectedmoodValueOutput: {fileID: 0}
+  selectedmoodBonusOutput: {fileID: 0}
+  selectedtraitsOutput: {fileID: 0}
   currentBudgetPurchaseScreen: {fileID: 1130456141}
   selectedNPCOutput: {fileID: 310752652}
   displayAllNPCsOutput: {fileID: 657864420}
@@ -29138,7 +29099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1681697170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33265,7 +33226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1937280328
 Transform:
   m_ObjectHideFlags: 0
@@ -35947,6 +35908,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141735895}
   m_CullTransparentMesh: 1
+--- !u!4 &1863952765856451238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265866977748372854}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1520076199}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2811572359547354248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36004,6 +35980,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e70320fc235636041b9984620928ebe6, type: 3}
+--- !u!114 &5047119278650496579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265866977748372854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5942595618ce8c04db07975822d0352a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcGenerator: {fileID: 1681697170}
+  actionManager: {fileID: 1476152432}
+  weeklyQuotaSlider: {fileID: 0}
+  weeklyQuotaGoal: 1000
+  numOfTotalTasksCompleted: 0
+  weeksPassed: 0
+  startingBudget: 200000
+  currentBudget: 0
 --- !u!1001 &6924471946190926440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36062,6 +36058,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 025f85a79f6fd114ba74eadbf92bbbea, type: 3}
+--- !u!1 &7265866977748372854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1863952765856451238}
+  - component: {fileID: 5047119278650496579}
+  m_Layer: 0
+  m_Name: TaskManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
