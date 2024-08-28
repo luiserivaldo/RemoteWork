@@ -1,0 +1,82 @@
+# Blender 3.4.1 MTL File: 'office set 2 redo.blend'
+# www.blender.org
+
+newmtl Color_1
+Ns 336.400055
+Ka 1.000000 1.000000 1.000000
+Kd 0.098503 0.041689 0.015249
+Ks 0.220000 0.220000 0.220000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Door
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Documents N/Blender 2.8/2022/Office Set 2/Textures/Door.png
+
+newmtl Laptop_Screen
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Documents N/Blender 2.8/2022/Office Set 2/Redo/Textures/Laptop.png
+
+newmtl Light
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 1.709959 1.709959 1.709959
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl PC
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Documents N/Blender 2.8/2022/Office Set 2/Textures/PC.png
+
+newmtl Paintings
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Documents N/Blender 2.8/2022/Office Set 2/Textures/Paintings.png
+
+newmtl Palette
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Documents N/Blender 2.8/2022/Office Set 2/Textures/palette1.png
+
+newmtl TV_Screen
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Documents N/Blender 2.8/2022/Office Set 2/Textures/TV.png

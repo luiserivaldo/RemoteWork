@@ -24,6 +24,7 @@ public class TaskManager : MonoBehaviour
     [Header("Budget Components")]
     public int startingBudget = 300000;
     [HideInInspector] public int currentBudget = 0;
+    [HideInInspector] public int totalSalary = 0;
 
     void Start()
     {
@@ -31,6 +32,11 @@ public class TaskManager : MonoBehaviour
         weeklyQuotaSlider.maxValue = weeklyQuotaGoal;
         weeklyQuotaSlider.value = workerCollectedProgress;
         
+        npcGenerator.OnNPCsGenerated += TotalSalaries; // Subscribe to the event
+        foreach (var npc in npcGenerator.npcList.Values)
+            {
+                totalSalary += npc.Salary;
+            }
         CalculateBudget();
         // Start the work process
         StartCoroutine(UpdateWorkProgress());
@@ -53,6 +59,7 @@ public class TaskManager : MonoBehaviour
                 float incrementalWorkDone = npc.WorkDonePerIncrement;
                 totalWeeklyIncrementalWorkDone += incrementalWorkDone;
                 //npc.WorkDonePerIncrement = npc.TotalWorkDone; // Update the last recorded work done
+                
             }
 
             workerCollectedProgress += totalWeeklyIncrementalWorkDone;
@@ -62,6 +69,7 @@ public class TaskManager : MonoBehaviour
             {
                 weeksPassed += 1;
                 workerCollectedProgress = 0;
+                currentBudget -= totalSalary;
             }
 
             yield return new WaitForSeconds(1);
@@ -70,7 +78,7 @@ public class TaskManager : MonoBehaviour
 
     private void UpdateWorkDone(NPC npc) // Calculate work done per individual NPC
     {
-        npc.WorkDonePerIncrement = npc.WorkEfficiency * (1 + (npc.Mood / 10f));
+        npc.WorkDonePerIncrement = npc.WorkEfficiency * (1 + (npc.Mood / 20f));
         npc.TotalWorkDone += npc.WorkDonePerIncrement;
         if (npc.TotalWorkDone >= npc.MaxTaskCapacity)
         {
@@ -84,5 +92,13 @@ public class TaskManager : MonoBehaviour
     private void CalculateBudget()
     {
         currentBudget += startingBudget;
+    }
+    private void TotalSalaries()
+    {
+        totalSalary = 0; // Reset total salary when new NPCs are generated
+        foreach (var npc in npcGenerator.npcList.Values)
+            {
+                totalSalary += npc.Salary;
+            }
     }
 }

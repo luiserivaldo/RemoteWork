@@ -9,11 +9,9 @@ using Random = UnityEngine.Random;
 
 public class NPCGenerator : MonoBehaviour
 {
-
-    
-
     // 3D Model reference
     [Header("Instantiation references")]
+    public int maxNPCsGenerated = 4;
     public GameObject[] npcPrefabs; // Array of different 3D model prefabs
     public Transform[] spawnPoints; // Array of spawn points for NPCs
 
@@ -23,19 +21,32 @@ public class NPCGenerator : MonoBehaviour
     public Dictionary<int, NPC> npcList = new Dictionary<int, NPC>(); // Dictionary containing all generated NPCs
     private List<GameObject> instantiatedNPCs = new List<GameObject>(); // List to store references to instantiated NPCs
     public Action OnNPCsGenerated; // Event to notify when NPCs are generated
-    // Debug options
-    [Header("Debug options")]
-    public Button generateNPCsButton; // Debug Generate NPC Button
+    public event Action OnNPCListUpdated; // Event to notify when NPCs details are updated
+ 
 
     private void Start()
     {
-        generateNPCsButton.onClick.AddListener(GenerateNewNPCs);
-
-        for (int i = 0; i < 6; i++) // Initial starting no. of NPCs = 6
+        npcGenCounter = 1;
+        // Clear all past NPCs
+        foreach (var npc in npcList.Values)
+        {
+            npcList.Clear();
+        }
+        
+        for (int i = 0; i < maxNPCsGenerated; i++) // Set max number of NPCs depending on scene/office size
         {
             NPC newNPC = GenerateRandomNPC();
+
+            if (newNPC == null)
+            {
+                Debug.LogError("GenerateRandomNPC returned null. Skipping this NPC.");
+                continue; // Skip this iteration if NPC creation failed
+            }
             npcList.Add(newNPC.NPCId, newNPC); // Add NPCs to dictionary
-            SpawnNPCModel(newNPC, i);
+            if (newNPC.CurrentWorkArrangement == "On-site")
+            {
+                SpawnNPCModel(newNPC, i);
+            }
         }
 
         //generateButton.onClick.AddListener(OnGenerateButtonClick); // Debug Generate
@@ -48,20 +59,12 @@ public class NPCGenerator : MonoBehaviour
                 prefab.AddComponent<MeshCollider>();
             }
         }
-        
+        NotifyNPCListUpdated();
     }
     void Update()
     {
-         //UpdateWorkProgress();
-    }
 
-    /*// Debug Generate
-    private void OnGenerateButtonClick()
-    {
-        NPC newNPC = GenerateRandomNPC();
-        DisplayNPCInfo(newNPC, i); // Optionally display the first NPC's info
-        //SpawnNPCModel(newNPC, i);
-    } */
+    }
     
     public NPC GenerateRandomNPC()
     {
@@ -82,13 +85,24 @@ public class NPCGenerator : MonoBehaviour
                     WorkEfficiency = Mathf.Round(Random.Range(1f, 5f) * 100f) / 100f,
                     Salary = 0,
                     CurrentActivity = "Working",
-                    CurrentWorkArrangement = Random.value > 0.5f ? "On-site" : "Remote Working",
+                    CurrentWorkArrangement = Random.value > 0.2f ? "On-site" : "Remote",
                     Mood = 0,
                     WorkDonePerIncrement = 0f,
                     TotalWorkDone = 0f,
                     MaxTaskCapacity = 100f,
                     numOfTasksCompleted = 0,
+                    SocialPref = Random.value > 0.5f ? "Introvert" : "Extrovert",
+                    IsDisabled = Random.value > 0.9f ? "Disabled" : "Able-bodied",
+                    TechSkill = Random.Range(1, 11)
                 };
+                if (newNPC.CurrentWorkArrangement == "On-site")
+                    {
+                        newNPC.Mood -= 2;
+                    }
+                else if (newNPC.CurrentWorkArrangement == "Remote")
+                    {
+                        newNPC.Mood += 2;
+                    }
                 newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
                 return newNPC;
             }
@@ -136,14 +150,38 @@ public class NPCGenerator : MonoBehaviour
         npcGenCounter = 1;
 
         // Generate new NPCs
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < maxNPCsGenerated; i++)
         {
             NPC newNPC = GenerateRandomNPC();
             npcList.Add(newNPC.NPCId, newNPC);
-            SpawnNPCModel(newNPC, i);
+            if (newNPC.CurrentWorkArrangement == "On-site")
+            {
+                SpawnNPCModel(newNPC, i);
+            }
         }
         // Notify that NPCs have been generated
         OnNPCsGenerated?.Invoke();
+        NotifyNPCListUpdated();
+    }
+
+    private void NotifyNPCListUpdated()
+    {
+        if (OnNPCListUpdated != null)
+        {
+            OnNPCListUpdated();
+        }
+    }
+
+    private void AddNPC(NPC newNPC)
+    {
+        npcList.Add(newNPC.NPCId, newNPC);
+        NotifyNPCListUpdated();
+    }
+
+    private void RemoveNPC(int npcId)
+    {
+        npcList.Remove(npcId);
+        NotifyNPCListUpdated();
     }
 }
 
@@ -154,23 +192,26 @@ public class NPC
     public string Name { get; set; }
     public int Age { get; set; }
     public float WorkEfficiency { get; set; }
+    public float WorkEfficiencyBonus {get; set;}
     public int Salary { get; set; }
     public string CurrentActivity { get; set;}
     public string CurrentWorkArrangement { get; set;}
     public float Mood { get; set; }
+    public float MoodBonus {get; set;}
     public float WorkDonePerIncrement { get; set; } = 0f;
     public float TotalWorkDone { get; set;} = 0f;
     public float MaxTaskCapacity { get; set;} = 100f;
     public int numOfTasksCompleted {get; set;}
+    public string SocialPref { get; set; }
+    public string IsDisabled { get; set; }
+    public float TechSkill { get; set; }
 
 
     // Expanded list
     /* public string LeadershipStyle { get; set; }
-    public float TechSkill { get; set; }
+    
     public float SocialSkill { get; set; }
-    public string SocialPref { get; set; }
     public bool IsNeurodivergent { get; set; }
-    public bool IsDisabled { get; set; }
     public bool InRelationship { get; set; } */
 
     public override string ToString() // Output the class elements as a string
