@@ -22,16 +22,26 @@ public class NPCGenerator : MonoBehaviour
     private List<GameObject> instantiatedNPCs = new List<GameObject>(); // List to store references to instantiated NPCs
     public Action OnNPCsGenerated; // Event to notify when NPCs are generated
     public event Action OnNPCListUpdated; // Event to notify when NPCs details are updated
-    // Debug options
-    [Header("Debug options")]
-    public Button generateNPCsButton; // Debug Generate NPC Button
+ 
 
     private void Start()
     {
-        generateNPCsButton.onClick.AddListener(GenerateNewNPCs);
+        npcGenCounter = 1;
+        // Clear all past NPCs
+        foreach (var npc in npcList.Values)
+        {
+            npcList.Clear();
+        }
+        
         for (int i = 0; i < maxNPCsGenerated; i++) // Set max number of NPCs depending on scene/office size
         {
             NPC newNPC = GenerateRandomNPC();
+
+            if (newNPC == null)
+            {
+                Debug.LogError("GenerateRandomNPC returned null. Skipping this NPC.");
+                continue; // Skip this iteration if NPC creation failed
+            }
             npcList.Add(newNPC.NPCId, newNPC); // Add NPCs to dictionary
             if (newNPC.CurrentWorkArrangement == "On-site")
             {

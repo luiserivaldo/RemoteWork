@@ -11588,7 +11588,6 @@ MonoBehaviour:
   - {fileID: 1721751827}
   - {fileID: 892887971}
   - {fileID: 1423034647}
-  generateNPCsButton: {fileID: 1209856735308239370}
 --- !u!222 &1032880338246112988
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22412,6 +22411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enquireButton: {fileID: 5987825143221454143}
   praiseButton: {fileID: 6924706954728346192}
+  generateNPCsButton: {fileID: 1209856735308239370}
 --- !u!114 &3538772120074961766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30524,7 +30524,6 @@ MonoBehaviour:
   maxNPCsGenerated: 4
   npcPrefabs: []
   spawnPoints: []
-  generateNPCsButton: {fileID: 0}
 --- !u!222 &5535049450457004679
 CanvasRenderer:
   m_ObjectHideFlags: 0

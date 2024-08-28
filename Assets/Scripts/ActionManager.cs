@@ -10,6 +10,7 @@ public class ActionManager : MonoBehaviour
     // Reference to Game Managers
     [Header("Reference to Game Managers")]
     private TaskManager taskManager;
+    private NPCGenerator npcGenerator;
     
     // NPC Action Bar Buttons
     [Header("NPC Action Bar Buttons")]
@@ -18,11 +19,19 @@ public class ActionManager : MonoBehaviour
 
     // To identify currently selected NPC
     private NPC selectedNPC;
+
+    [Header("Debug Options")]
+    public Button generateNPCsButton; // Debug Generate NPC Button
     
     void Start() 
     {
+        // Find related Game Managers
+        npcGenerator = FindObjectOfType<NPCGenerator>();
+        taskManager = FindObjectOfType<TaskManager>(); 
+
         enquireButton.onClick.AddListener(OnEnquireButtonClick);
         praiseButton.onClick.AddListener(OnPraiseButtonClick);
+        generateNPCsButton.onClick.AddListener(npcGenerator.GenerateNewNPCs);
     }
     public void SetSelectedNPC(NPC npc) // Set clicked NPC as the selected NPC for logic functions
     {
