@@ -140,7 +140,7 @@ public class NPCGenerator : MonoBehaviour
         npcGenCounter = 1;
 
         // Generate new NPCs
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < maxNPCsGenerated; i++)
         {
             NPC newNPC = GenerateRandomNPC();
             npcList.Add(newNPC.NPCId, newNPC);
