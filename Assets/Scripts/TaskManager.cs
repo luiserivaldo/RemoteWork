@@ -24,6 +24,7 @@ public class TaskManager : MonoBehaviour
     [Header("Budget Components")]
     public int startingBudget = 300000;
     [HideInInspector] public int currentBudget = 0;
+    private int totalSalary = 0;
 
     void Start()
     {
@@ -53,6 +54,7 @@ public class TaskManager : MonoBehaviour
                 float incrementalWorkDone = npc.WorkDonePerIncrement;
                 totalWeeklyIncrementalWorkDone += incrementalWorkDone;
                 //npc.WorkDonePerIncrement = npc.TotalWorkDone; // Update the last recorded work done
+                totalSalary += npc.Salary;
             }
 
             workerCollectedProgress += totalWeeklyIncrementalWorkDone;
@@ -62,6 +64,7 @@ public class TaskManager : MonoBehaviour
             {
                 weeksPassed += 1;
                 workerCollectedProgress = 0;
+                currentBudget -= totalSalary;
             }
 
             yield return new WaitForSeconds(1);
