@@ -252,6 +252,6 @@ public class OutputManager : MonoBehaviour
     
     private string NPCToString(NPC npc)
     {
-        return $"isSelected: {npc.IsSelected}\nID: {npc.NPCId}\nName: {npc.Name}\nAge: {npc.Age}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}\nCurrent activity: {npc.CurrentActivity}\nWork per Increment: {npc.WorkDonePerIncrement}\nTotal Work Done: {npc.TotalWorkDone}\nWork Location: {npc.CurrentWorkArrangement}";
+        return $"isSelected: {npc.IsSelected}\nID: {npc.NPCId}\nName: {npc.Name}\nAge: {npc.Age}\nWork Efficiency: {npc.WorkEfficiency}\nSalary: {npc.Salary}\nMood: {npc.Mood}\nCurrent activity: {npc.CurrentActivity}\nWork per Increment: {npc.WorkDonePerIncrement}\nTotal Work Done: {npc.TotalWorkDone}\nWork Location: {npc.CurrentWorkArrangement} \nTotal Salaries: {taskManager.totalSalary}";
     }
 }
