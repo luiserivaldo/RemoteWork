@@ -19737,6 +19737,7 @@ MonoBehaviour:
   weeksPassed: 0
   startingBudget: 200000
   currentBudget: 0
+  totalSalary: 0
 --- !u!1001 &1471878857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54844,6 +54845,7 @@ MonoBehaviour:
   weeksPassed: 0
   startingBudget: 300000
   currentBudget: 0
+  totalSalary: 0
 --- !u!1 &5762666813463494611
 GameObject:
   m_ObjectHideFlags: 0
@@ -64157,7 +64159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405005ae9b6f6fb4b80b05c667e3f9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNPCsGenerated: 4
+  maxNPCsGenerated: 6
   npcPrefabs:
   - {fileID: 9090306628916022113, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
   - {fileID: 9110255225808119051, guid: 2af33cd35018e214ea8f76ff65b5b16b, type: 3}
@@ -64172,7 +64174,7 @@ MonoBehaviour:
   - {fileID: 2913910555533745733}
   - {fileID: 7092028824549963505}
   - {fileID: 189023683122980460}
-  generateNPCsButton: {fileID: 0}
+  generateNPCsButton: {fileID: 6920663214466295068}
 --- !u!114 &7902408392029217552
 MonoBehaviour:
   m_ObjectHideFlags: 0
