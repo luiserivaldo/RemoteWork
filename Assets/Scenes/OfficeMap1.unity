@@ -37962,7 +37962,7 @@ MonoBehaviour:
   selectednpcWorkDoneSlider: {fileID: 682325738847091824}
   selectedcompletedTasksOutput: {fileID: 9143557363760133533}
   selectednpcMoodSlider: {fileID: 4189401226937981799}
-  selectedmoodValueOutput: {fileID: 7987953666663809919}
+  selectedmoodValueOutput: {fileID: 4050490335929022295}
   selectedmoodBonusOutput: {fileID: 7987953666663809919}
   selectedtraitsOutput: {fileID: 2810710901765381422}
   currentBudgetPurchaseScreen: {fileID: 5589798411109090041}
