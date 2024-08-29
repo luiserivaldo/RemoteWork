@@ -14,6 +14,7 @@ public class NPCGenerator : MonoBehaviour
     public int maxNPCsGenerated = 4;
     public GameObject[] npcPrefabs; // Array of different 3D model prefabs
     [HideInInspector] public Sprite npcIcon;
+    [HideInInspector] public GameObject npcModel;
     public Transform[] spawnPoints; // Array of spawn points for NPCs
 
     private string[] firstNames = { "Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley", "Dakota", "Reese", "Skyler", "Quinn" };
@@ -98,8 +99,8 @@ public class NPCGenerator : MonoBehaviour
                     IsDisabled = Random.value > 0.9f ? "Disabled" : "Able-bodied",
                     TechSkill = Random.Range(1, 11),
 
+                    NPCModel = npcPrefabs[Random.Range(0, npcPrefabs.Length)],
                     NPCIcon = npcIcon
-
                 };
                 if (newNPC.CurrentWorkArrangement == "On-site")
                     {
@@ -109,6 +110,10 @@ public class NPCGenerator : MonoBehaviour
                     {
                         newNPC.Mood += 2;
                     }
+                
+                npcModel = newNPC.NPCModel;
+                Image npcImage = npcModel.GetComponentInChildren<Canvas>().transform.Find("npcIcon").GetComponent<Image>();
+                newNPC.NPCIcon = npcImage.sprite;
                 newNPC.Salary = CalculateSalary(newNPC.Age, newNPC.WorkEfficiency);
                 return newNPC;
             }
@@ -124,14 +129,14 @@ public class NPCGenerator : MonoBehaviour
             return;
         }
 
-        GameObject npcPrefab = npcPrefabs[Random.Range(0, npcPrefabs.Length)];
+        //GameObject npcPrefab = npcPrefabs[Random.Range(0, npcPrefabs.Length)];
         Transform spawnPoint = spawnPoints[index % spawnPoints.Length];
         //Debug.Log($"Selected Prefab: {npcPrefab.name} for NPC {index + 1}");
 
-        GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject npcModel = Instantiate(npc.NPCModel, spawnPoint.position, spawnPoint.rotation);
 
-        Image npcIconImage = npcModel.GetComponentInChildren<Canvas>().transform.Find("npcIcon").GetComponent<Image>();
-        npcIcon = npcIconImage.sprite;
+        //Image npcIconImage = npcModel.GetComponentInChildren<Canvas>().transform.Find("npcIcon").GetComponent<Image>();
+        //npcIcon = npcIconImage.sprite;
         instantiatedNPCs.Add(npcModel); // Add to the list of instantiated NPCs
         npcModel.GetComponent<SelectActiveNPC>().InitializeNPC(npc);
     } 

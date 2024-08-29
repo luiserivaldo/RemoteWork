@@ -47090,6 +47090,7 @@ MonoBehaviour:
   currentDate: {fileID: 6961516226360692168}
   NumOfTasksCompleted: {fileID: 3335861679931330918}
   currentBudget: {fileID: 1027046289016444073}
+  npcIconImage: {fileID: 7952274823515034628}
   npcNameOutput: {fileID: 1465402423371435118}
   npcSalaryOutput: {fileID: 15142456808433517}
   npcWorkPerIncrement: {fileID: 1228165443507979332}
@@ -47099,6 +47100,7 @@ MonoBehaviour:
   maxMoodvalue: 10
   npcWorkDoneSlider: {fileID: 7217180810921107194}
   npcNumOfTasksCompletedOutput: {fileID: 3335861679931330918}
+  selectedNPCIconImage: {fileID: 705238164411036008}
   selectedNpcNameOutput: {fileID: 7088480450123995597}
   selectednpcCurrentWorkArrangement: {fileID: 7216829270296728065}
   selectedageOutput: {fileID: 319754571105227092}
@@ -48489,6 +48491,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxNPCsGenerated: 4
   npcPrefabs: []
+  npcIcon: {fileID: 0}
+  npcModel: {fileID: 0}
   spawnPoints: []
 --- !u!114 &4361891578799916817
 MonoBehaviour:
@@ -64315,6 +64319,8 @@ MonoBehaviour:
   - {fileID: 9110255225808119051, guid: 596263a14b5b05444a93b161f4e9f8c1, type: 3}
   - {fileID: 9110255225808119051, guid: 9c1e2650ca53d82408d50c95a09dd950, type: 3}
   - {fileID: 9110255225808119051, guid: 47a09e7a0b2ca894bb0a8d489f83f5ff, type: 3}
+  npcIcon: {fileID: 0}
+  npcModel: {fileID: 0}
   spawnPoints:
   - {fileID: 3776404929110664577}
   - {fileID: 7035747320381146653}

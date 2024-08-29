@@ -11855,6 +11855,7 @@ MonoBehaviour:
   - {fileID: 9110255225808119051, guid: 9c1e2650ca53d82408d50c95a09dd950, type: 3}
   - {fileID: 9110255225808119051, guid: 47a09e7a0b2ca894bb0a8d489f83f5ff, type: 3}
   npcIcon: {fileID: 0}
+  npcModel: {fileID: 0}
   spawnPoints:
   - {fileID: 1243608370}
   - {fileID: 1721751827}
@@ -18801,7 +18802,7 @@ RectTransform:
   m_Father: {fileID: 4800256687145466311}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -21914,8 +21915,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3083028135525757377}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.507, y: 0}
+  m_AnchorMax: {x: 0.507, y: 1}
   m_AnchoredPosition: {x: 0, y: 18.5678}
   m_SizeDelta: {x: 32, y: -24.6644}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -30800,6 +30801,7 @@ MonoBehaviour:
   maxNPCsGenerated: 4
   npcPrefabs: []
   npcIcon: {fileID: 0}
+  npcModel: {fileID: 0}
   spawnPoints: []
 --- !u!222 &5535049450457004679
 CanvasRenderer:
@@ -33596,7 +33598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &6177086533697769482
 GameObject:
   m_ObjectHideFlags: 0
@@ -45582,7 +45584,7 @@ RectTransform:
   m_Father: {fileID: 6231604768038580208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.507, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
