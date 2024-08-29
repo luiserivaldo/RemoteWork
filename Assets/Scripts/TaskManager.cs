@@ -23,6 +23,7 @@ public class TaskManager : MonoBehaviour
     // Budget components
     [Header("Budget Components")]
     public int startingBudget = 300000;
+    public int budgetIncreasePerTask = 20000;
     [HideInInspector] public int currentBudget = 0;
     [HideInInspector] public int totalSalary = 0;
 
@@ -85,7 +86,7 @@ public class TaskManager : MonoBehaviour
             npc.TotalWorkDone = 0;
             npc.numOfTasksCompleted += 1;
             numOfTotalTasksCompleted += 1;
-            currentBudget += 10000; // Increase budget when NPC has completed a task
+            currentBudget += budgetIncreasePerTask; // Increase budget when NPC has completed a task
         }
         //Debug.Log($"NPC ID: {npc.NPCId} total work: {npc.TotalWorkDone}");
     }

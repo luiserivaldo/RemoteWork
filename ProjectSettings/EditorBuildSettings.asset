@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 4be0f31a42564d24e9cc456216197a7e
+  - enabled: 1
+    path: Assets/Scenes/OfficeMap1.unity
+    guid: af028bc006ef50643a3acd427ab638b8
+  - enabled: 1
+    path: Assets/Scenes/OfficeMap2.unity
+    guid: 95e45d1e1ff9ecd46bfc3f2d3229492a
+  - enabled: 0
+    path: Assets/Scenes/DebugRoom.unity
+    guid: 7b82b1e82f895aa4886cacf5165f1153
   m_configObjects: {}

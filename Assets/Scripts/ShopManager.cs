@@ -10,35 +10,41 @@ public class ShopManager : MonoBehaviour
     public NPCGenerator npcGenerator;
     // Buy office upgrades buttons
     [Header("Office Upgrade Fields")]
-    public Button buyPantry; // Pantry
-    public Button buyLounge; // Lounge
-    public Button buyLibrary; // LibraryCorner
-    public GameObject pantryGameObject; // Group of GameObjects for the first upgrade
-    public GameObject loungeGameObject; // Group of GameObjects for the second upgrade
+    public Button buyPantryButton; // Pantry button
+    public Button buyLoungeButton; // Lounge button
+    public Button buyLibraryButton; // LibraryCorner button
+    public Button upgradeSetupButton; // Change DeskSetupPoor to Cubicle
+    public GameObject pantryGameObject; // Pantry group of gameobjects
+    public GameObject loungeGameObject; // Lounge gameobjects
     public GameObject libraryGameObject; // Group of GameObjects for the second upgrade
+    public GameObject deskSetupPoorGameObject; // Initial desk to be replaced
+    public GameObject cubicleGameObject; // New desks to replace poor desks
 
     private Dictionary<string, UpgradeSet> upgradeSets = new Dictionary<string, UpgradeSet>
     {
         // SetName, Cost, MoodBonus, WorkBonus, isPurchased
         { "Pantry", new UpgradeSet("Pantry", 100000, 1, 0) },
         { "Lounge", new UpgradeSet("Lounge", 150000, 1, 0) },
-        { "Library", new UpgradeSet("Library", 125000, 0, 0.5f) }
+        { "Library", new UpgradeSet("Library", 125000, 1, 0.5f) },
+        { "UpgradeSetup", new UpgradeSet("Library", 250000, 0, 1f) }
     };
     void Start()
     {   
         npcGenerator = FindObjectOfType<NPCGenerator>();
         taskManager = FindObjectOfType<TaskManager>();
 
-        buyPantry.onClick.AddListener(() => TryPurchaseUpgrade("Pantry"));
-        buyLounge.onClick.AddListener(() => TryPurchaseUpgrade("Lounge"));
-        buyLibrary.onClick.AddListener(() => TryPurchaseUpgrade("Library"));
+        buyPantryButton.onClick.AddListener(() => TryPurchaseUpgrade("Pantry"));
+        buyLoungeButton.onClick.AddListener(() => TryPurchaseUpgrade("Lounge"));
+        buyLibraryButton.onClick.AddListener(() => TryPurchaseUpgrade("Library"));
+        upgradeSetupButton.onClick.AddListener(() => TryPurchaseUpgrade("UpgradeSetup"));
 
     }
     void Update()
     {
-        UpdateButtonInteractble(buyPantry, taskManager.currentBudget >= upgradeSets["Pantry"].Cost && !upgradeSets["Pantry"].IsPurchased);
-        UpdateButtonInteractble(buyLounge, taskManager.currentBudget >= upgradeSets["Lounge"].Cost && !upgradeSets["Lounge"].IsPurchased);
-        UpdateButtonInteractble(buyLibrary, taskManager.currentBudget >= upgradeSets["Library"].Cost && !upgradeSets["Library"].IsPurchased);
+        UpdateButtonInteractble(buyPantryButton, taskManager.currentBudget >= upgradeSets["Pantry"].Cost && !upgradeSets["Pantry"].IsPurchased);
+        UpdateButtonInteractble(buyLoungeButton, taskManager.currentBudget >= upgradeSets["Lounge"].Cost && !upgradeSets["Lounge"].IsPurchased);
+        UpdateButtonInteractble(buyLibraryButton, taskManager.currentBudget >= upgradeSets["Library"].Cost && !upgradeSets["Library"].IsPurchased);
+        UpdateButtonInteractble(upgradeSetupButton, taskManager.currentBudget >= upgradeSets["UpgradeSetup"].Cost && !upgradeSets["UpgradeSetup"].IsPurchased);
     }
     private void UpdateButtonInteractble(Button button, bool isInteractable)
     {
@@ -73,6 +79,10 @@ public class ShopManager : MonoBehaviour
             case "Library":
                 libraryGameObject.SetActive(true);
                 break;
+            case "UpgradeSetup":
+                deskSetupPoorGameObject.SetActive(false);
+                cubicleGameObject.SetActive(true);
+                break;
         }
 
         if (upgradeSets.ContainsKey(upgradeName))
@@ -85,8 +95,10 @@ public class ShopManager : MonoBehaviour
     {
         foreach (var npc in npcGenerator.npcList.Values)
         {
-            npc.Mood += moodBonus;
-            npc.WorkEfficiency += workBonus;
+            if (npc.CurrentWorkArrangement == "On-site"){
+                npc.Mood += moodBonus;
+                npc.WorkEfficiency += workBonus;
+            }
         }
     }
 }

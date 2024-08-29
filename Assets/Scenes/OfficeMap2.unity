@@ -1967,7 +1967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &177818297
 Transform:
   m_ObjectHideFlags: 0
@@ -2082,8 +2082,8 @@ Transform:
   - {fileID: 403796884}
   - {fileID: 1850736346}
   - {fileID: 1993099468}
-  - {fileID: 394126996}
   - {fileID: 2055896759}
+  - {fileID: 394126996}
   - {fileID: 671153039}
   - {fileID: 1589461020}
   - {fileID: 759708593}
@@ -19737,6 +19737,7 @@ MonoBehaviour:
   numOfTotalTasksCompleted: 0
   weeksPassed: 0
   startingBudget: 200000
+  budgetIncreasePerTask: 20000
   currentBudget: 0
   totalSalary: 0
 --- !u!1001 &1471878857
@@ -32079,7 +32080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1095969804093930196}
   m_Layer: 0
-  m_Name: PurchaseLibrary (1)
+  m_Name: UpgradeSetup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38323,12 +38324,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskManager: {fileID: 1462283618}
   npcGenerator: {fileID: 7901158871196697024}
-  buyPantry: {fileID: 8966813451331455640}
-  buyLounge: {fileID: 5472461368993340049}
-  buyLibrary: {fileID: 4368949454897270866}
+  buyPantryButton: {fileID: 8966813451331455640}
+  buyLoungeButton: {fileID: 5472461368993340049}
+  buyLibraryButton: {fileID: 4368949454897270866}
+  upgradeSetupButton: {fileID: 33748941739620929}
   pantryGameObject: {fileID: 1589461019}
   loungeGameObject: {fileID: 759708592}
   libraryGameObject: {fileID: 177818296}
+  deskSetupPoorGameObject: {fileID: 2055896758}
+  cubicleGameObject: {fileID: 394126995}
 --- !u!114 &1845126427626405462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44906,7 +44910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3508255547534525009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54787,6 +54791,7 @@ MonoBehaviour:
   numOfTotalTasksCompleted: 0
   weeksPassed: 0
   startingBudget: 300000
+  budgetIncreasePerTask: 20000
   currentBudget: 0
   totalSalary: 0
 --- !u!1 &5762666813463494611
@@ -69462,7 +69467,7 @@ GameObject:
   - component: {fileID: 6843727640600957385}
   - component: {fileID: 33748941739620929}
   m_Layer: 0
-  m_Name: BuyLibraryButton
+  m_Name: UpgradeDeskButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -26623,6 +26623,7 @@ MonoBehaviour:
   numOfTotalTasksCompleted: 0
   weeksPassed: 0
   startingBudget: 300000
+  budgetIncreasePerTask: 20000
   currentBudget: 0
   totalSalary: 0
 --- !u!114 &4569877622582402154
@@ -27062,7 +27063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &4642849587783005511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33588,7 +33589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &6252366505072619609
 GameObject:
   m_ObjectHideFlags: 0
@@ -44619,7 +44620,8 @@ MonoBehaviour:
   weeklyQuotaGoal: 1000
   numOfTotalTasksCompleted: 0
   weeksPassed: 0
-  startingBudget: 5000000
+  startingBudget: 50000
+  budgetIncreasePerTask: 20000
   currentBudget: 0
   totalSalary: 0
 --- !u!1 &8840911733539515754

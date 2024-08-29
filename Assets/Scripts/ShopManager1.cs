@@ -46,10 +46,10 @@ public class ShopManager1 : MonoBehaviour
     void Update()
     {
         UpdateButtonInteractble(cleanJunk, taskManager.currentBudget >= upgradeSets["CleanJunk"].Cost && !upgradeSets["CleanJunk"].IsPurchased);
-        UpdateButtonInteractble(buyPantry, taskManager.currentBudget >= upgradeSets["Pantry"].Cost && !upgradeSets["Pantry"].IsPurchased);
-        UpdateButtonInteractble(upgradeSetup, taskManager.currentBudget >= upgradeSets["DeskSetup"].Cost && !upgradeSets["DeskSetup"].IsPurchased);
-        UpdateButtonInteractble(buyPrinter, taskManager.currentBudget >= upgradeSets["Printer"].Cost && !upgradeSets["Printer"].IsPurchased);
-        UpdateButtonInteractble(upgradeOfficeButton, taskManager.currentBudget >= upgradeSets["UpgradeOffice"].Cost && !upgradeSets["UpgradeOffice"].IsPurchased);
+        UpdateButtonInteractble(buyPantry, taskManager.currentBudget >= upgradeSets["Pantry"].Cost && !upgradeSets["Pantry"].IsPurchased && upgradeSets["CleanJunk"].IsPurchased);
+        UpdateButtonInteractble(upgradeSetup, taskManager.currentBudget >= upgradeSets["DeskSetup"].Cost && !upgradeSets["DeskSetup"].IsPurchased && upgradeSets["CleanJunk"].IsPurchased);
+        UpdateButtonInteractble(buyPrinter, taskManager.currentBudget >= upgradeSets["Printer"].Cost && !upgradeSets["Printer"].IsPurchased && upgradeSets["CleanJunk"].IsPurchased);
+        UpdateButtonInteractble(upgradeOfficeButton, taskManager.currentBudget >= upgradeSets["UpgradeOffice"].Cost && !upgradeSets["UpgradeOffice"].IsPurchased && upgradeSets["CleanJunk"].IsPurchased);
     }
     private void UpdateButtonInteractble(Button button, bool isInteractable)
     {
@@ -103,8 +103,10 @@ public class ShopManager1 : MonoBehaviour
     {
         foreach (var npc in npcGenerator.npcList.Values)
         {
-            npc.Mood += moodBonus;
-            npc.WorkEfficiency += workBonus;
+            if (npc.CurrentWorkArrangement == "On-site"){
+                npc.Mood += moodBonus;
+                npc.WorkEfficiency += workBonus;
+            }
         }
     }
     private void SwitchScene()
