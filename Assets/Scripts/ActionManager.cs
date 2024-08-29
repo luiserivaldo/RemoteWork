@@ -11,6 +11,9 @@ public class ActionManager : MonoBehaviour
     [Header("Reference to Game Managers")]
     private TaskManager taskManager;
     private NPCGenerator npcGenerator;
+
+    [Header("Pause Screen Buttons")]
+    public Button exitButton;
     
     // NPC Action Bar Buttons
     [Header("NPC Action Bar Buttons")]
@@ -32,6 +35,7 @@ public class ActionManager : MonoBehaviour
         enquireButton.onClick.AddListener(OnEnquireButtonClick);
         praiseButton.onClick.AddListener(OnPraiseButtonClick);
         generateNPCsButton.onClick.AddListener(npcGenerator.GenerateNewNPCs);
+        exitButton.onClick.AddListener(QuitGame);
     }
     public void SetSelectedNPC(NPC npc) // Set clicked NPC as the selected NPC for logic functions
     {
@@ -82,5 +86,9 @@ public class ActionManager : MonoBehaviour
         {
             Debug.LogError("No NPC selected. Cannot praise.");
         }
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

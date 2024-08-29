@@ -38774,6 +38774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126b7600810e6414ca2a9442e2cfd918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exitButton: {fileID: 5721038063287101744}
   enquireButton: {fileID: 2582924281551204905}
   praiseButton: {fileID: 1213971362529125702}
   generateNPCsButton: {fileID: 6920663214466295068}
