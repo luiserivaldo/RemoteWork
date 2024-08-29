@@ -36,7 +36,6 @@ public class SelectActiveNPC : MonoBehaviour
     }
     void OnMouseDown()
     {   
-        //Debug.Log("Model clicked");
         // Deselect any previously selected NPC
         foreach (var npcEntry in npcGenerator.npcList)
         {

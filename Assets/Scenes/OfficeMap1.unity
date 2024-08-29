@@ -2813,6 +2813,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 428301806417119635, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4100485747669575974, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4950,6 +4954,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 428301806417119635, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4100485747669575974, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5576,6 +5584,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6562335403851513886, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428301806417119635, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4100485747669575974, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
@@ -6598,6 +6610,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6562335403851513886, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428301806417119635, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4100485747669575974, guid: a708d5d6c7425af4da4687d0ecd7e518, type: 3}
@@ -11838,6 +11854,8 @@ MonoBehaviour:
   - {fileID: 9110255225808119051, guid: 596263a14b5b05444a93b161f4e9f8c1, type: 3}
   - {fileID: 9110255225808119051, guid: 9c1e2650ca53d82408d50c95a09dd950, type: 3}
   - {fileID: 9110255225808119051, guid: 47a09e7a0b2ca894bb0a8d489f83f5ff, type: 3}
+  npcIcon: {fileID: 0}
+  npcModel: {fileID: 0}
   spawnPoints:
   - {fileID: 1243608370}
   - {fileID: 1721751827}
@@ -30782,6 +30800,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxNPCsGenerated: 4
   npcPrefabs: []
+  npcIcon: {fileID: 0}
+  npcModel: {fileID: 0}
   spawnPoints: []
 --- !u!222 &5535049450457004679
 CanvasRenderer:
@@ -38200,6 +38220,7 @@ MonoBehaviour:
   currentDate: {fileID: 1179136967595653854}
   NumOfTasksCompleted: {fileID: 6812319280075122288}
   currentBudget: {fileID: 9115753919069053887}
+  npcIconImage: {fileID: 2205993186439750418}
   npcNameOutput: {fileID: 7248336280692734840}
   npcSalaryOutput: {fileID: 8139323077900030075}
   npcWorkPerIncrement: {fileID: 7046503092027470674}
@@ -38209,6 +38230,7 @@ MonoBehaviour:
   maxMoodvalue: 10
   npcWorkDoneSlider: {fileID: 1507007650603133420}
   npcNumOfTasksCompletedOutput: {fileID: 0}
+  selectedNPCIconImage: {fileID: 8721474199225206398}
   selectedNpcNameOutput: {fileID: 1341566524639948507}
   selectednpcCurrentWorkArrangement: {fileID: 1505951808758261015}
   selectedageOutput: {fileID: 8407828916282189378}
