@@ -25,6 +25,7 @@ public class ActionManager : MonoBehaviour
 
     [Header("Debug Options")]
     public Button generateNPCsButton; // Debug Generate NPC Button
+    public Button addBudgetDebugButton; // Debug add money button
     
     void Start() 
     {
@@ -35,6 +36,7 @@ public class ActionManager : MonoBehaviour
         enquireButton.onClick.AddListener(OnEnquireButtonClick);
         praiseButton.onClick.AddListener(OnPraiseButtonClick);
         generateNPCsButton.onClick.AddListener(npcGenerator.GenerateNewNPCs);
+        addBudgetDebugButton.onClick.AddListener(AddBudgetClick);
         exitButton.onClick.AddListener(QuitGame);
     }
     public void SetSelectedNPC(NPC npc) // Set clicked NPC as the selected NPC for logic functions
@@ -86,6 +88,11 @@ public class ActionManager : MonoBehaviour
         {
             Debug.LogError("No NPC selected. Cannot praise.");
         }
+    }
+
+    public void AddBudgetClick()
+    {
+        taskManager.currentBudget += 50000;
     }
     public void QuitGame()
     {
