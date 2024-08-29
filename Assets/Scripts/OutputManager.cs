@@ -20,6 +20,7 @@ public class OutputManager : MonoBehaviour
 
     // NPC Info Bar
     [Header("NPC Info Bar Fields")]
+    public Image npcIconImage;
     public Text npcNameOutput; // Name
     public Text npcSalaryOutput; // Salary
     //public Text npcCurrentActivity;
@@ -36,6 +37,7 @@ public class OutputManager : MonoBehaviour
     // Select NPC Screen
     [Header("Select NPC Screen")]
     // Bio
+    public Image selectedNPCIconImage;
     public Text selectedNpcNameOutput; // Name
     public Text selectednpcCurrentWorkArrangement;
     public Text selectedageOutput;
@@ -123,11 +125,17 @@ public class OutputManager : MonoBehaviour
         }
     }
 
+    public void UpdateNPCIcon(NPC npc)
+    {
+        //npcIconImage.sprite = npcGenerator.npcIcon;
+    }
+
     private void UpdateSelectedNPCInfo()
     {
         if (selectedNPC != null)
         {
             // Active info bar
+            npcIconImage.sprite = selectedNPC.NPCIcon;
             npcNameOutput.text = selectedNPC.Name;
             npcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")} / month";
             //npcCurrentActivity.text = selectedNPC.CurrentActivity;
@@ -137,6 +145,7 @@ public class OutputManager : MonoBehaviour
             npcWorkDoneSlider.value = selectedNPC.TotalWorkDone;
 
             // Selected NPC Screen
+            selectedNPCIconImage.sprite = selectedNPC.NPCIcon;
             selectedNpcNameOutput.text = selectedNPC.Name;
             selectednpcSalaryOutput.text = $"$ {selectedNPC.Salary.ToString("N0")} / month";
             SeniorityLevelText(); // Age/Seniority level

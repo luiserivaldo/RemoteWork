@@ -13,6 +13,7 @@ public class NPCGenerator : MonoBehaviour
     [Header("Instantiation references")]
     public int maxNPCsGenerated = 4;
     public GameObject[] npcPrefabs; // Array of different 3D model prefabs
+    [HideInInspector] public Sprite npcIcon;
     public Transform[] spawnPoints; // Array of spawn points for NPCs
 
     private string[] firstNames = { "Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley", "Dakota", "Reese", "Skyler", "Quinn" };
@@ -32,6 +33,7 @@ public class NPCGenerator : MonoBehaviour
         {
             npcList.Clear();
         }
+        
         
         for (int i = 0; i < maxNPCsGenerated; i++) // Set max number of NPCs depending on scene/office size
         {
@@ -65,6 +67,7 @@ public class NPCGenerator : MonoBehaviour
     {
 
     }
+
     
     public NPC GenerateRandomNPC()
     {
@@ -93,7 +96,10 @@ public class NPCGenerator : MonoBehaviour
                     numOfTasksCompleted = 0,
                     SocialPref = Random.value > 0.5f ? "Introvert" : "Extrovert",
                     IsDisabled = Random.value > 0.9f ? "Disabled" : "Able-bodied",
-                    TechSkill = Random.Range(1, 11)
+                    TechSkill = Random.Range(1, 11),
+
+                    NPCIcon = npcIcon
+
                 };
                 if (newNPC.CurrentWorkArrangement == "On-site")
                     {
@@ -123,6 +129,9 @@ public class NPCGenerator : MonoBehaviour
         //Debug.Log($"Selected Prefab: {npcPrefab.name} for NPC {index + 1}");
 
         GameObject npcModel = Instantiate(npcPrefab, spawnPoint.position, spawnPoint.rotation);
+
+        Image npcIconImage = npcModel.GetComponentInChildren<Canvas>().transform.Find("npcIcon").GetComponent<Image>();
+        npcIcon = npcIconImage.sprite;
         instantiatedNPCs.Add(npcModel); // Add to the list of instantiated NPCs
         npcModel.GetComponent<SelectActiveNPC>().InitializeNPC(npc);
     } 
@@ -188,6 +197,8 @@ public class NPCGenerator : MonoBehaviour
 public class NPC
 {
     public int NPCId {get; set;}
+    public GameObject NPCModel {get; set;}
+    public Sprite NPCIcon {get; set;}
     public bool IsSelected {get; set;} = false;
     public string Name { get; set; }
     public int Age { get; set; }
